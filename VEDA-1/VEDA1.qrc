@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="VEDA1"/>
+  <qresource prefix="icons">
+    <file>icons/like_fill.png</file>
+    <file>icons/like_unfill.png</file>
+    <file>icons/link.png</file>
+    <file>icons/logo.png</file>
+    <file>icons/noti.png</file>
+    <file>icons/search.png</file>
+    <file>icons/user.png</file>
+  </qresource>
+</RCC>
