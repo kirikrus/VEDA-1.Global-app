@@ -87,8 +87,12 @@
     <QtUic Include="VEDA1.ui" />
     <QtMoc Include="VEDA1.h" />
     <ClCompile Include="connections.cpp" />
+    <ClCompile Include="Profile.cpp" />
     <ClCompile Include="VEDA1.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Profile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

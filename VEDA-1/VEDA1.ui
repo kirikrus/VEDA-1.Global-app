@@ -17,24 +17,31 @@
    <string notr="true">background-color: #16191A;</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <property name="spacing">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>-25</y>
+      <width>1061</width>
+      <height>776</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
      <number>0</number>
     </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <item>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
      <widget class="QFrame" name="mainGrid">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>1000</width>
+        <height>711</height>
+       </rect>
+      </property>
       <property name="minimumSize">
        <size>
         <width>1000</width>
@@ -586,7 +593,7 @@ border: 1px solid rgb(163, 236, 90);</string>
         </widget>
        </widget>
       </widget>
-      <widget class="QFrame" name="sitcher">
+      <widget class="QFrame" name="switcher">
        <property name="geometry">
         <rect>
          <x>235</x>
@@ -657,28 +664,35 @@ border-radius: 27px;</string>
          </property>
         </widget>
        </widget>
-       <widget class="QLabel" name="label_2">
+       <widget class="QPushButton" name="profile_button">
         <property name="geometry">
          <rect>
-          <x>145</x>
-          <y>8</y>
-          <width>96</width>
-          <height>36</height>
+          <x>135</x>
+          <y>5</y>
+          <width>101</width>
+          <height>46</height>
          </rect>
         </property>
         <property name="font">
          <font>
           <family>Inter V</family>
           <pointsize>16</pointsize>
-          <bold>false</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: #fff
-</string>
+         <string notr="true">color:white</string>
         </property>
         <property name="text">
          <string>Профиль</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </widget>
@@ -877,7 +891,7 @@ border-radius: 8px</string>
           <x>0</x>
           <y>0</y>
           <width>711</width>
-          <height>910</height>
+          <height>1051</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -886,6 +900,9 @@ border-radius: 8px</string>
          </property>
          <property name="rightMargin">
           <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>150</number>
          </property>
          <item>
           <widget class="QFrame" name="frame_2">
@@ -1564,14 +1581,19 @@ border-radius: 21px;</string>
       <zorder>quickUsers</zorder>
       <zorder>verticalScrollBar</zorder>
       <zorder>logo</zorder>
-      <zorder>sitcher</zorder>
+      <zorder>switcher</zorder>
       <zorder>notif</zorder>
       <zorder>label_3</zorder>
       <zorder>frame</zorder>
       <zorder>mainFooter</zorder>
      </widget>
-    </item>
-   </layout>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
