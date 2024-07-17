@@ -1,5 +1,6 @@
 #include "Profile.h"
 #include <qlineedit.h>
+#include "UserData.h"
 
 bool USER_ENTERED = false;
 
@@ -73,7 +74,7 @@ void show_auth(Ui::VEDA1Class ui) {
     label_10->setStyleSheet(QString::fromUtf8("color: rgb(242, 54, 54);"));
     label_11 = new QLabel(widget);
     label_11->setObjectName(QString::fromUtf8("label_11"));
-    label_11->setGeometry(QRect(310, 95, 71, 16));
+    label_11->setGeometry(QRect(310, 95, 200, 16));
     QFont font5;
     font5.setFamilies({ QString::fromUtf8("Inter V") });
     font5.setPointSize(12);
@@ -104,11 +105,14 @@ void show_auth(Ui::VEDA1Class ui) {
     pushButton->setText(QCoreApplication::translate("VEDA1Class", "\320\222\320\276\320\271\321\202\320\270", nullptr));
     widget->raise();
     widget->show();
+
+    UserData user(1);
+
+    inp_email->setText(user.getUserName());
 }
 
-
 void show_profile(Ui::VEDA1Class ui) {
-	if (!USER_ENTERED) {
-		show_auth(ui);
-	}
+    if (!USER_ENTERED) {
+        show_auth(ui);
+    }
 }
