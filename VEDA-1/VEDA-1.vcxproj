@@ -87,6 +87,7 @@
     <QtUic Include="VEDA1.ui" />
     <QtMoc Include="VEDA1.h" />
     <ClCompile Include="connections.cpp" />
+    <ClCompile Include="experiment.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="HTTPclient.cpp" />
     <ClCompile Include="Profile.cpp" />
@@ -96,6 +97,7 @@
   <ItemGroup>
     <QtMoc Include="HTTPclient.h" />
     <QtMoc Include="UserData.h" />
+    <ClInclude Include="experiment.h" />
     <ClInclude Include="Profile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

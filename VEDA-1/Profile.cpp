@@ -1,6 +1,7 @@
 #include "Profile.h"
 #include <qlineedit.h>
 #include "UserData.h"
+#include <qstandarditemmodel.h>
 
 bool USER_ENTERED = false;
 
@@ -106,13 +107,54 @@ void show_auth(Ui::VEDA1Class ui) {
     widget->raise();
     widget->show();
 
-    UserData user(1);
+    //inp_email->setText(user.getUserName());
+    
+}
 
-    inp_email->setText(user.getUserName());
+void show_experiments(Ui::VEDA1Class ui, QVector<experiment> experiments) {
+    ui.tableExp->setColumnCount(4);
+    ui.tableExp->setRowCount(experiments.size());
+    // установка заголовков таблицы
+    QStringList headers;
+    headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Эксперимент
+            << "\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273"//Материал
+            << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//Процесс
+            << "\320\224\320\260\321\202\320\260";//Дата
+
+    ui.tableExp->setHorizontalHeaderLabels(headers);
+
+    QTableWidgetItem d(experiments[1].getMaterial());
+
+    for (int i = 0; i < experiments.size(); ++i) {
+        ui.tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
+        ui.tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
+
+        QLabel* processLabel = new QLabel(experiments[i].getProcessTypeName());//для красивой отрисовки тега
+        processLabel->setObjectName(QString::fromUtf8("label_11"));
+        processLabel->setGeometry(QRect(175, 80, 86, 16));
+        processLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(65, 93, 138);\n"
+            "border-radius: 8px;\n"
+            "color: rgb(255, 255, 255);\n"
+            "margin-top: 5px;\n"
+            "margin-left: 40px;"));
+        processLabel->setAlignment(Qt::AlignCenter);
+        processLabel->setMaximumSize(QSize(115,21));
+        ui.tableExp->setCellWidget(i, 2, processLabel);
+        
+        ui.tableExp->setItem(i, 3, new QTableWidgetItem(experiments[i].getDate().toString("dd.MM.yy")));
+    }
+
+    ui.tableExp->setColumnWidth(0, 250);
+    ui.tableExp->setColumnWidth(1, 225);
+    ui.tableExp->setColumnWidth(2, 150);
+    ui.tableExp->setColumnWidth(3, 75);
 }
 
 void show_profile(Ui::VEDA1Class ui) {
     if (!USER_ENTERED) {
-        show_auth(ui);
+        //show_auth(ui);
     }
+    ui.tabWidget->setCurrentIndex(1);
+    UserData user(1);
+    show_experiments(ui, user.getExperiments());
 }

@@ -1220,8 +1220,7 @@ border-radius: 21px;</string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">color: #fff
-</string>
+              <string notr="true">color: #fff;</string>
              </property>
              <property name="text">
               <string>Lorem ipsum dolor sit amet consectetur. In nisl ut odio magna magnis commodo gravida dis malesuada. In commodo amet in duis aenean. Elementum proin dignissim quam faucibus. Et felis morbi non diam egestas tristique libero consequat placerat. Amet adipiscing tellus purus fermentum cursus sociis vulputate vitae. Morbi quis enim praesent ipsum ultrices. In.</string>
@@ -1902,12 +1901,12 @@ border-radius: 8px</string>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QFrame" name="frame_5">
+      <widget class="QFrame" name="hightlighter">
        <property name="geometry">
         <rect>
          <x>18</x>
          <y>95</y>
-         <width>217</width>
+         <width>220</width>
          <height>50</height>
         </rect>
        </property>
@@ -1921,6 +1920,61 @@ border-bottom-left-radius: 25px;</string>
        </property>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>695</y>
+         <width>131</width>
+         <height>36</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Inter V</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>® 2024 veda-1. Все права защищены.</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="expPage">
+       <property name="geometry">
+        <rect>
+         <x>18</x>
+         <y>95</y>
+         <width>217</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Inter V</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(255, 255, 255);
+border-top-left-radius: 25px;
+border-bottom-left-radius: 25px;
+background-color: transparent;
+}
+QPushButton:hover{
+	
+	background-color: rgb(74, 80, 85);
+}</string>
+       </property>
+       <property name="text">
+        <string>Эксперименты</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -2092,6 +2146,180 @@ border-radius: 21px</string>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>271</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Inter V</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Эксприменты с вашим участием</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableExp">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>736</width>
+         <height>131</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>736</width>
+         <height>126</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Inter V</family>
+         <pointsize>12</pointsize>
+         <italic>false</italic>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableView{
+color: rgb(212, 212, 212);
+border:none;
+}
+QHeaderView::section{
+	background-color: transparent;
+	border-top: none;
+border-right: none;
+border-left: none;
+	border-bottom: 1px solid rgb(54, 59, 62);
+color: rgb(212, 212, 212);
+	font: 10pt &quot;Inter V&quot;;
+}
+QScrollBar:vertical {
+	border: none;
+    background: transparent;
+    width: 14px;
+	border-radius: 8px;
+ }
+
+/*  HANDLE BAR VERTICAL */
+QScrollBar::handle:vertical {	
+	background-color: #A3EC5A;
+	min-height: 30px;
+	border-radius: 7px;
+}
+
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color: none;
+	height: 0px;
+}
+
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: none;
+	height: 0px;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="tabKeyNavigation">
+        <bool>false</bool>
+       </property>
+       <property name="showDropIndicator" stdset="0">
+        <bool>false</bool>
+       </property>
+       <property name="dragDropOverwriteMode">
+        <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideMiddle</enum>
+       </property>
+       <property name="verticalScrollMode">
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
+       </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
+       </property>
+       <property name="showGrid">
+        <bool>false</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+       <property name="cornerButtonEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="rowCount">
+        <number>5</number>
+       </property>
+       <property name="columnCount">
+        <number>5</number>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>32</number>
+       </attribute>
+       <attribute name="horizontalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <column/>
+       <column/>
+       <column/>
+       <column/>
+       <column/>
+      </widget>
+      <zorder>tableExp</zorder>
+      <zorder>label_10</zorder>
      </widget>
      <widget class="QFrame" name="frame_7">
       <property name="enabled">
@@ -2235,8 +2463,8 @@ border-radius: 21px</string>
        <enum>QFrame::Raised</enum>
       </property>
      </widget>
-     <zorder>frame_7</zorder>
      <zorder>frame_4</zorder>
+     <zorder>frame_7</zorder>
      <zorder>label_8</zorder>
      <zorder>logo_2</zorder>
      <zorder>switcher_2</zorder>
