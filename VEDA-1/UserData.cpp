@@ -1,19 +1,30 @@
 #include "UserData.h"
-#include <qeventloop.h>
+#include <QDebug>
 
-UserData::UserData(quint32 id_) : id(id_){
-	http = new HTTPclient();
+UserData::UserData(quint32 id_, QObject* parent) : QObject(parent), id(id_) {
+    http = new HTTPclient(this);
 
-    QEventLoop loop;
-    connect(http, &HTTPclient::userDataReceived, [&](const QString name_) {
-        name = name_;
-        loop.quit();
-        });
 
-    http->fetchUserData(QString::number(id));
+    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
+    connect(http, &HTTPclient::requestError, this, &UserData::onError);
+
+    QString endpoint = QString("http://localhost:5011/User/%1").arg(id);
+    http->get(endpoint);
+
     loop.exec();
 }
 
-QString UserData::getUserName() {
-	return name;
+void UserData::onUserDataReceived(const QJsonObject& jsonResponse) {
+    qDebug() << "User data received";
+    name = jsonResponse["userName"].toString();
+
+    loop.quit();
 }
+
+void UserData::onError(const QString& errorString) {
+    qDebug() << "Error received:" << errorString;
+
+    loop.quit();
+}
+
+QString UserData::getUserName() const {return name;}

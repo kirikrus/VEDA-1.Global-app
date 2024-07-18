@@ -1,20 +1,22 @@
-#include <qobject.h>
-#include <qjsonobject.h>
-#include <qjsondocument.h>
-#include <qnetworkreply.h>
-#include <qnetworkrequest.h>
-#include <qnetworkaccessmanager.h>
-#include <qurl.h>
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 class HTTPclient : public QObject {
     Q_OBJECT
 
 public:
-    HTTPclient(QObject* parent = nullptr);
-    void fetchUserData(const QString& userId);
+    explicit HTTPclient(QObject* parent = nullptr);
+
+    void get(const QString& endpoint);
+    void post(const QString& endpoint, const QJsonObject& data);
 
 signals:
-    void userDataReceived(const QString& userName);
+    void requestFinished(const QJsonObject& response);
+    void requestError(const QString& errorString);
 
 private slots:
     void onReplyFinished(QNetworkReply* reply);
