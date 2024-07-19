@@ -1,7 +1,9 @@
 #include "Profile.h"
 #include <qlineedit.h>
 #include "UserData.h"
-#include <qstandarditemmodel.h>
+#include "qchart.h"
+#include <qchartview.h>
+#include <qvalueaxis.h>
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
@@ -162,7 +164,56 @@ void show_experiments(Ui::VEDA1Class ui, UserData *user) {
 void showChart(Ui::VEDA1Class ui,int row){
     experiment exp = MAIN_USER_POINTER->getExperiments()[row];
     QLineSeries* series = exp.getChart();
+    
+    QChart* chart = new QChart;
+    chart->legend()->hide();
+    chart->addSeries(series);
+    chart->createDefaultAxes();
+    
 
+//стилизация
+    chart->setTitle(QString::fromLocal8Bit("Эксперимент №") + QString::number(exp.getId()));
+    chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
+
+    chart->setMinimumSize(ui.chart->size());
+
+    QPen pen(QColor("#A3EC5A"));
+    pen.setWidth(1);
+    series->setPen(pen);
+
+    chart->setBackgroundBrush(QBrush(QColor("#202325")));
+    chart->setPlotAreaBackgroundVisible(false);
+    
+    QValueAxis* axisX = dynamic_cast<QValueAxis*>(chart->axisX());
+    QValueAxis* axisY = dynamic_cast<QValueAxis*>(chart->axisY());
+
+    QFont labelsFont;
+    labelsFont.setPixelSize(12);
+    labelsFont.setFamily("Inter V");
+    axisX->setLabelsFont(labelsFont);
+    axisY->setLabelsFont(labelsFont);
+    labelsFont.setPixelSize(16);
+    labelsFont.setBold(true);
+    chart->setTitleFont(labelsFont);
+
+    axisX->setLineVisible(false);
+    axisY->setLineVisible(false);
+
+    QBrush axisBrush(QColor("#d4d4d4"));
+    axisX->setLabelsBrush(axisBrush);
+    axisY->setLabelsBrush(axisBrush);
+
+    axisX->setGridLineVisible(false);
+    axisY->setGridLineColor(QColor("#363b3e"));
+//---
+
+    QChartView* chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setStyleSheet("background-color: #202325;""color: rgb(212, 212, 212);");
+
+    ui.chart->setScene(new QGraphicsScene());
+    ui.chart->scene()->addWidget(chartView);
+    ui.chart->show();
 }
 
 void show_profile(Ui::VEDA1Class ui) {
