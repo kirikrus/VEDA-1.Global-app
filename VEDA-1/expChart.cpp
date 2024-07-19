@@ -1,0 +1,42 @@
+#include "expChart.h"
+#include <QDebug>
+#include <QJsonArray>
+
+expChart::expChart(quint32 expId_, QObject* parent) : QObject(parent), expId(expId_){
+    http = new HTTPclient(this);
+
+    QObject::connect(http, &HTTPclient::requestFinished, this, &expChart::onChartDataReceived);
+    QObject::connect(http, &HTTPclient::requestError, this, &expChart::onError);
+
+    initChart();
+}
+
+void expChart::initChart() {
+    QString endpoint = QString("http://localhost:5011/Experiment/GetExperimentData/%1").arg(expId);
+    http->get(endpoint);
+
+    loop.exec();
+}
+
+QLineSeries* expChart::getSeries(){return &series;}
+
+void expChart::onChartDataReceived(const QJsonObject& jsonResponse) {
+    qDebug() << "Chart data received";
+    QJsonArray experimentsArray = jsonResponse["DataOfExperiment"].toArray();
+
+    for (const QJsonValue& value : experimentsArray) {
+        QJsonObject experimentObject = value.toObject();
+        double time = experimentObject["timepoint"].toDouble();
+        double value = experimentObject["value"].toDouble();
+
+        series.append(time, value);
+    }
+
+    loop.quit();
+}
+
+void expChart::onError(const QString& errorString) {
+    qDebug() << "Error received:" << errorString;
+
+    loop.quit();
+}

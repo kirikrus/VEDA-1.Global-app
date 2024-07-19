@@ -4,6 +4,9 @@
 #include <qstandarditemmodel.h>
 
 bool USER_ENTERED = false;
+UserData* MAIN_USER_POINTER;
+
+void showChart(Ui::VEDA1Class,int);
 
 void show_auth(Ui::VEDA1Class ui) {
     QFrame* backdrop = new QFrame(ui.centralWidget);
@@ -111,7 +114,9 @@ void show_auth(Ui::VEDA1Class ui) {
     
 }
 
-void show_experiments(Ui::VEDA1Class ui, QVector<experiment> experiments) {
+void show_experiments(Ui::VEDA1Class ui, UserData *user) {
+    QVector<experiment> experiments = user->getExperiments();
+
     ui.tableExp->setColumnCount(4);
     ui.tableExp->setRowCount(experiments.size());
     // установка заголовков таблицы
@@ -129,14 +134,14 @@ void show_experiments(Ui::VEDA1Class ui, QVector<experiment> experiments) {
         ui.tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
         ui.tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
 
-        QLabel* processLabel = new QLabel(experiments[i].getProcessTypeName());//для красивой отрисовки тега
+        QLabel* processLabel = new QLabel(experiments[i].getProcessTypeName());//для красивой отрисовки тега процесса
         processLabel->setObjectName(QString::fromUtf8("label_11"));
         processLabel->setGeometry(QRect(175, 80, 86, 16));
-        processLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(65, 93, 138);\n"
-            "border-radius: 8px;\n"
-            "color: rgb(255, 255, 255);\n"
+        QString rgb = "color: rgb(255, 255, 255);\n";
+        processLabel->setStyleSheet("background-color: rgb(65, 93, 138);\n"
+            "border-radius: 8px;\n" + rgb +
             "margin-top: 5px;\n"
-            "margin-left: 40px;"));
+            "margin-left: 40px;");
         processLabel->setAlignment(Qt::AlignCenter);
         processLabel->setMaximumSize(QSize(115,21));
         ui.tableExp->setCellWidget(i, 2, processLabel);
@@ -148,6 +153,16 @@ void show_experiments(Ui::VEDA1Class ui, QVector<experiment> experiments) {
     ui.tableExp->setColumnWidth(1, 225);
     ui.tableExp->setColumnWidth(2, 150);
     ui.tableExp->setColumnWidth(3, 75);
+
+   QObject::connect(ui.tableExp, &QTableWidget::cellClicked, [=](int row, int) {
+        showChart(ui,row);
+        });
+}
+
+void showChart(Ui::VEDA1Class ui,int row){
+    experiment exp = MAIN_USER_POINTER->getExperiments()[row];
+    QLineSeries* series = exp.getChart();
+
 }
 
 void show_profile(Ui::VEDA1Class ui) {
@@ -156,5 +171,6 @@ void show_profile(Ui::VEDA1Class ui) {
     }
     ui.tabWidget->setCurrentIndex(1);
     UserData user(1);
-    show_experiments(ui, user.getExperiments());
+    MAIN_USER_POINTER = new UserData(1);
+    show_experiments(ui, &user);
 }

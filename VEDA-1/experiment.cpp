@@ -12,3 +12,12 @@ QString experiment::getMaterial() const {return material;}
 quint32 experiment::getProcessTypeId() const {return processTypeId;}
 
 QString experiment::getProcessTypeName() const {return processTypeName;}
+
+QLineSeries* experiment::getChart() {
+    if (!chart)
+        chart = new expChart(id);
+    else
+        return chart->getSeries();
+}
+
+

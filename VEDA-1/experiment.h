@@ -1,5 +1,6 @@
 #include <QString>
 #include <qdatetime.h>
+#include "expChart.h"
 
 class experiment {
 public:
@@ -10,6 +11,7 @@ public:
     QString getMaterial() const;
     quint32 getProcessTypeId() const;
     QString getProcessTypeName() const;
+    QLineSeries* getChart();
 
 private:
     quint32 id;
@@ -17,4 +19,6 @@ private:
     QString material;
     quint32 processTypeId;
     QString processTypeName;
+
+    expChart* chart = nullptr;
 };

@@ -32,7 +32,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.2.4_msvc2019_64</QtInstall>
-    <QtModules>core;gui;network;widgets</QtModules>
+    <QtModules>core;gui;network;widgets;charts</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -87,6 +87,7 @@
     <QtUic Include="VEDA1.ui" />
     <QtMoc Include="VEDA1.h" />
     <ClCompile Include="connections.cpp" />
+    <ClCompile Include="expChart.cpp" />
     <ClCompile Include="experiment.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="HTTPclient.cpp" />
@@ -97,6 +98,7 @@
   <ItemGroup>
     <QtMoc Include="HTTPclient.h" />
     <QtMoc Include="UserData.h" />
+    <QtMoc Include="expChart.h" />
     <ClInclude Include="experiment.h" />
     <ClInclude Include="Profile.h" />
   </ItemGroup>

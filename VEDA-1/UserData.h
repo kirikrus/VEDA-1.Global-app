@@ -2,7 +2,6 @@
 #include <QString>
 #include <QEventLoop>
 #include "experiment.h"
-#include "HTTPclient.h"
 
 
 class UserData : public QObject {

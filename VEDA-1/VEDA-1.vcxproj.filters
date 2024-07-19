@@ -55,6 +55,9 @@
     <ClCompile Include="experiment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="expChart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Profile.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UserData.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="expChart.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

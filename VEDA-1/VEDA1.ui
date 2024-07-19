@@ -1981,9 +1981,9 @@ QPushButton:hover{
      <widget class="QFrame" name="search_2">
       <property name="geometry">
        <rect>
-        <x>745</x>
+        <x>697</x>
         <y>18</y>
-        <width>288</width>
+        <width>336</width>
         <height>54</height>
        </rect>
       </property>
