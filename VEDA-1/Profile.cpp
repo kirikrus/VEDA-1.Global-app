@@ -8,12 +8,12 @@
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
 
-void showChart(Ui::VEDA1Class,int);
+void showChart(Ui::VEDA1Class*,int);
 
-void show_auth(Ui::VEDA1Class ui) {
-    QFrame* backdrop = new QFrame(ui.centralWidget);
+void show_auth(Ui::VEDA1Class* ui) {
+    QFrame* backdrop = new QFrame(ui->centralWidget);
 
-    backdrop->setGeometry(ui.centralWidget->rect());
+    backdrop->setGeometry(ui->centralWidget->rect());
     backdrop->setStyleSheet("background-color: rgba(22, 25, 26, 200);");
     backdrop->show();
 
@@ -28,7 +28,7 @@ void show_auth(Ui::VEDA1Class ui) {
     QLabel* label_21;
     QPushButton* pushButton;
 
-    widget = new QWidget(ui.centralWidget);
+    widget = new QWidget(ui->centralWidget);
     widget->setObjectName(QString::fromUtf8("widget"));
     widget->setGeometry(QRect(245, 125, 571, 443));
     widget->setStyleSheet(QString::fromUtf8("background-color: #202325;\n"
@@ -116,11 +116,11 @@ void show_auth(Ui::VEDA1Class ui) {
     
 }
 
-void show_experiments(Ui::VEDA1Class ui, UserData *user) {
+void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
     QVector<experiment> experiments = user->getExperiments();
 
-    ui.tableExp->setColumnCount(4);
-    ui.tableExp->setRowCount(experiments.size());
+    ui->tableExp->setColumnCount(4);
+    ui->tableExp->setRowCount(experiments.size());
     // установка заголовков таблицы
     QStringList headers;
     headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Эксперимент
@@ -128,13 +128,13 @@ void show_experiments(Ui::VEDA1Class ui, UserData *user) {
             << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//Процесс
             << "\320\224\320\260\321\202\320\260";//Дата
 
-    ui.tableExp->setHorizontalHeaderLabels(headers);
+    ui->tableExp->setHorizontalHeaderLabels(headers);
 
     QTableWidgetItem d(experiments[1].getMaterial());
 
     for (int i = 0; i < experiments.size(); ++i) {
-        ui.tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
-        ui.tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
+        ui->tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
+        ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
 
         QLabel* processLabel = new QLabel(experiments[i].getProcessTypeName());//для красивой отрисовки тега процесса
         processLabel->setObjectName(QString::fromUtf8("label_11"));
@@ -146,22 +146,30 @@ void show_experiments(Ui::VEDA1Class ui, UserData *user) {
             "margin-left: 40px;");
         processLabel->setAlignment(Qt::AlignCenter);
         processLabel->setMaximumSize(QSize(115,21));
-        ui.tableExp->setCellWidget(i, 2, processLabel);
+        ui->tableExp->setCellWidget(i, 2, processLabel);
         
-        ui.tableExp->setItem(i, 3, new QTableWidgetItem(experiments[i].getDate().toString("dd.MM.yy")));
+        ui->tableExp->setItem(i, 3, new QTableWidgetItem(experiments[i].getDate().toString("dd.MM.yy")));
     }
 
-    ui.tableExp->setColumnWidth(0, 250);
-    ui.tableExp->setColumnWidth(1, 225);
-    ui.tableExp->setColumnWidth(2, 150);
-    ui.tableExp->setColumnWidth(3, 75);
+    ui->tableExp->setColumnWidth(0, 250);
+    ui->tableExp->setColumnWidth(1, 225);
+    ui->tableExp->setColumnWidth(2, 150);
+    ui->tableExp->setColumnWidth(3, 75);
 
-   QObject::connect(ui.tableExp, &QTableWidget::cellClicked, [=](int row, int) {
+   QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         showChart(ui,row);
         });
 }
 
-void showChart(Ui::VEDA1Class ui,int row){
+void showChart(Ui::VEDA1Class *ui,int row){
+    if (ui->chart->scene()) {
+        QList<QGraphicsItem*> items = ui->chart->scene()->items();
+        for (QGraphicsItem* item : items)
+            ui->chart->scene()->removeItem(item);
+        ui->chart->scene()->clear();
+        delete ui->chart->scene();
+    }
+
     experiment exp = MAIN_USER_POINTER->getExperiments()[row];
     QLineSeries* series = exp.getChart();
     
@@ -175,7 +183,7 @@ void showChart(Ui::VEDA1Class ui,int row){
     chart->setTitle(QString::fromLocal8Bit("Эксперимент №") + QString::number(exp.getId()));
     chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
 
-    chart->setMinimumSize(ui.chart->size());
+    chart->setMinimumSize(ui->chart->size());
 
     QPen pen(QColor("#A3EC5A"));
     pen.setWidth(1);
@@ -205,22 +213,22 @@ void showChart(Ui::VEDA1Class ui,int row){
 
     axisX->setGridLineVisible(false);
     axisY->setGridLineColor(QColor("#363b3e"));
-//---
 
     QChartView* chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setStyleSheet("background-color: #202325;""color: rgb(212, 212, 212);");
+//---
 
-    ui.chart->setScene(new QGraphicsScene());
-    ui.chart->scene()->addWidget(chartView);
-    ui.chart->show();
+    ui->chart->setScene(new QGraphicsScene());
+    ui->chart->scene()->addWidget(chartView);
+    ui->chart->show();
 }
 
-void show_profile(Ui::VEDA1Class ui) {
+void show_profile(Ui::VEDA1Class *ui) {
     if (!USER_ENTERED) {
         //show_auth(ui);
     }
-    ui.tabWidget->setCurrentIndex(1);
+    ui->tabWidget->setCurrentIndex(1);
     UserData user(1);
     MAIN_USER_POINTER = new UserData(1);
     show_experiments(ui, &user);
