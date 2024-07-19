@@ -4,11 +4,13 @@
 #include "qchart.h"
 #include <qchartview.h>
 #include <qvalueaxis.h>
+#include <qstandarditemmodel.h>
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
 
 void showChart(Ui::VEDA1Class*,int);
+void show_exp_data(Ui::VEDA1Class* ui, int row);
 
 void show_auth(Ui::VEDA1Class* ui) {
     QFrame* backdrop = new QFrame(ui->centralWidget);
@@ -158,6 +160,7 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
 
    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         showChart(ui,row);
+        show_exp_data(ui, row);
         });
 }
 
@@ -222,6 +225,33 @@ void showChart(Ui::VEDA1Class *ui,int row){
     ui->chart->setScene(new QGraphicsScene());
     ui->chart->scene()->addWidget(chartView);
     ui->chart->show();
+}
+
+void show_exp_data(Ui::VEDA1Class* ui, int row) {
+    experiment exp = MAIN_USER_POINTER->getExperiments()[row];
+    QLineSeries* series = exp.getChart();
+
+    QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
+
+    model->setHorizontalHeaderLabels({ "ID", "X", "Y" });
+
+    ui->dataGraphTable->setColumnWidth(0, 20);
+    ui->dataGraphTable->setColumnWidth(1, 90);
+    ui->dataGraphTable->setColumnWidth(2, 90);
+
+    //установка данных в модели
+    int id = 0;
+    for (const QPointF& point : series->points()) {
+        QList<QStandardItem*> rowItems;
+        rowItems.append(new QStandardItem(QString::number(id)));
+        rowItems.append(new QStandardItem(QString::number(point.x())));
+        rowItems.append(new QStandardItem(QString::number(point.y())));
+        model->appendRow(rowItems);
+        id++;
+    }
+
+    ui->dataGraphTable->setModel(model);
+    ui->dataGraphTable->show();
 }
 
 void show_profile(Ui::VEDA1Class *ui) {
