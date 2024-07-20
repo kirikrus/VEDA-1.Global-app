@@ -4,6 +4,7 @@
 #include <QNetworkRequest>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <qjsonarray.h>
 
 class HTTPclient : public QObject {
     Q_OBJECT
@@ -12,7 +13,7 @@ public:
     explicit HTTPclient(QObject* parent = nullptr);
 
     void get(const QString& endpoint);
-    void post(const QString& endpoint, const QJsonObject& data);
+    void post(const QString& endpoint, const QJsonValue&);
 
 signals:
     void requestFinished(const QJsonObject& response);

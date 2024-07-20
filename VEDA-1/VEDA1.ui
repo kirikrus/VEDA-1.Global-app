@@ -2775,9 +2775,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>260</x>
-        <y>95</y>
+        <y>665</y>
         <width>486</width>
-        <height>626</height>
+        <height>56</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -2834,7 +2834,7 @@ color: white;</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <widget class="QDoubleSpinBox" name="inp_time_add">
         <property name="geometry">
          <rect>
           <x>290</x>
@@ -2893,7 +2893,7 @@ background-color: transparent;</string>
          <string>Добавление</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+       <widget class="QDoubleSpinBox" name="inp_num_add">
         <property name="geometry">
          <rect>
           <x>290</x>

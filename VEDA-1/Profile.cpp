@@ -252,6 +252,21 @@ void show_exp_data(Ui::VEDA1Class* ui, int row) {
 
     ui->dataGraphTable->setModel(model);
     ui->dataGraphTable->show();
+
+    //Îòïðàâêà ïîñò çàïðîñà ÂÐÅÌÅÍÍÎ
+    QObject::connect(ui->addData, &QPushButton::pressed, [=]() {
+        HTTPclient http;
+        QJsonArray data;
+        QJsonObject item;
+        item["value"] = ui->inp_num_add->value();
+        item["timepoint"] = ui->inp_time_add->value();
+        item["parameterid"] = (int)exp.getProcessTypeId() + 1;
+        item["experimentid"] = (row + 1);
+        data.append(item);
+
+        QString endpoint = "http://localhost:5011/Experiment/PutNewData";
+        http.post(endpoint, data);
+        });
 }
 
 void show_profile(Ui::VEDA1Class *ui) {
