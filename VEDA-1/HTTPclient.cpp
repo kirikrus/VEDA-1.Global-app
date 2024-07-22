@@ -39,7 +39,6 @@ void HTTPclient::post(const QString& endpoint, const QJsonValue& data) {
 
     loop.exec();
 
-
     QObject::connect(reply, &QNetworkReply::finished, [=]() {
         if (reply->error() == QNetworkReply::NoError) {
             QByteArray responseData = reply->readAll();

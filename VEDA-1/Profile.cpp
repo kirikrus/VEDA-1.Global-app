@@ -8,9 +8,10 @@
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
+int CURENT_EXP;
 
-void showChart(Ui::VEDA1Class*,int);
-void show_exp_data(Ui::VEDA1Class* ui, int row);
+void showChart(Ui::VEDA1Class*);
+void show_exp_data(Ui::VEDA1Class* ui);
 
 void show_auth(Ui::VEDA1Class* ui) {
     QFrame* backdrop = new QFrame(ui->centralWidget);
@@ -138,12 +139,18 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
         ui->tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
         ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
 
-        QLabel* processLabel = new QLabel(experiments[i].getProcessTypeName());//для красивой отрисовки тега процесса
+        QString tag = experiments[i].getProcessTypeName();
+        QLabel* processLabel = new QLabel(tag);//для красивой отрисовки тега процесса
         processLabel->setObjectName(QString::fromUtf8("label_11"));
         processLabel->setGeometry(QRect(175, 80, 86, 16));
-        QString rgb = "color: rgb(255, 255, 255);\n";
-        processLabel->setStyleSheet("background-color: rgb(65, 93, 138);\n"
-            "border-radius: 8px;\n" + rgb +
+        
+        QString rgb = "background-color: rgb(105, 105, 105);\n";
+        if(tag == "Cutting") rgb = "background-color: rgb(65, 93, 138);\n";
+        else if (tag == "Drilling") rgb = "background-color: rgb(160, 82, 45);\n";
+        else if (tag == "Turning") rgb = "background-color: rgb(34, 139, 34);\n";
+
+        processLabel->setStyleSheet("border-radius: 8px;\n" + rgb +
+            "color: rgb(255, 255, 255);\n"
             "margin-top: 5px;\n"
             "margin-left: 40px;");
         processLabel->setAlignment(Qt::AlignCenter);
@@ -159,12 +166,13 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
     ui->tableExp->setColumnWidth(3, 75);
 
    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
-        showChart(ui,row);
-        show_exp_data(ui, row);
+        CURENT_EXP = row;
+        showChart(ui);
+        show_exp_data(ui);
         });
 }
 
-void showChart(Ui::VEDA1Class *ui,int row){
+void showChart(Ui::VEDA1Class *ui){
     if (ui->chart->scene()) {
         QList<QGraphicsItem*> items = ui->chart->scene()->items();
         for (QGraphicsItem* item : items)
@@ -173,7 +181,7 @@ void showChart(Ui::VEDA1Class *ui,int row){
         delete ui->chart->scene();
     }
 
-    experiment exp = MAIN_USER_POINTER->getExperiments()[row];
+    experiment exp = MAIN_USER_POINTER->getExperiments()[CURENT_EXP];
     QLineSeries* series = exp.getChart();
     
     QChart* chart = new QChart;
@@ -227,8 +235,8 @@ void showChart(Ui::VEDA1Class *ui,int row){
     ui->chart->show();
 }
 
-void show_exp_data(Ui::VEDA1Class* ui, int row) {
-    experiment exp = MAIN_USER_POINTER->getExperiments()[row];
+void show_exp_data(Ui::VEDA1Class* ui) {
+    experiment exp = MAIN_USER_POINTER->getExperiments()[CURENT_EXP];
     QLineSeries* series = exp.getChart();
 
     QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
@@ -252,21 +260,6 @@ void show_exp_data(Ui::VEDA1Class* ui, int row) {
 
     ui->dataGraphTable->setModel(model);
     ui->dataGraphTable->show();
-
-    //Отправка пост запроса ВРЕМЕННО
-    QObject::connect(ui->addData, &QPushButton::pressed, [=]() {
-        HTTPclient http;
-        QJsonArray data;
-        QJsonObject item;
-        item["value"] = ui->inp_num_add->value();
-        item["timepoint"] = ui->inp_time_add->value();
-        item["parameterid"] = (int)exp.getProcessTypeId() + 1;
-        item["experimentid"] = (row + 1);
-        data.append(item);
-
-        QString endpoint = "http://localhost:5011/Experiment/PutNewData";
-        http.post(endpoint, data);
-        });
 }
 
 void show_profile(Ui::VEDA1Class *ui) {
@@ -277,4 +270,22 @@ void show_profile(Ui::VEDA1Class *ui) {
     UserData user(1);
     MAIN_USER_POINTER = new UserData(1);
     show_experiments(ui, &user);
+}
+
+void profile_ExpData_request(Ui::VEDA1Class* ui) {
+    //Отправка пост запроса ВРЕМЕННО
+    HTTPclient http;
+    QJsonArray data;
+    QJsonObject item;
+    item["value"] = ui->inp_num_add->value();
+    item["timepoint"] = ui->inp_time_add->value();
+    item["parameterid"] = (int)MAIN_USER_POINTER->getExperiments()[CURENT_EXP].getProcessTypeId() + 1;
+    item["experimentid"] = (CURENT_EXP + 1);
+    data.append(item);
+
+    QString endpoint = "http://localhost:5011/Experiment/PutNewData";
+    http.post(endpoint, data);
+
+    showChart(ui);
+    show_exp_data(ui);
 }

@@ -33,4 +33,7 @@ void connections(Ui::VEDA1Class *ui) {
 			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));//Закрыть редактор
 		}
 		});
+
+//Работа с запросами в редакторе
+    QObject::connect(ui->addData, &QPushButton::pressed, [=]() {profile_ExpData_request(ui);});
 }
