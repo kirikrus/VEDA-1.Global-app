@@ -279,8 +279,8 @@ void profile_ExpData_request(Ui::VEDA1Class* ui) {
     QJsonObject item;
     item["value"] = ui->inp_num_add->value();
     item["timepoint"] = ui->inp_time_add->value();
-    item["parameterid"] = (int)MAIN_USER_POINTER->getExperiments()[CURENT_EXP].getProcessTypeId() + 1;
-    item["experimentid"] = (CURENT_EXP + 1);
+    item["parameterid"] = (int)MAIN_USER_POINTER->getExperiments()[CURENT_EXP].getProcessTypeId();
+    item["experimentid"] = (int)MAIN_USER_POINTER->getExperiments()[CURENT_EXP].getId();
     data.append(item);
 
     QString endpoint = "http://localhost:5011/Experiment/PutNewData";
