@@ -11,6 +11,7 @@ public:
     UserData(quint32 id_, QObject* parent = nullptr);
     QString getUserName() const;
     QVector<experiment> getExperiments() const;
+    experiment* getExperimentById(int id);
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);

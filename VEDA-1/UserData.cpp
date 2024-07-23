@@ -64,4 +64,6 @@ void UserData::onError(const QString& errorString) {
 
 QString UserData::getUserName() const {return name;}
 
-QVector<experiment> UserData::getExperiments() const{return experiments;}
+QVector<experiment> UserData::getExperiments() const {return experiments;}
+
+experiment* UserData::getExperimentById(int id){return &experiments[id];}

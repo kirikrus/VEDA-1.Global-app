@@ -8,7 +8,7 @@
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
-int CURENT_EXP;
+int CURRENT_EXP;
 
 void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
@@ -166,7 +166,7 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
     ui->tableExp->setColumnWidth(3, 75);
 
    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
-        CURENT_EXP = row;
+        CURRENT_EXP = row;
         showChart(ui);
         show_exp_data(ui);
         });
@@ -174,15 +174,18 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
 
 void showChart(Ui::VEDA1Class *ui){
     if (ui->chart->scene()) {
-        QList<QGraphicsItem*> items = ui->chart->scene()->items();
+        QGraphicsScene* oldScene = ui->chart->scene();
+        QList<QGraphicsItem*> items = oldScene->items();
         for (QGraphicsItem* item : items)
-            ui->chart->scene()->removeItem(item);
-        ui->chart->scene()->clear();
-        delete ui->chart->scene();
+            oldScene->removeItem(item); 
+        oldScene->clear();
+        ui->chart->setScene(nullptr);
+        delete oldScene;
     }
 
-    experiment exp = MAIN_USER_POINTER->getExperiments()[CURENT_EXP];
-    QLineSeries* series = exp.getChart();
+    experiment* exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+    QLineSeries* series = exp->getChart();
     
     QChart* chart = new QChart;
     chart->legend()->hide();
@@ -191,7 +194,7 @@ void showChart(Ui::VEDA1Class *ui){
     
 
 //стилизация
-    chart->setTitle(QString::fromLocal8Bit("Эксперимент №") + QString::number(exp.getId()));
+    chart->setTitle(QString::fromLocal8Bit("Эксперимент №") + QString::number(exp->getId()));
     chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
 
     chart->setMinimumSize(ui->chart->size());
@@ -232,12 +235,15 @@ void showChart(Ui::VEDA1Class *ui){
 
     ui->chart->setScene(new QGraphicsScene());
     ui->chart->scene()->addWidget(chartView);
-    ui->chart->show();
 }
 
 void show_exp_data(Ui::VEDA1Class* ui) {
-    experiment exp = MAIN_USER_POINTER->getExperiments()[CURENT_EXP];
-    QLineSeries* series = exp.getChart();
+    experiment* exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+    QLineSeries* series = exp->getChart();
+
+
+    QAbstractItemModel* oldModel = ui->dataGraphTable->model();//чистим память
+    if (oldModel) delete oldModel;
 
     QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
 
@@ -272,6 +278,10 @@ void show_profile(Ui::VEDA1Class *ui) {
     show_experiments(ui, &user);
 }
 
+void data_Editer() {
+
+}
+
 void profile_ExpData_request(Ui::VEDA1Class* ui) {
     //Отправка пост запроса ВРЕМЕННО
     HTTPclient http;
@@ -279,8 +289,8 @@ void profile_ExpData_request(Ui::VEDA1Class* ui) {
     QJsonObject item;
     item["value"] = ui->inp_num_add->value();
     item["timepoint"] = ui->inp_time_add->value();
-    item["parameterid"] = (int)MAIN_USER_POINTER->getExperiments()[CURENT_EXP].getProcessTypeId();
-    item["experimentid"] = (int)MAIN_USER_POINTER->getExperiments()[CURENT_EXP].getId();
+    item["parameterid"] = (int)MAIN_USER_POINTER->getExperiments()[CURRENT_EXP].getProcessTypeId();
+    item["experimentid"] = (int)MAIN_USER_POINTER->getExperiments()[CURRENT_EXP].getId();
     data.append(item);
 
     QString endpoint = "http://localhost:5011/Experiment/PutNewData";
