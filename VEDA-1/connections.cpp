@@ -4,11 +4,15 @@
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скрола
+	ui->verticalScrollBar->setMaximum(ui->scrollArea->verticalScrollBar()->maximum());
 	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, ui->verticalScrollBar, &QScrollBar::setValue);
 	QObject::connect(ui->verticalScrollBar, &QScrollBar::valueChanged, ui->scrollArea->verticalScrollBar(), &QScrollBar::setValue);
 
-//кнопка переключения на профиль 
+//кнопка переключения на авторизацию
 	QObject::connect(ui->profile_button, &QPushButton::clicked, [=]() {show_profile(ui);});
+
+//кнопка переключения на главную
+	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {ui->tabWidget->setCurrentIndex(0);});
 
 //Развертка блока с точками на странице профиля
 	QObject::connect(ui->dataViewChange, &QPushButton::clicked, [=]() {

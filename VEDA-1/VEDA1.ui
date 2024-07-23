@@ -349,6 +349,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 	background: none;
 }</string>
        </property>
+       <property name="singleStep">
+        <number>100</number>
+       </property>
+       <property name="pageStep">
+        <number>100</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -667,10 +673,10 @@ border-radius: 27px;</string>
        <widget class="QPushButton" name="profile_button">
         <property name="geometry">
          <rect>
-          <x>135</x>
-          <y>5</y>
-          <width>101</width>
-          <height>46</height>
+          <x>55</x>
+          <y>0</y>
+          <width>196</width>
+          <height>54</height>
          </rect>
         </property>
         <property name="font">
@@ -680,7 +686,15 @@ border-radius: 27px;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color:white</string>
+         <string notr="true">QPushButton{
+color:white;
+border-radius: 27px;
+padding-left: 60px;
+}
+QPushButton:hover{
+color:Black;
+	background-color: rgb(212, 212, 212);
+}</string>
         </property>
         <property name="text">
          <string>Профиль</string>
@@ -695,6 +709,8 @@ border-radius: 27px;</string>
          <bool>true</bool>
         </property>
        </widget>
+       <zorder>profile_button</zorder>
+       <zorder>cur_page</zorder>
       </widget>
       <widget class="QFrame" name="notif">
        <property name="geometry">
@@ -1735,13 +1751,13 @@ border-radius: 27px;</string>
         </property>
        </widget>
       </widget>
-      <widget class="QPushButton" name="profile_button_2">
+      <widget class="QPushButton" name="home_button">
        <property name="geometry">
         <rect>
-         <x>12</x>
-         <y>5</y>
-         <width>101</width>
-         <height>46</height>
+         <x>0</x>
+         <y>0</y>
+         <width>201</width>
+         <height>54</height>
         </rect>
        </property>
        <property name="font">
@@ -1751,7 +1767,15 @@ border-radius: 27px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:white</string>
+        <string notr="true">QPushButton{
+color:white;
+border-radius: 27px;
+padding-right: 60px;
+}
+QPushButton:hover{
+color:Black;
+	background-color: rgb(212, 212, 212);
+}</string>
        </property>
        <property name="text">
         <string>Главная</string>
@@ -1766,6 +1790,8 @@ border-radius: 27px;</string>
         <bool>true</bool>
        </property>
       </widget>
+      <zorder>home_button</zorder>
+      <zorder>cur_page_2</zorder>
      </widget>
      <widget class="QFrame" name="notif_2">
       <property name="geometry">
@@ -1966,8 +1992,7 @@ border-bottom-left-radius: 25px;
 background-color: transparent;
 }
 QPushButton:hover{
-	
-	background-color: rgb(74, 80, 85);
+	background-color: rgb(58, 58, 58);
 }</string>
        </property>
        <property name="text">
@@ -2192,9 +2217,12 @@ border-radius: 21px</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QTableView{
+        <string notr="true">QTableWidget{
 color: rgb(212, 212, 212);
 border:none;
+}
+QTableView::item:focus{
+    border: 1px solid rgb(163, 236, 90);
 }
 QHeaderView::section{
 	background-color: transparent;
@@ -2409,7 +2437,12 @@ border-radius: 21px</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(163, 236, 90);</string>
+        <string notr="true">QPushButton{
+color: rgb(163, 236, 90);
+}
+QPushButton:hover{
+color: rgba(163, 236, 90, 150);
+}</string>
        </property>
        <property name="text">
         <string>Расширенный режим  &gt;</string>
@@ -2454,7 +2487,12 @@ border-radius: 21px</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(163, 236, 90);</string>
+        <string notr="true">QPushButton{
+color: rgb(163, 236, 90);
+}
+QPushButton:hover{
+color: rgba(163, 236, 90, 150);
+}</string>
        </property>
        <property name="text">
         <string>Развернуть  &gt;</string>
@@ -2482,6 +2520,9 @@ border-radius: 21px</string>
         <string notr="true">QTableView{
 color: rgb(212, 212, 212);
 border:none;
+}
+QTableView::item:focus{
+    border: 1px solid rgb(163, 236, 90);
 }
 QHeaderView::section{
 	background-color: transparent;
@@ -2631,12 +2672,17 @@ background-color: transparent;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">	background-color: transparent;
+        <string notr="true">QPushButton{
+	background-color: transparent;
 	border-top: 1px solid rgb(54, 59, 62);;
 border-right: none;
 border-left: none;
 	border-bottom: none;
-color: rgb(212, 212, 212);</string>
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgba(58, 58, 58, 50);
+}</string>
        </property>
        <property name="text">
         <string>Добавить</string>
@@ -2806,10 +2852,15 @@ border-radius: 21px</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">	background-color: transparent;
+        <string notr="true">QPushButton{
+	background-color: transparent;
 	border: 1px solid rgb(54, 59, 62);
 border-radius: 15px;
-color: rgb(212, 212, 212);</string>
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgb(58, 58, 58);
+}</string>
        </property>
        <property name="text">
         <string>Открыть редактор</string>
@@ -2992,9 +3043,14 @@ background-color: transparent;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(163, 236, 90);
+         <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
 color: black;
-border-radius: 13px;</string>
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
         </property>
         <property name="text">
          <string>Добавить</string>
@@ -3128,9 +3184,14 @@ background-color: transparent;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(163, 236, 90);
+         <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
 color: black;
-border-radius: 13px;</string>
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
         </property>
         <property name="text">
          <string>Удалить</string>
@@ -3314,9 +3375,14 @@ background-color: transparent;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(163, 236, 90);
+         <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
 color: black;
-border-radius: 13px;</string>
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
         </property>
         <property name="text">
          <string>Изменить</string>

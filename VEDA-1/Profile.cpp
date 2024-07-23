@@ -115,8 +115,12 @@ void show_auth(Ui::VEDA1Class* ui) {
     widget->raise();
     widget->show();
 
-    //inp_email->setText(user.getUserName());
-    
+    QObject::connect(pushButton, &QPushButton::pressed, [=]() {
+        delete widget;
+        delete backdrop;
+        USER_ENTERED = true;
+        show_profile(ui);
+        });
 }
 
 void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
@@ -272,7 +276,8 @@ void show_exp_data(Ui::VEDA1Class* ui) {
 
 void show_profile(Ui::VEDA1Class *ui) {
     if (!USER_ENTERED) {
-        //show_auth(ui);
+        show_auth(ui);
+        return;
     }
     ui->tabWidget->setCurrentIndex(1);
     UserData user(1);
