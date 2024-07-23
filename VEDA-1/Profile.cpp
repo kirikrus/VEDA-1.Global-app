@@ -305,7 +305,9 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         http.put(endpoint, data);
     }
     else if (type_of_method == "DELETE") {
-        int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_put->value());
+        int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_del->value() );
+
+        if (id == -1) return;
 
         QString endpoint = "http://localhost:5011/Experiment/DeleteData";
         http.delet(endpoint, id);

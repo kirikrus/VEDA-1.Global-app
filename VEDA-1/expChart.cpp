@@ -20,7 +20,10 @@ void expChart::initChart() {
 
 QLineSeries* expChart::getSeries(){return &series;}
 
-int expChart::getPointId(int num) const{return points_id[num];}
+int expChart::getPointId(int num) const{
+    if (points_id.size() == 0) return -1;
+    return points_id[num];
+}
 
 QString expChart::getParamUnit() const{return param_unit;}
 
