@@ -247,7 +247,9 @@ void show_exp_data(Ui::VEDA1Class* ui) {
 
     QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
 
-    model->setHorizontalHeaderLabels({ "ID", "X", "Y" });
+    model->setHorizontalHeaderLabels({ "ID", 
+        QString::fromLocal8Bit("Время"), 
+         exp->getChartLink()->getParamUnit()});
 
     ui->dataGraphTable->setColumnWidth(0, 20);
     ui->dataGraphTable->setColumnWidth(1, 90);
@@ -278,23 +280,36 @@ void show_profile(Ui::VEDA1Class *ui) {
     show_experiments(ui, &user);
 }
 
-void data_Editer() {
-
-}
-
-void profile_ExpData_request(Ui::VEDA1Class* ui) {
-    //Отправка пост запроса ВРЕМЕННО
+void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
     HTTPclient http;
     QJsonArray data;
     QJsonObject item;
-    item["value"] = ui->inp_num_add->value();
-    item["timepoint"] = ui->inp_time_add->value();
-    item["parameterid"] = (int)MAIN_USER_POINTER->getExperiments()[CURRENT_EXP].getProcessTypeId();
-    item["experimentid"] = (int)MAIN_USER_POINTER->getExperiments()[CURRENT_EXP].getId();
-    data.append(item);
 
-    QString endpoint = "http://localhost:5011/Experiment/PutNewData";
-    http.post(endpoint, data);
+    if (type_of_method == "POST") {
+        item["value"] = ui->inp_num_add->value();
+        item["timepoint"] = ui->inp_time_add->value();
+        item["parameterid"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getProcessTypeId();
+        item["experimentid"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getId();
+        data.append(item);
+
+        QString endpoint = "http://localhost:5011/Experiment/PutNewData";
+        http.post(endpoint, data);
+    }
+    else if (type_of_method == "PUT") {
+        item["value"] = ui->inp_num_put->value();
+        item["timepoint"] = ui->inp_time_put->value();
+        item["id"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_put->value());
+        data.append(item);
+
+        QString endpoint = "http://localhost:5011/Experiment/UpdateData";
+        http.put(endpoint, data);
+    }
+    else if (type_of_method == "DELETE") {
+        int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_put->value());
+
+        QString endpoint = "http://localhost:5011/Experiment/DeleteData";
+        http.delet(endpoint, id);
+    }
 
     showChart(ui);
     show_exp_data(ui);

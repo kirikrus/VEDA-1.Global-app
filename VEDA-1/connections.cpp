@@ -35,5 +35,7 @@ void connections(Ui::VEDA1Class *ui) {
 		});
 
 //Работа с запросами в редакторе
-    QObject::connect(ui->addData, &QPushButton::pressed, [=]() {profile_ExpData_request(ui);});
+    QObject::connect(ui->addData, &QPushButton::pressed, [=]() {data_Editer(ui,"POST");});
+	QObject::connect(ui->putData, &QPushButton::pressed, [=]() {data_Editer(ui, "PUT");});
+	QObject::connect(ui->deleteData, &QPushButton::pressed, [=]() {data_Editer(ui, "DELETE");});
 }

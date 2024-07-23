@@ -2166,7 +2166,7 @@ border-radius: 21px</string>
         <string notr="true">color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
-        <string>Эксприменты с вашим участием</string>
+        <string>Эксперименты с вашим участием</string>
        </property>
       </widget>
       <widget class="QTableWidget" name="tableExp">
@@ -2775,9 +2775,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>260</x>
-        <y>665</y>
+        <y>670</y>
         <width>486</width>
-        <height>56</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3020,7 +3020,7 @@ color: white;</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+       <widget class="QDoubleSpinBox" name="inp_id_del">
         <property name="geometry">
          <rect>
           <x>155</x>
@@ -3156,7 +3156,7 @@ color: white;</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+       <widget class="QDoubleSpinBox" name="inp_time_put">
         <property name="geometry">
          <rect>
           <x>290</x>
@@ -3215,7 +3215,7 @@ background-color: transparent;</string>
          <string>Изменение</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
+       <widget class="QDoubleSpinBox" name="inp_num_put">
         <property name="geometry">
          <rect>
           <x>290</x>
@@ -3298,7 +3298,7 @@ background-color: transparent;</string>
          <string>Новое значение:</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="editData">
+       <widget class="QPushButton" name="putData">
         <property name="geometry">
          <rect>
           <x>15</x>
@@ -3322,7 +3322,7 @@ border-radius: 13px;</string>
          <string>Изменить</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_6">
+       <widget class="QDoubleSpinBox" name="inp_id_put">
         <property name="geometry">
          <rect>
           <x>290</x>
@@ -3391,7 +3391,7 @@ background-color: transparent;</string>
          <x>20</x>
          <y>430</y>
          <width>451</width>
-         <height>131</height>
+         <height>181</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -3452,54 +3452,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        </property>
        <property name="readOnly">
         <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="confirm">
-       <property name="geometry">
-        <rect>
-         <x>25</x>
-         <y>585</y>
-         <width>206</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Inter V</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(163, 236, 90);
-color: black;
-border-radius: 13px;</string>
-       </property>
-       <property name="text">
-        <string>Подтвердить</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="returnBt">
-       <property name="geometry">
-        <rect>
-         <x>265</x>
-         <y>585</y>
-         <width>206</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Inter V</family>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(22, 25, 26);
-color: rgb(242, 54, 54);
-border-radius: 13px;</string>
-       </property>
-       <property name="text">
-        <string>Сбросить</string>
        </property>
       </widget>
      </widget>

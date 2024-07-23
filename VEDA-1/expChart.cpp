@@ -20,15 +20,25 @@ void expChart::initChart() {
 
 QLineSeries* expChart::getSeries(){return &series;}
 
+int expChart::getPointId(int num) const{return points_id[num];}
+
+QString expChart::getParamUnit() const{return param_unit;}
+
 void expChart::onChartDataReceived(const QJsonObject& jsonResponse) {
     qDebug() << "Chart data received";
     QJsonArray experimentsArray = jsonResponse["DataOfExperiment"].toArray();
+
 
     for (const QJsonValue& value : experimentsArray) {
         QJsonObject experimentObject = value.toObject();
         double time = experimentObject["timepoint"].toDouble();
         double value = experimentObject["value"].toDouble();
+        int id = experimentObject["id"].toInt();
 
+        QJsonObject processTypeObject = experimentObject["parameter"].toObject();
+        param_unit = processTypeObject["unit"].toString();
+
+        points_id.append(id);
         series.append(time, value);
     }
 

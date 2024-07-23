@@ -14,9 +14,11 @@ quint32 experiment::getProcessTypeId() const {return processTypeId;}
 QString experiment::getProcessTypeName() const {return processTypeName;}
 
 QLineSeries* experiment::getChart() {
-    if (!chart)
-        chart = new expChart(id);
+    if (!chart) delete chart;
+    chart = new expChart(id);
     return chart->getSeries();
 }
+
+expChart* experiment::getChartLink(){return chart;}
 
 

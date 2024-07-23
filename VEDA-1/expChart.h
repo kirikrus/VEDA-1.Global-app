@@ -11,6 +11,8 @@ public:
 	expChart(quint32 expId_, QObject* parent = nullptr);
 	void initChart();
 	QLineSeries* getSeries();
+	int getPointId(int num) const;
+	QString getParamUnit() const;
 
 private slots:
 	void onChartDataReceived(const QJsonObject& jsonResponse);
@@ -19,6 +21,8 @@ private slots:
 private:
 	quint32 expId;
 	QLineSeries series;
+	QVector<int> points_id;
+	QString param_unit;
 
 	HTTPclient* http;
 	QEventLoop loop;

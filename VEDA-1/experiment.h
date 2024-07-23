@@ -12,6 +12,7 @@ public:
     quint32 getProcessTypeId() const;
     QString getProcessTypeName() const;
     QLineSeries* getChart();
+    expChart* getChartLink();
 
 private:
     quint32 id;
