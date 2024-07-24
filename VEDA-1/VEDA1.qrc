@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="VEDA1"/>
   <qresource prefix="icons">
+    <file>icons/back_auth.png</file>
     <file>icons/like_fill.png</file>
     <file>icons/like_unfill.png</file>
     <file>icons/link.png</file>

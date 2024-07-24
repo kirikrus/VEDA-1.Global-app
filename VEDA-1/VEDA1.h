@@ -3,6 +3,8 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_VEDA1.h"
 
+void connections(Ui::VEDA1Class*);
+
 class VEDA1 : public QMainWindow
 {
     Q_OBJECT
