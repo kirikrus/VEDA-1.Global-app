@@ -2,6 +2,11 @@
 #include <QDebug>
 #include <QJsonArray>
 
+struct PointWithId {
+    QPointF point;
+    int id;
+};
+
 expChart::expChart(quint32 expId_, QObject* parent) : QObject(parent), expId(expId_){
     http = new HTTPclient(this);
 
@@ -53,13 +58,18 @@ void expChart::onChartDataReceived(const QJsonObject& jsonResponse) {
 void expChart::sortLineSeries() {
     QList<QPointF> points = series.points();
 
-    std::vector<QPointF> pointsVector(points.begin(), points.end());
+    std::vector<PointWithId> pointsWithIds;
+    for (int i = 0; i < points.size(); ++i) pointsWithIds.push_back({ points[i], points_id[i] });
 
-    std::sort(pointsVector.begin(), pointsVector.end(), [](const QPointF& a, const QPointF& b) {return a.x() < b.x();});
+    std::sort(pointsWithIds.begin(), pointsWithIds.end(), [](const PointWithId& a, const PointWithId& b) {return a.point.x() < b.point.x();});
 
+    // Очищаем серию и QVector, затем добавляем отсортированные значения
     series.clear();
-    for (const QPointF& point : pointsVector)
-        series.append(point);
+    points_id.clear();
+    for (const PointWithId& pointWithId : pointsWithIds) {
+        series.append(pointWithId.point);
+        points_id.append(pointWithId.id);
+    }
 }
 
 void expChart::onError(const QString& errorString) {
