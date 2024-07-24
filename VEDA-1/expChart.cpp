@@ -45,7 +45,21 @@ void expChart::onChartDataReceived(const QJsonObject& jsonResponse) {
         series.append(time, value);
     }
 
+    sortLineSeries();
+
     loop.quit();
+}
+
+void expChart::sortLineSeries() {
+    QList<QPointF> points = series.points();
+
+    std::vector<QPointF> pointsVector(points.begin(), points.end());
+
+    std::sort(pointsVector.begin(), pointsVector.end(), [](const QPointF& a, const QPointF& b) {return a.x() < b.x();});
+
+    series.clear();
+    for (const QPointF& point : pointsVector)
+        series.append(point);
 }
 
 void expChart::onError(const QString& errorString) {

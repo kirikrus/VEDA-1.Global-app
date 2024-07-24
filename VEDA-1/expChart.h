@@ -9,10 +9,12 @@ class expChart : public QObject {
 
 public:
 	expChart(quint32 expId_, QObject* parent = nullptr);
+	
 	void initChart();
-	QLineSeries* getSeries();
+	void sortLineSeries();
 	int getPointId(int num) const;
 	QString getParamUnit() const;
+	QLineSeries* getSeries();
 
 private slots:
 	void onChartDataReceived(const QJsonObject& jsonResponse);
