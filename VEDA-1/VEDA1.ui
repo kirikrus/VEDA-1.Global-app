@@ -849,7 +849,7 @@ border-radius: 8px</string>
 </string>
        </property>
        <property name="text">
-        <string>VEDA-1</string>
+        <string>ВEDA-1</string>
        </property>
       </widget>
       <widget class="QFrame" name="frame">
@@ -1628,7 +1628,7 @@ border-radius: 21px;</string>
 background-color: transparent;</string>
       </property>
       <property name="text">
-       <string>VEDA-1</string>
+       <string>ВEDA-1</string>
       </property>
      </widget>
      <widget class="QFrame" name="logo_2">
@@ -1913,10 +1913,13 @@ border-radius: 8px</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>-1</y>
-        <width>235</width>
-        <height>750</height>
+        <y>80</y>
+        <width>106</width>
+        <height>666</height>
        </rect>
+      </property>
+      <property name="mouseTracking">
+       <bool>false</bool>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(32, 35, 37);</string>
@@ -1930,9 +1933,9 @@ border-radius: 8px</string>
       <widget class="QFrame" name="hightlighter">
        <property name="geometry">
         <rect>
-         <x>18</x>
-         <y>95</y>
-         <width>220</width>
+         <x>5</x>
+         <y>15</y>
+         <width>61</width>
          <height>50</height>
         </rect>
        </property>
@@ -1948,33 +1951,12 @@ border-bottom-left-radius: 25px;</string>
         <enum>QFrame::Raised</enum>
        </property>
       </widget>
-      <widget class="QLabel" name="label_9">
-       <property name="geometry">
-        <rect>
-         <x>55</x>
-         <y>695</y>
-         <width>131</width>
-         <height>36</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Inter V</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(212, 212, 212);</string>
-       </property>
-       <property name="text">
-        <string>® 2024 veda-1. Все права защищены.</string>
-       </property>
-      </widget>
       <widget class="QPushButton" name="expPage">
        <property name="geometry">
         <rect>
-         <x>18</x>
-         <y>95</y>
-         <width>217</width>
+         <x>5</x>
+         <y>15</y>
+         <width>56</width>
          <height>50</height>
         </rect>
        </property>
@@ -1996,7 +1978,124 @@ QPushButton:hover{
 }</string>
        </property>
        <property name="text">
-        <string>Эксперименты</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="VEDA1.qrc">
+         <normaloff>:/icons/icons/exp.png</normaloff>
+         <normalon>:/icons/icons/exp_fill.png</normalon>
+         <activeoff>:/icons/icons/exp_fill.png</activeoff>:/icons/icons/exp.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="settingPage">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>80</y>
+         <width>56</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Inter V</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(255, 255, 255);
+border-top-left-radius: 25px;
+border-bottom-left-radius: 25px;
+background-color: transparent;
+}
+QPushButton:hover{
+	background-color: rgb(58, 58, 58);
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="VEDA1.qrc">
+         <normaloff>:/icons/icons/settings.png</normaloff>
+         <activeoff>:/icons/icons/setting_fill.png</activeoff>
+         <activeon>:/icons/icons/setting_fill.png</activeon>:/icons/icons/settings.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeat">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="settingPage_2">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>145</y>
+         <width>56</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Inter V</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+color: rgb(255, 255, 255);
+border-top-left-radius: 25px;
+border-bottom-left-radius: 25px;
+background-color: transparent;
+}
+QPushButton:hover{
+	background-color: rgb(58, 58, 58);
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="VEDA1.qrc">
+         <normaloff>:/icons/icons/admin.png</normaloff>
+         <activeoff>:/icons/icons/admin_fill.png</activeoff>
+         <activeon>:/icons/icons/admin_fill.png</activeon>:/icons/icons/admin.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="autoRepeat">
+        <bool>false</bool>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -2155,9 +2254,9 @@ border: 1px solid rgb(163, 236, 90);</string>
      <widget class="QFrame" name="frame_6">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>90</x>
         <y>95</y>
-        <width>771</width>
+        <width>941</width>
         <height>197</height>
        </rect>
       </property>
@@ -2199,7 +2298,7 @@ border-radius: 21px</string>
         <rect>
          <x>20</x>
          <y>50</y>
-         <width>736</width>
+         <width>906</width>
          <height>131</height>
         </rect>
        </property>
@@ -2220,6 +2319,7 @@ border-radius: 21px</string>
         <string notr="true">QTableWidget{
 color: rgb(212, 212, 212);
 border:none;
+text-align: center;
 }
 QTableView::item:focus{
     border: 1px solid rgb(163, 236, 90);
@@ -2286,6 +2386,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        </property>
        <property name="selectionMode">
         <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
        </property>
        <property name="textElideMode">
         <enum>Qt::ElideMiddle</enum>
@@ -2356,7 +2459,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
       <property name="geometry">
        <rect>
         <x>572</x>
-        <y>264</y>
+        <y>260</y>
         <width>428</width>
         <height>411</height>
        </rect>
@@ -2374,9 +2477,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <widget class="QFrame" name="frame_8">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>90</x>
         <y>310</y>
-        <width>486</width>
+        <width>571</width>
         <height>341</height>
        </rect>
       </property>
@@ -2401,7 +2504,7 @@ border-radius: 21px</string>
         <rect>
          <x>9</x>
          <y>9</y>
-         <width>468</width>
+         <width>551</width>
          <height>323</height>
         </rect>
        </property>
@@ -2424,7 +2527,7 @@ border-radius: 21px</string>
       <widget class="QPushButton" name="fullScreenGraph">
        <property name="geometry">
         <rect>
-         <x>330</x>
+         <x>410</x>
          <y>15</y>
          <width>146</width>
          <height>16</height>
@@ -2455,9 +2558,9 @@ color: rgba(163, 236, 90, 150);
      <widget class="QFrame" name="dataGraphPanel">
       <property name="geometry">
        <rect>
-        <x>760</x>
+        <x>680</x>
         <y>525</y>
-        <width>271</width>
+        <width>351</width>
         <height>196</height>
        </rect>
       </property>
@@ -2474,7 +2577,7 @@ border-radius: 21px</string>
       <widget class="QPushButton" name="dataViewChange">
        <property name="geometry">
         <rect>
-         <x>165</x>
+         <x>250</x>
          <y>15</y>
          <width>91</width>
          <height>16</height>
@@ -2506,7 +2609,7 @@ color: rgba(163, 236, 90, 150);
         <rect>
          <x>10</x>
          <y>40</y>
-         <width>251</width>
+         <width>326</width>
          <height>141</height>
         </rect>
        </property>
@@ -2616,9 +2719,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <widget class="QFrame" name="frame_10">
       <property name="geometry">
        <rect>
-        <x>760</x>
+        <x>680</x>
         <y>310</y>
-        <width>271</width>
+        <width>351</width>
         <height>197</height>
        </rect>
       </property>
@@ -2661,7 +2764,7 @@ background-color: transparent;</string>
         <rect>
          <x>20</x>
          <y>165</y>
-         <width>231</width>
+         <width>316</width>
          <height>24</height>
         </rect>
        </property>
@@ -2820,9 +2923,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <widget class="QFrame" name="edite">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>90</x>
         <y>670</y>
-        <width>486</width>
+        <width>571</width>
         <height>51</height>
        </rect>
       </property>
@@ -2839,7 +2942,7 @@ border-radius: 21px</string>
       <widget class="QPushButton" name="dataChange">
        <property name="geometry">
         <rect>
-         <x>135</x>
+         <x>175</x>
          <y>10</y>
          <width>211</width>
          <height>30</height>
@@ -3456,7 +3559,7 @@ background-color: transparent;</string>
         <rect>
          <x>20</x>
          <y>430</y>
-         <width>451</width>
+         <width>531</width>
          <height>181</height>
         </rect>
        </property>
@@ -3521,6 +3624,53 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        </property>
       </widget>
      </widget>
+     <widget class="QFrame" name="shadow">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>80</y>
+        <width>151</width>
+        <height>671</height>
+       </rect>
+      </property>
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(22, 25, 26);
+border-top-left-radius: 20px;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_12">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>-5</y>
+        <width>241</width>
+        <height>86</height>
+       </rect>
+      </property>
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(32, 35, 37);
+border-bottom-right-radius: 30px;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <zorder>frame_12</zorder>
      <zorder>frame_4</zorder>
      <zorder>frame_7</zorder>
      <zorder>label_8</zorder>
@@ -3529,11 +3679,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <zorder>notif_2</zorder>
      <zorder>search_2</zorder>
      <zorder>span1_2</zorder>
+     <zorder>frame_10</zorder>
+     <zorder>shadow</zorder>
      <zorder>frame_6</zorder>
      <zorder>frame_8</zorder>
-     <zorder>frame_10</zorder>
-     <zorder>edite</zorder>
      <zorder>dataGraphPanel</zorder>
+     <zorder>edite</zorder>
     </widget>
    </widget>
   </widget>

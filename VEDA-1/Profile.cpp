@@ -186,9 +186,9 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
         ui->tableExp->setItem(i, 3, new QTableWidgetItem(experiments[i].getDate().toString("dd.MM.yy")));
     }
 
-    ui->tableExp->setColumnWidth(0, 250);
-    ui->tableExp->setColumnWidth(1, 225);
-    ui->tableExp->setColumnWidth(2, 150);
+    ui->tableExp->setColumnWidth(0, 332);
+    ui->tableExp->setColumnWidth(1, 332);
+    ui->tableExp->setColumnWidth(2, 155);
     ui->tableExp->setColumnWidth(3, 75);
 
    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
@@ -277,9 +277,9 @@ void show_exp_data(Ui::VEDA1Class* ui) {
         QString::fromLocal8Bit("Время"), 
          exp->getChartLink()->getParamUnit()});
 
-    ui->dataGraphTable->setColumnWidth(0, 20);
-    ui->dataGraphTable->setColumnWidth(1, 90);
-    ui->dataGraphTable->setColumnWidth(2, 90);
+    ui->dataGraphTable->setColumnWidth(0, 50);
+    ui->dataGraphTable->setColumnWidth(1, 130);
+    ui->dataGraphTable->setColumnWidth(2, 130);
 
     //установка данных в модели
     int id = 0;
