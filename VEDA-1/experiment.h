@@ -4,7 +4,7 @@
 
 class experiment {
 public:
-    experiment(quint32 id, const QDate& date, const QString& material, quint32 processTypeId, const QString& processTypeName);
+    experiment(quint32 id, QDate date, QString material, quint32 processTypeId, QString processTypeName, int authorId, QVector<int> membersId);
 
     quint32 getId() const;
     QDate getDate() const;
@@ -13,6 +13,8 @@ public:
     QString getProcessTypeName() const;
     QLineSeries* getChart();
     expChart* getChartLink();
+    int getAuthorId() const;
+    QVector<int> getMembersId() const;
 
 private:
     quint32 id;
@@ -20,6 +22,9 @@ private:
     QString material;
     quint32 processTypeId;
     QString processTypeName;
+
+    int authorId;
+    QVector<int> membersId;
 
     expChart* chart = nullptr;
 };

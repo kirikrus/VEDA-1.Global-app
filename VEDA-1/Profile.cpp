@@ -1,6 +1,7 @@
 #include "Profile.h"
 #include "qchart.h"
-#include "UserData.h"
+#include "modalUserInfo.h"
+
 #include <qchartview.h>
 #include <qlineedit.h>
 #include <qstandarditemmodel.h>
@@ -11,6 +12,7 @@ bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
 int CURRENT_EXP;
 
+void show_users(Ui::VEDA1Class* ui);
 void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
 
@@ -191,11 +193,27 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
     ui->tableExp->setColumnWidth(2, 155);
     ui->tableExp->setColumnWidth(3, 75);
 
+    
+
    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         CURRENT_EXP = row;
         showChart(ui);
         show_exp_data(ui);
+        show_users(ui);
         });
+}
+
+void show_users(Ui::VEDA1Class* ui) {
+    auto users = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getMembersId();
+    
+    QLayoutItem* item;
+    while ((item = ui->verticalLayout_2->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+    for (int id : users) 
+        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui->scrollAreaWidgetContents_2));
 }
 
 void showChart(Ui::VEDA1Class *ui){

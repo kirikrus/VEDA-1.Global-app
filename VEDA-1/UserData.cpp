@@ -17,6 +17,19 @@ UserData::UserData(QString login, QString password, QObject* parent) : QObject(p
     loop.exec();
 }
 
+UserData::UserData(int id, QObject* parent) : QObject(parent), id(id) {
+    http = new HTTPclient(this);
+    http_for_exp = new HTTPclient(this);
+
+    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
+    connect(http, &HTTPclient::requestError, this, &UserData::onError);
+
+    QString endpoint = QString("http://localhost:5011/User/%1").arg(id);
+    http->get(endpoint);
+
+    loop.exec();
+}
+
 void UserData::onUserVerification(const QJsonObject& jsonResponse) {
     qDebug() << "User data received";
     id = jsonResponse["userid"].toInt();
@@ -71,7 +84,14 @@ void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
         quint32 processTypeId = processTypeObject["id"].toInt();
         QString processTypeName = processTypeObject["name"].toString();
 
-        experiments.append(experiment(id, date, material, processTypeId, processTypeName));
+        QJsonArray membersArray = experimentObject["membersid"].toArray();
+        QVector<int> memberId;
+        for (const QJsonValue& value : membersArray)
+            memberId.append(value.toInt());
+
+        int authorId = experimentObject["authorid"].toInt();
+
+        experiments.append(experiment(id, date, material, processTypeId, processTypeName,authorId, memberId));
     }
 
     loop_for_exp.quit();
@@ -86,8 +106,14 @@ void UserData::onError(const QString& errorString) {
 
 QString UserData::getUserName() const {return name;}
 
+QString UserData::getEmail() const{return email;}
+
+QString UserData::getPhone() const { return phone; }
+
 int UserData::getId() const{return id;}
 
 QVector<experiment> UserData::getExperiments() const {return experiments;}
 
 experiment* UserData::getExperimentById(int id){return &experiments[id];}
+
+bool UserData::is_admin(){return admin;}
