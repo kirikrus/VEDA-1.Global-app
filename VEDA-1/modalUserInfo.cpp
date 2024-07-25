@@ -1,6 +1,8 @@
 #include "modalUserInfo.h"
 
-modalUserInfo::modalUserInfo(UserData* user_,QWidget* parent) : user(user_), QWidget(parent) {
+#include <QMouseEvent>
+
+modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, QWidget* parent) : user(user_),ui(ui), QWidget(parent) {
 	//connect(this, &QWidget::mousePressEvent, this, &modalUserInfo::goBig);
     
     name.setParent(this);
@@ -70,6 +72,99 @@ modalUserInfo::~modalUserInfo(){
     user = nullptr;
 }
 
-void modalUserInfo::goBig(){
-    return;
+void modalUserInfo::mousePressEvent(QMouseEvent* event) {
+    if (event->button() == Qt::LeftButton) {
+        goBig();
+    }
+}
+
+void modalUserInfo::goBig() {
+    QFrame* backdrop = new QFrame(ui->centralWidget);
+
+    backdrop->setGeometry(ui->centralWidget->rect());
+    backdrop->setStyleSheet("background-color: rgba(22, 25, 26, 200);");
+    backdrop->show();
+
+    QWidget* widget;
+    QLabel* photo;
+    QLabel* name_;
+    QLabel* phone;
+    QLabel* email;
+
+#pragma region print
+    widget = new QWidget(ui->centralWidget);
+    widget->setGeometry(QRect(310, 225, 446, 281));
+    widget->setStyleSheet(QString::fromUtf8("background-color: rgb(32, 35, 37);\n"
+        "border-radius: 21px;\n"
+        "border: 1px solid rgb(163, 236, 90);"));
+    photo = new QLabel(widget);
+    photo->setGeometry(QRect(20, 20, 100, 100));
+    photo->setStyleSheet(QString::fromUtf8("background-color: rgb(32, 35, 37);\n"
+        "border: none"));
+    photo->setPixmap(QPixmap(QString::fromUtf8(":/icons/icons/test_avatar.png")));
+    photo->setScaledContents(true);
+    name_ = new QLabel(widget);
+    name_->setGeometry(QRect(140, 25, 276, 86));
+    QFont font12;
+    font12.setFamilies({ QString::fromUtf8("Inter V") });
+    font12.setPointSize(16);
+    font12.setBold(true);
+    name_->setFont(font12);
+    name_->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+        "background-color: rgb(32, 35, 37);\n"
+        "border: none"));
+    name_->setWordWrap(true);
+    email = new QLabel(widget);
+    email->setGeometry(QRect(85, 140, 281, 26));
+    QFont font7;
+    font7.setFamilies({ QString::fromUtf8("Inter V") });
+    font7.setPointSize(12);
+    font7.setBold(true);
+    email->setFont(font7);
+    email->setStyleSheet(QString::fromUtf8("color: rgb(212, 212, 212);\n"
+        "background-color: rgb(32, 35, 37);\n"
+        "border: none"));
+    email->setAlignment(Qt::AlignCenter);
+    email->setWordWrap(true);
+    phone = new QLabel(widget);
+    phone->setGeometry(QRect(85, 170, 281, 26));
+    phone->setFont(font7);
+    phone->setStyleSheet(QString::fromUtf8("color: rgb(212, 212, 212);\n"
+        "background-color: rgb(32, 35, 37);\n"
+        "border: none"));
+    phone->setAlignment(Qt::AlignCenter);
+    phone->setWordWrap(true);
+    QPushButton* user_ok_bt = new QPushButton(widget);
+    user_ok_bt->setGeometry(QRect(120, 225, 211, 30));
+    user_ok_bt->setFont(font7);
+    user_ok_bt->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        "	background-color: transparent;\n"
+        "	border: 1px solid rgb(54, 59, 62);\n"
+        "border-radius: 15px;\n"
+        "color: rgb(212, 212, 212);\n"
+        "}\n"
+        "QPushButton:hover{\n"
+        "	background-color: rgb(58, 58, 58);\n"
+        "}"));
+
+    phone->setTextInteractionFlags(Qt::TextInteractionFlag::TextSelectableByMouse);
+    email->setTextInteractionFlags(Qt::TextInteractionFlag::TextSelectableByMouse);
+#pragma endregion
+
+    name_->setText(user->getUserName());
+    phone->setText(user->getPhone());
+    email->setText(user->getEmail());
+    user_ok_bt->setText("\320\227\320\260\320\272\321\200\321\213\321\202\321\214");
+
+    widget->raise();
+    widget->show();
+
+    connect(user_ok_bt, &QPushButton::pressed, [=]() {
+        delete email;
+        delete phone;
+        delete name_;
+        delete photo;
+        delete widget;
+        delete backdrop;
+        });
 }

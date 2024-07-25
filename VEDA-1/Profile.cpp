@@ -213,7 +213,7 @@ void show_users(Ui::VEDA1Class* ui) {
     }
 
     for (int id : users) 
-        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui->scrollAreaWidgetContents_2));
+        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui, ui->scrollAreaWidgetContents_2));
 }
 
 void showChart(Ui::VEDA1Class *ui){
