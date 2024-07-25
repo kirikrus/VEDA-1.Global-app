@@ -5,6 +5,7 @@
 #include <qlineedit.h>
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
+#include <QMessageBox>
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
@@ -131,6 +132,14 @@ void show_auth(Ui::VEDA1Class* ui) {
             show_profile(ui);
         }
         else {
+            QMessageBox msgBox;
+            msgBox.setIcon(QMessageBox::Critical);
+            msgBox.setText(QString::fromLocal8Bit("Упс..."));
+            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(") 
+                                                           : QString::fromLocal8Bit("Неверный пароль! \n =(");
+            msgBox.setInformativeText(err);
+            msgBox.setStyleSheet("background-color: #202325; color: White;");
+            msgBox.exec();
             delete MAIN_USER_POINTER;
         }
         });

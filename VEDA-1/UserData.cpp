@@ -11,13 +11,10 @@ UserData::UserData(QString login, QString password, QObject* parent) : QObject(p
     connect(http_for_exp, &HTTPclient::requestFinished, this, &UserData::onExpDataReceived);
     connect(http_for_exp, &HTTPclient::requestError, this, &UserData::onError);
 
-    QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(login).arg(password);
+    QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(login == ""?"0":login).arg(password==""?"0":password);
     http->get(endpoint);
 
     loop.exec();
-
-    disconnect(http, &HTTPclient::requestFinished, this, &UserData::onUserVerification);
-    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
 }
 
 void UserData::onUserVerification(const QJsonObject& jsonResponse) {
@@ -25,6 +22,9 @@ void UserData::onUserVerification(const QJsonObject& jsonResponse) {
     id = jsonResponse["userid"].toInt();
 
     loop.quit();
+
+    disconnect(http, &HTTPclient::requestFinished, this, &UserData::onUserVerification);
+    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
 }
 
 void UserData::onUserDataReceived(const QJsonObject& jsonResponse) {
@@ -86,7 +86,7 @@ void UserData::onError(const QString& errorString) {
 
 QString UserData::getUserName() const {return name;}
 
-quint32 UserData::getId() const{return id;}
+int UserData::getId() const{return id;}
 
 QVector<experiment> UserData::getExperiments() const {return experiments;}
 

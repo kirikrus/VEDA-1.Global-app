@@ -11,7 +11,7 @@ public:
     UserData(QString login, QString password, QObject* parent = nullptr);
     void download_data();
     QString getUserName() const;
-    quint32 getId() const;
+    int getId() const;
     QVector<experiment> getExperiments() const;
     experiment* getExperimentById(int id);
 
@@ -24,7 +24,7 @@ private slots:
 private:
     void initExp();
 
-    quint32 id;
+    int id;
     QString name;
     QString email;
     QString phone;
