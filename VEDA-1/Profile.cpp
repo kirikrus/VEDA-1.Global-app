@@ -120,7 +120,7 @@ void show_auth(Ui::VEDA1Class* ui) {
     widget->raise();
     widget->show();
 #pragma endregion
-
+    
     QObject::connect(pushButton, &QPushButton::pressed, [=]() {
         QString login = inp_email->text();
         QString password = inp_password->text();
@@ -131,7 +131,13 @@ void show_auth(Ui::VEDA1Class* ui) {
             delete backdrop;
             USER_ENTERED = true;
             MAIN_USER_POINTER->download_data();
+
             show_profile(ui);
+            ui->expPage->setDisabled(true);
+            if (!MAIN_USER_POINTER->is_admin())
+                ui->adminPage->hide();
+            else
+                ui->adminPage->show();
         }
         else {
             QMessageBox msgBox;
