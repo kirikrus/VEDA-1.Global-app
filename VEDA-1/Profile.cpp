@@ -1,10 +1,10 @@
 #include "Profile.h"
-#include <qlineedit.h>
-#include "UserData.h"
 #include "qchart.h"
+#include "UserData.h"
 #include <qchartview.h>
-#include <qvalueaxis.h>
+#include <qlineedit.h>
 #include <qstandarditemmodel.h>
+#include <qvalueaxis.h>
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
@@ -14,6 +14,8 @@ void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
 
 void show_auth(Ui::VEDA1Class* ui) {
+
+#pragma region print
     QFrame* backdrop = new QFrame(ui->centralWidget);
 
     backdrop->setGeometry(ui->centralWidget->rect());
@@ -114,12 +116,23 @@ void show_auth(Ui::VEDA1Class* ui) {
     pushButton->setText(QCoreApplication::translate("VEDA1Class", "\320\222\320\276\320\271\321\202\320\270", nullptr));
     widget->raise();
     widget->show();
+#pragma endregion
 
     QObject::connect(pushButton, &QPushButton::pressed, [=]() {
-        delete widget;
-        delete backdrop;
-        USER_ENTERED = true;
-        show_profile(ui);
+        QString login = inp_email->text();
+        QString password = inp_password->text();
+        
+        MAIN_USER_POINTER = new UserData(login, password);
+        if (MAIN_USER_POINTER->getId() >= 1) {
+            delete widget;
+            delete backdrop;
+            USER_ENTERED = true;
+            MAIN_USER_POINTER->download_data();
+            show_profile(ui);
+        }
+        else {
+            delete MAIN_USER_POINTER;
+        }
         });
 }
 
@@ -280,9 +293,8 @@ void show_profile(Ui::VEDA1Class *ui) {
         return;
     }
     ui->tabWidget->setCurrentIndex(1);
-    UserData user(1);
-    MAIN_USER_POINTER = new UserData(1);
-    show_experiments(ui, &user);
+
+    show_experiments(ui, MAIN_USER_POINTER);
 }
 
 void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
