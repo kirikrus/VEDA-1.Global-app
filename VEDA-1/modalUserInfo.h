@@ -1,4 +1,4 @@
-#include "UserData.h"
+#include "GLOBAL.h"
 #include <QWidget>
 #include <qlabel.h>
 #include <qlayout.h>

@@ -1,4 +1,6 @@
 #include "modalUserInfo.h"
+#include "MSGconstructor.h"
+#include "Profile.h"
 
 #include <QMouseEvent>
 
@@ -73,8 +75,24 @@ modalUserInfo::~modalUserInfo(){
 }
 
 void modalUserInfo::mousePressEvent(QMouseEvent* event) {
-    if (event->button() == Qt::LeftButton) {
+    switch (event->button())
+    {
+    case Qt::LeftButton:
         goBig();
+        break;
+    case Qt::RightButton:
+        if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId()) 
+            if (!MAIN_USER_POINTER->is_admin())
+                return;
+        
+        QString err = QString::fromLocal8Bit("Вы хотите удалить\n%1?").arg(user->getUserName());
+        bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+        if (yes) {
+            delete user;
+            user = nullptr;
+            delete this;
+        }
+        break;
     }
 }
 

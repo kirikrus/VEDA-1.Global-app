@@ -8,11 +8,6 @@
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
 
-
-bool USER_ENTERED = false;
-UserData* MAIN_USER_POINTER;
-int CURRENT_EXP;
-
 void show_users(Ui::VEDA1Class* ui);
 void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
