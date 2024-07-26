@@ -1,12 +1,13 @@
 #include "Profile.h"
 #include "qchart.h"
 #include "modalUserInfo.h"
+#include "MSGconstructor.h"
 
 #include <qchartview.h>
 #include <qlineedit.h>
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
-#include <QMessageBox>
+
 
 bool USER_ENTERED = false;
 UserData* MAIN_USER_POINTER;
@@ -145,14 +146,9 @@ void show_auth(Ui::VEDA1Class* ui) {
             validate(ui);
         }
         else {
-            QMessageBox msgBox;
-            msgBox.setIcon(QMessageBox::Critical);
-            msgBox.setText(QString::fromLocal8Bit("Упс..."));
-            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(") 
+            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(")
                                                            : QString::fromLocal8Bit("Неверный пароль! \n =(");
-            msgBox.setInformativeText(err);
-            msgBox.setStyleSheet("background-color: #202325; color: White;");
-            msgBox.exec();
+            msg(QMessageBox::Critical, QString::fromLocal8Bit("Упс..."), err, QMessageBox::Ok);
             delete MAIN_USER_POINTER;
         }
         });
@@ -366,11 +362,16 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
     }
     else if (type_of_method == "DELETE") {
         int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_del->value() );
-
         if (id == -1) return;
 
-        QString endpoint = "http://localhost:5011/Experiment/DeleteData";
-        http.delet(endpoint, id);
+        QString err = QString::fromLocal8Bit("Вы хотите удалить точку № %1?").arg(ui->inp_id_del->value());
+        bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+
+        if (yes) {
+            QString endpoint = "http://localhost:5011/Experiment/DeleteData";
+            http.delet(endpoint, id);
+        }
+        else return;
     }
 
     showChart(ui);
