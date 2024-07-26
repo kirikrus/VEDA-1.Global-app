@@ -32,7 +32,7 @@ UserData::UserData(int id, QObject* parent) : QObject(parent), id(id) {
 
 void UserData::onUserVerification(const QJsonObject& jsonResponse) {
     qDebug() << "User data received";
-    id = jsonResponse["userid"].toInt();
+    id = jsonResponse["userId"].toInt();
 
     loop.quit();
 
@@ -93,6 +93,7 @@ void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
 
         experiments.append(experiment(id, date, material, processTypeId, processTypeName,authorId, memberId));
     }
+
 
     loop_for_exp.quit();
 }
