@@ -15,7 +15,7 @@ void connections(Ui::VEDA1Class *ui) {
 //кнопка переключения на главную
 	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {ui->tabWidget->setCurrentIndex(0);});
 
-//Развертка блока с точками на странице профиля
+//Развертка блоков на странице профиля
 	QObject::connect(ui->dataViewChange, &QPushButton::clicked, [=]() {
 		if (ui->dataGraphPanel->height() == 626) {
 			ui->dataGraphPanel->setGeometry(610, 435, 351, 196);
@@ -31,12 +31,21 @@ void connections(Ui::VEDA1Class *ui) {
 	QObject::connect(ui->dataChange, &QPushButton::clicked, [=]() {
 		if (ui->edite->height() == 626) {
 			ui->edite->setGeometry(20, 580, 571, 51);
-			ui->dataChange->setText(("\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\264\320\260\320\275\320\275\321\213\320\265"));//Открыть редактор
+			ui->dataChange->setText(("\320\240\320\265\320\264\320\260\320\272\321\202\320\276\321\200 \320\264\320\260\320\275\320\275\321\213\321\205"));
+			ui->expChange->show();
 		}
 		else {
 			ui->edite->setGeometry(20, 10, 571, 626);
-			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));//Закрыть редактор
+			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
+			ui->tabWidget_3->setCurrentIndex(0);
+			ui->expChange->hide();
 		}
+		});
+	QObject::connect(ui->expChange, &QPushButton::clicked, [=]() {
+			ui->edite->setGeometry(20, 10, 571, 626);
+			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
+			ui->tabWidget_3->setCurrentIndex(1);
+			ui->expChange->hide();
 		});
 
 //Работа с запросами в редакторе

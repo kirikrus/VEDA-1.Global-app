@@ -2362,7 +2362,7 @@ border-radius: 21px</string>
           <rect>
            <x>20</x>
            <y>10</y>
-           <width>271</width>
+           <width>286</width>
            <height>26</height>
           </rect>
          </property>
@@ -2536,8 +2536,39 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
          <column/>
          <column/>
         </widget>
+        <widget class="QPushButton" name="add_exp">
+         <property name="geometry">
+          <rect>
+           <x>715</x>
+           <y>10</y>
+           <width>211</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	background-color: transparent;
+	border: 1px solid rgb(54, 59, 62);
+border-radius: 15px;
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgb(58, 58, 58);
+}</string>
+         </property>
+         <property name="text">
+          <string>Создать эксперимент</string>
+         </property>
+        </widget>
         <zorder>tableExp</zorder>
         <zorder>label_10</zorder>
+        <zorder>add_exp</zorder>
        </widget>
        <widget class="QFrame" name="frame_7">
         <property name="enabled">
@@ -2968,9 +2999,9 @@ color: rgba(163, 236, 90, 150);
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>580</y>
+          <y>5</y>
           <width>571</width>
-          <height>51</height>
+          <height>626</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -2986,9 +3017,9 @@ border-radius: 21px</string>
         <widget class="QPushButton" name="dataChange">
          <property name="geometry">
           <rect>
-           <x>175</x>
+           <x>200</x>
            <y>10</y>
-           <width>211</width>
+           <width>181</width>
            <height>30</height>
           </rect>
          </property>
@@ -3010,605 +3041,69 @@ QPushButton:hover{
 }</string>
          </property>
          <property name="text">
-          <string>Открыть редактор</string>
+          <string>Редактор данных</string>
          </property>
         </widget>
-        <widget class="QFrame" name="frame_5">
+        <widget class="QPushButton" name="expChange">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>60</y>
-           <width>451</width>
-           <height>96</height>
+           <x>10</x>
+           <y>10</y>
+           <width>181</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(43, 47, 50);
-color: white;</string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QDoubleSpinBox" name="inp_time_add">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>15</y>
-            <width>141</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 1px solid rgb(163, 236, 90);
-</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="decimals">
-           <number>10</number>
-          </property>
-          <property name="minimum">
-           <double>-100000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_36">
-          <property name="geometry">
-           <rect>
-            <x>15</x>
-            <y>5</y>
-            <width>206</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>12</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Добавление</string>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="inp_num_add">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>55</y>
-            <width>141</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 1px solid rgb(163, 236, 90);
-</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="decimals">
-           <number>10</number>
-          </property>
-          <property name="minimum">
-           <double>-100000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_37">
-          <property name="geometry">
-           <rect>
-            <x>235</x>
-            <y>15</y>
-            <width>46</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>10</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Время:</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_38">
-          <property name="geometry">
-           <rect>
-            <x>215</x>
-            <y>55</y>
-            <width>66</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>10</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Значение:</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="addData">
-          <property name="geometry">
-           <rect>
-            <x>15</x>
-            <y>58</y>
-            <width>101</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
-background-color: rgb(163, 236, 90);
-color: black;
-border-radius: 13px;
+          <string notr="true">QPushButton{
+	background-color: transparent;
+	border: 1px solid rgb(54, 59, 62);
+border-radius: 15px;
+color: rgb(212, 212, 212);
 }
 QPushButton:hover{
-background-color: rgba(163, 236, 90, 150);
+	background-color: rgb(58, 58, 58);
 }</string>
-          </property>
-          <property name="text">
-           <string>Добавить</string>
-          </property>
-         </widget>
+         </property>
+         <property name="text">
+          <string>Редактор эксперимента</string>
+         </property>
         </widget>
-        <widget class="QFrame" name="frame_9">
+        <widget class="QTabWidget" name="tabWidget_3">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>170</y>
-           <width>316</width>
-           <height>86</height>
+           <x>6</x>
+           <y>40</y>
+           <width>556</width>
+           <height>576</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(43, 47, 50);
-color: white;</string>
+          <string notr="true"/>
          </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+         <property name="currentIndex">
+          <number>0</number>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QDoubleSpinBox" name="inp_id_del">
-          <property name="geometry">
-           <rect>
-            <x>155</x>
-            <y>45</y>
-            <width>141</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 1px solid rgb(163, 236, 90);
-</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="showGroupSeparator" stdset="0">
-           <bool>false</bool>
-          </property>
-          <property name="decimals">
-           <number>0</number>
-          </property>
-          <property name="minimum">
-           <double>0.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_39">
-          <property name="geometry">
-           <rect>
-            <x>15</x>
-            <y>5</y>
-            <width>206</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>12</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Удаление</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_40">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>5</y>
-            <width>121</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>10</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Номер измерения:</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="deleteData">
-          <property name="geometry">
-           <rect>
-            <x>15</x>
-            <y>45</y>
-            <width>101</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
-background-color: rgb(163, 236, 90);
-color: black;
-border-radius: 13px;
-}
-QPushButton:hover{
-background-color: rgba(163, 236, 90, 150);
-}</string>
-          </property>
-          <property name="text">
-           <string>Удалить</string>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QFrame" name="frame_11">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>270</y>
-           <width>451</width>
-           <height>136</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(43, 47, 50);
-color: white;</string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <widget class="QDoubleSpinBox" name="inp_time_put">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>55</y>
-            <width>141</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 1px solid rgb(163, 236, 90);
-</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="decimals">
-           <number>10</number>
-          </property>
-          <property name="minimum">
-           <double>-100000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_41">
-          <property name="geometry">
-           <rect>
-            <x>15</x>
-            <y>5</y>
-            <width>206</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>12</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Изменение</string>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="inp_num_put">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>95</y>
-            <width>141</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 1px solid rgb(163, 236, 90);
-</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="decimals">
-           <number>10</number>
-          </property>
-          <property name="minimum">
-           <double>-100000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.001000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_42">
-          <property name="geometry">
-           <rect>
-            <x>190</x>
-            <y>55</y>
-            <width>91</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>10</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Новое время:</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_43">
-          <property name="geometry">
-           <rect>
-            <x>170</x>
-            <y>95</y>
-            <width>111</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>10</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Новое значение:</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="putData">
-          <property name="geometry">
-           <rect>
-            <x>15</x>
-            <y>95</y>
-            <width>101</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{
-background-color: rgb(163, 236, 90);
-color: black;
-border-radius: 13px;
-}
-QPushButton:hover{
-background-color: rgba(163, 236, 90, 150);
-}</string>
-          </property>
-          <property name="text">
-           <string>Изменить</string>
-          </property>
-         </widget>
-         <widget class="QDoubleSpinBox" name="inp_id_put">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>15</y>
-            <width>141</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 1px solid rgb(163, 236, 90);
-</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="decimals">
-           <number>0</number>
-          </property>
-          <property name="minimum">
-           <double>0.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>1.000000000000000</double>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_44">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>15</y>
-            <width>121</width>
-            <height>26</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <family>Inter V</family>
-            <pointsize>10</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string>Номер измерения:</string>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QTextEdit" name="consoleLog">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>430</y>
-           <width>531</width>
-           <height>181</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QTextEdit{
+         <widget class="QWidget" name="data">
+          <attribute name="title">
+           <string/>
+          </attribute>
+          <widget class="QTextEdit" name="consoleLog">
+           <property name="geometry">
+            <rect>
+             <x>15</x>
+             <y>375</y>
+             <width>531</width>
+             <height>181</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QTextEdit{
 background-color: rgb(22, 25, 26);
 color: white;
 }
@@ -3653,20 +3148,615 @@ QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 	background: none;
 }</string>
-         </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAsNeeded</enum>
-         </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="undoRedoEnabled">
-          <bool>false</bool>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAsNeeded</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="undoRedoEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QFrame" name="frame_5">
+           <property name="geometry">
+            <rect>
+             <x>15</x>
+             <y>5</y>
+             <width>451</width>
+             <height>96</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(43, 47, 50);
+color: white;</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QDoubleSpinBox" name="inp_time_add">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>15</y>
+              <width>141</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid rgb(163, 236, 90);
+</string>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="keyboardTracking">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>10</number>
+            </property>
+            <property name="minimum">
+             <double>-100000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_36">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>5</y>
+              <width>206</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Добавление</string>
+            </property>
+           </widget>
+           <widget class="QDoubleSpinBox" name="inp_num_add">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>55</y>
+              <width>141</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid rgb(163, 236, 90);
+</string>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="keyboardTracking">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>10</number>
+            </property>
+            <property name="minimum">
+             <double>-100000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_37">
+            <property name="geometry">
+             <rect>
+              <x>235</x>
+              <y>15</y>
+              <width>46</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Время:</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_38">
+            <property name="geometry">
+             <rect>
+              <x>215</x>
+              <y>55</y>
+              <width>66</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Значение:</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="addData">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>58</y>
+              <width>101</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
+color: black;
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
+            </property>
+            <property name="text">
+             <string>Добавить</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="frame_11">
+           <property name="geometry">
+            <rect>
+             <x>15</x>
+             <y>215</y>
+             <width>451</width>
+             <height>136</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(43, 47, 50);
+color: white;</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QDoubleSpinBox" name="inp_time_put">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>55</y>
+              <width>141</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid rgb(163, 236, 90);
+</string>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="keyboardTracking">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>10</number>
+            </property>
+            <property name="minimum">
+             <double>-100000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_41">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>5</y>
+              <width>206</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Изменение</string>
+            </property>
+           </widget>
+           <widget class="QDoubleSpinBox" name="inp_num_put">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>95</y>
+              <width>141</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid rgb(163, 236, 90);
+</string>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="keyboardTracking">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>10</number>
+            </property>
+            <property name="minimum">
+             <double>-100000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_42">
+            <property name="geometry">
+             <rect>
+              <x>190</x>
+              <y>55</y>
+              <width>91</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Новое время:</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_43">
+            <property name="geometry">
+             <rect>
+              <x>170</x>
+              <y>95</y>
+              <width>111</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Новое значение:</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="putData">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>95</y>
+              <width>101</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
+color: black;
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
+            </property>
+            <property name="text">
+             <string>Изменить</string>
+            </property>
+           </widget>
+           <widget class="QDoubleSpinBox" name="inp_id_put">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>15</y>
+              <width>141</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid rgb(163, 236, 90);
+</string>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="keyboardTracking">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="minimum">
+             <double>0.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_44">
+            <property name="geometry">
+             <rect>
+              <x>160</x>
+              <y>15</y>
+              <width>121</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Номер измерения:</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="frame_9">
+           <property name="geometry">
+            <rect>
+             <x>15</x>
+             <y>115</y>
+             <width>316</width>
+             <height>86</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(43, 47, 50);
+color: white;</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QDoubleSpinBox" name="inp_id_del">
+            <property name="geometry">
+             <rect>
+              <x>155</x>
+              <y>45</y>
+              <width>141</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid rgb(163, 236, 90);
+</string>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="keyboardTracking">
+             <bool>false</bool>
+            </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>false</bool>
+            </property>
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="minimum">
+             <double>0.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_39">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>5</y>
+              <width>206</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Удаление</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_40">
+            <property name="geometry">
+             <rect>
+              <x>160</x>
+              <y>5</y>
+              <width>121</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Номер измерения:</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="deleteData">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>45</y>
+              <width>101</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
+color: black;
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
+            </property>
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="exp">
+          <attribute name="title">
+           <string/>
+          </attribute>
+         </widget>
         </widget>
+        <zorder>tabWidget_3</zorder>
+        <zorder>dataChange</zorder>
+        <zorder>expChange</zorder>
        </widget>
       </widget>
       <widget class="QWidget" name="setting">
