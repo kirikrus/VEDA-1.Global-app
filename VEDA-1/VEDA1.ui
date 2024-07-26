@@ -3966,6 +3966,37 @@ color: White;</string>
             </property>
            </widget>
           </widget>
+          <widget class="QPushButton" name="deleteExp">
+           <property name="geometry">
+            <rect>
+             <x>195</x>
+             <y>515</y>
+             <width>181</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Inter V</family>
+             <pointsize>10</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: rgba(242, 54, 54, 50);
+	border: 1px solid rgb(54, 59, 62);
+border-radius: 15px;
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgba(242, 54, 54, 150);
+}</string>
+           </property>
+           <property name="text">
+            <string>Удалить эксперимент</string>
+           </property>
+          </widget>
          </widget>
         </widget>
         <zorder>tabWidget_3</zorder>

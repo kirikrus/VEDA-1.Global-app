@@ -60,8 +60,6 @@ void UserData::download_data(){
     initExp();
 }
 
-
-
 void UserData::initExp() {
     QString endpoint = QString("http://localhost:5011/Experiment/GetExperimentsOfUser/%1").arg(id);
     http_for_exp->get(endpoint);
