@@ -10,6 +10,12 @@
     <height>747</height>
    </rect>
   </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>VEDA1</string>
   </property>
@@ -2329,12 +2335,248 @@ border: none;
       <property name="currentIndex">
        <number>1</number>
       </property>
-      <widget class="QWidget" name="exp">
+      <widget class="QWidget" name="admin">
        <attribute name="title">
         <string/>
        </attribute>
+       <widget class="QFrame" name="frame_17">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>5</y>
+          <width>351</width>
+          <height>621</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(0, 0, 0, 100);
+border-radius: 21px</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_54">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>206</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Пользователи</string>
+         </property>
+        </widget>
+        <widget class="QScrollArea" name="exp_user_2">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>316</width>
+           <height>541</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>316</width>
+           <height>130</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">*{
+    background: transparent;
+border: none;
+}
+
+QScrollBar:vertical {
+	border: none;
+    background: transparent;
+    width: 14px;
+	border-radius: 8px;
+ }
+
+/*  HANDLE BAR VERTICAL */
+QScrollBar::handle:vertical {	
+	background-color: #A3EC5A;
+	min-height: 30px;
+	border-radius: 7px;
+}
+
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color: none;
+	height: 0px;
+}
+
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: none;
+	height: 0px;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}</string>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>316</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QPushButton" name="add_member_2">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>585</y>
+           <width>316</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	background-color: transparent;
+	border-top: 1px solid rgb(54, 59, 62);;
+border-right: none;
+border-left: none;
+	border-bottom: none;
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgba(58, 58, 58, 50);
+}</string>
+         </property>
+         <property name="text">
+          <string>Добавить</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="dataGraphPanel_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>5</y>
+          <width>571</width>
+          <height>616</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(32, 35, 37);
+border-radius: 21px</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_56">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>206</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Админ</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="dataChange_3">
+         <property name="geometry">
+          <rect>
+           <x>195</x>
+           <y>575</y>
+           <width>181</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	background-color: rgba(163, 236, 90, 0);
+	border: 1px solid rgb(163, 236, 90);
+border-radius: 15px;
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgba(163, 236, 90, 100);
+}</string>
+         </property>
+         <property name="text">
+          <string>Сохранить</string>
+         </property>
+        </widget>
+       </widget>
       </widget>
-      <widget class="QWidget" name="admin">
+      <widget class="QWidget" name="expP">
        <attribute name="title">
         <string/>
        </attribute>
@@ -2813,7 +3055,7 @@ color: rgba(163, 236, 90, 150);
          </property>
          <property name="minimumSize">
           <size>
-           <width>251</width>
+           <width>326</width>
            <height>141</height>
           </size>
          </property>
@@ -4008,6 +4250,374 @@ QPushButton:hover{
        <attribute name="title">
         <string/>
        </attribute>
+       <widget class="QFrame" name="dataGraphPanel_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>5</y>
+          <width>571</width>
+          <height>316</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(32, 35, 37);
+border-radius: 21px</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_48">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>206</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Настройки</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_50">
+         <property name="geometry">
+          <rect>
+           <x>45</x>
+           <y>100</y>
+           <width>86</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Почта</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_51">
+         <property name="geometry">
+          <rect>
+           <x>45</x>
+           <y>150</y>
+           <width>86</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Телефон</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>50</y>
+           <width>241</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;
+background-color: rgb(22, 25, 26);
+border-radius: 10px;
+color: White;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_49">
+         <property name="geometry">
+          <rect>
+           <x>45</x>
+           <y>50</y>
+           <width>86</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>ФИО</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>100</y>
+           <width>241</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;
+background-color: rgb(22, 25, 26);
+border-radius: 10px;
+color: White;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>150</y>
+           <width>241</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;
+background-color: rgb(22, 25, 26);
+border-radius: 10px;
+color: White;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_9">
+         <property name="geometry">
+          <rect>
+           <x>410</x>
+           <y>75</y>
+           <width>126</width>
+           <height>126</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(22, 25, 26);
+border-radius: 63px;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="VEDA1.qrc">:/icons/icons/test_avatar.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="dataChange_2">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>250</y>
+           <width>181</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+	background-color: rgba(163, 236, 90, 0);
+	border: 1px solid rgb(163, 236, 90);
+border-radius: 15px;
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color: rgba(163, 236, 90, 100);
+}</string>
+         </property>
+         <property name="text">
+          <string>Сохранить</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_4">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>195</y>
+           <width>241</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;
+background-color: rgb(22, 25, 26);
+border-radius: 10px;
+color: White;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_53">
+         <property name="geometry">
+          <rect>
+           <x>45</x>
+           <y>195</y>
+           <width>86</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Пароль</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QFrame" name="frame_15">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>110</y>
+          <width>428</width>
+          <height>411</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.48, fx:0.5, fy:0.5, stop:0 rgba(163, 236, 90, 50), stop:1 transparent);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+       </widget>
+       <widget class="QFrame" name="frame_16">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>5</y>
+          <width>351</width>
+          <height>621</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(0, 0, 0, 100);
+border-radius: 21px</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_47">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>10</y>
+           <width>206</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+         </property>
+         <property name="text">
+          <string>Спец. настройки</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_52">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>50</y>
+           <width>116</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>12</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(212, 212, 212);
+background-color: transparent;
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Уведомления</string>
+         </property>
+        </widget>
+       </widget>
+       <zorder>frame_15</zorder>
+       <zorder>dataGraphPanel_2</zorder>
+       <zorder>frame_16</zorder>
       </widget>
      </widget>
      <zorder>frame_12</zorder>
@@ -4027,6 +4637,7 @@ QPushButton:hover{
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="VEDA1.qrc"/>
+  <include location="C:/Users/Кирик/.designer/backup/VEDA1.qrc"/>
  </resources>
  <connections/>
  <designerdata>
