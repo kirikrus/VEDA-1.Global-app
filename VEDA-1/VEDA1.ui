@@ -2604,7 +2604,7 @@ background-color: transparent;</string>
           <string>Участники</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="add_member">
          <property name="geometry">
           <rect>
            <x>20</x>

@@ -16,6 +16,15 @@ void show_users(Ui::VEDA1Class* ui);
 void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
 
+void validate(Ui::VEDA1Class* ui) {
+    ui->expPage->setDisabled(true);
+    ui->add_member->hide();
+    if (!MAIN_USER_POINTER->is_admin())
+        ui->adminPage->hide();
+    else
+        ui->adminPage->show();
+}
+
 void show_auth(Ui::VEDA1Class* ui) {
 
 #pragma region print
@@ -133,11 +142,7 @@ void show_auth(Ui::VEDA1Class* ui) {
             MAIN_USER_POINTER->download_data();
 
             show_profile(ui);
-            ui->expPage->setDisabled(true);
-            if (!MAIN_USER_POINTER->is_admin())
-                ui->adminPage->hide();
-            else
-                ui->adminPage->show();
+            validate(ui);
         }
         else {
             QMessageBox msgBox;
@@ -199,9 +204,7 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
     ui->tableExp->setColumnWidth(2, 155);
     ui->tableExp->setColumnWidth(3, 75);
 
-    
-
-   QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
+    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         CURRENT_EXP = row;
         showChart(ui);
         show_exp_data(ui);
@@ -216,6 +219,13 @@ void show_users(Ui::VEDA1Class* ui) {
     while ((item = ui->verticalLayout_2->takeAt(0)) != nullptr) {
         delete item->widget();
         delete item;
+    }
+
+    if (MAIN_USER_POINTER->getId() == MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() || MAIN_USER_POINTER->is_admin()) {
+        ui->add_member->show();
+    }
+    else {
+        ui->add_member->hide();
     }
 
     for (int id : users) 
