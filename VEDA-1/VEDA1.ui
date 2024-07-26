@@ -2999,9 +2999,9 @@ color: rgba(163, 236, 90, 150);
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>5</y>
+          <y>580</y>
           <width>571</width>
-          <height>626</height>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -3087,7 +3087,7 @@ QPushButton:hover{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="data">
           <attribute name="title">
@@ -3752,6 +3752,220 @@ background-color: rgba(163, 236, 90, 150);
           <attribute name="title">
            <string/>
           </attribute>
+          <widget class="QFrame" name="frame_13">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>25</y>
+             <width>341</width>
+             <height>96</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(43, 47, 50);
+color: white;</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="label_45">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>5</y>
+              <width>206</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Тип процесса</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="addData_2">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>58</y>
+              <width>101</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
+color: black;
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
+            </property>
+            <property name="text">
+             <string>Изменить</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="comboExpType">
+            <property name="geometry">
+             <rect>
+              <x>160</x>
+              <y>25</y>
+              <width>156</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+	background-color: rgb(22, 25, 26);
+	padding-left: 20px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow {
+        border-radius: 6px;
+	background-color: rgb(163, 236, 90);
+}</string>
+            </property>
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
+            <property name="placeholderText">
+             <string>тип</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QFrame" name="frame_14">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>140</y>
+             <width>501</width>
+             <height>96</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(43, 47, 50);
+color: white;</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="label_46">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>5</y>
+              <width>206</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Материал</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="addData_3">
+            <property name="geometry">
+             <rect>
+              <x>15</x>
+              <y>58</y>
+              <width>101</width>
+              <height>26</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter V</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
+color: black;
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
+            </property>
+            <property name="text">
+             <string>Изменить</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="materialExp">
+            <property name="geometry">
+             <rect>
+              <x>160</x>
+              <y>30</y>
+              <width>316</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(22, 25, 26);
+color: White;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="placeholderText">
+             <string>материал</string>
+            </property>
+           </widget>
+          </widget>
          </widget>
         </widget>
         <zorder>tabWidget_3</zorder>
