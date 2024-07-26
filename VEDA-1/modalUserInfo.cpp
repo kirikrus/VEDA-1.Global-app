@@ -5,7 +5,6 @@
 #include <QMouseEvent>
 
 modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, QWidget* parent) : user(user_),ui(ui), QWidget(parent) {
-	//connect(this, &QWidget::mousePressEvent, this, &modalUserInfo::goBig);
     
     name.setParent(this);
     ava.setParent(this);
