@@ -12,8 +12,7 @@ void HTTPclient::get(const QString& endpoint) {
     qDebug() << "GET Request URL:" << url.toString();
     QNetworkRequest request(url);
 
-    if (!authToken.isEmpty())
-        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
+    TOKEN_ADD
 
     networkManager->get(request);
 }
@@ -32,9 +31,7 @@ void HTTPclient::post(const QString& endpoint, const QJsonValue& data) {
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "POST Request json:" << jsonData;
 
-    if (!authToken.isEmpty()) {
-        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
-    }
+    TOKEN_ADD
 
     QNetworkReply* reply = networkManager->post(request, jsonData);
 
@@ -58,9 +55,7 @@ void HTTPclient::put(const QString& endpoint, const QJsonValue& data){
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
-    if (!authToken.isEmpty()) {
-        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
-    }
+    TOKEN_ADD
 
     QNetworkReply* reply = networkManager->put(request, jsonData);
 
@@ -80,9 +75,7 @@ void HTTPclient::delet(const QString& endpoint, const int id){
     QByteArray jsonData = QString("[%1]").arg(id).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
-    if (!authToken.isEmpty()) {
-        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
-    }
+    TOKEN_ADD
 
     QNetworkReply* reply = networkManager->sendCustomRequest(request, "DELETE", jsonData);
 

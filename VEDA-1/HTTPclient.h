@@ -6,6 +6,10 @@
 #include <QJsonObject>
 #include <qjsonarray.h>
 
+#define TOKEN_ADD       if (!authToken.isEmpty()) {\
+                            request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());\
+                        }
+
 class HTTPclient : public QObject {
     Q_OBJECT
 
