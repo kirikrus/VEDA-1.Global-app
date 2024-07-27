@@ -11,6 +11,10 @@ void HTTPclient::get(const QString& endpoint) {
     QUrl url(endpoint);
     qDebug() << "GET Request URL:" << url.toString();
     QNetworkRequest request(url);
+
+    if (!authToken.isEmpty())
+        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
+
     networkManager->get(request);
 }
 
@@ -27,6 +31,10 @@ void HTTPclient::post(const QString& endpoint, const QJsonValue& data) {
     // ѕреобразование JSON в строку и добавление кавычек
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "POST Request json:" << jsonData;
+
+    if (!authToken.isEmpty()) {
+        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
+    }
 
     QNetworkReply* reply = networkManager->post(request, jsonData);
 
@@ -50,6 +58,10 @@ void HTTPclient::put(const QString& endpoint, const QJsonValue& data){
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
+    if (!authToken.isEmpty()) {
+        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
+    }
+
     QNetworkReply* reply = networkManager->put(request, jsonData);
 
     QEventLoop loop;
@@ -68,6 +80,10 @@ void HTTPclient::delet(const QString& endpoint, const int id){
     QByteArray jsonData = QString("[%1]").arg(id).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
+    if (!authToken.isEmpty()) {
+        request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());
+    }
+
     QNetworkReply* reply = networkManager->sendCustomRequest(request, "DELETE", jsonData);
 
     QEventLoop loop;
@@ -83,7 +99,15 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
         qDebug() << "Response data:" << responseData;
         QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
         QJsonObject jsonObject = jsonResponse.object();
-        emit requestFinished(jsonObject);
+
+        if (authToken == nullptr) {
+            QVariant headerToken = reply->rawHeader("tasty-cookies");
+            if (headerToken.isValid()) {
+                authToken = headerToken.toString();
+                qDebug() << "Token extracted and stored:" << authToken;
+            }
+        }
+        emit requestFinished(jsonObject, authToken);
     }
     else {
         qDebug() << "Error sending POST request:" << reply->errorString();

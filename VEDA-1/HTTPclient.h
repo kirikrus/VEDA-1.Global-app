@@ -18,7 +18,7 @@ public:
     void delet(const QString& endpoint, const int id);
 
 signals:
-    void requestFinished(const QJsonObject& response);
+    void requestFinished(const QJsonObject& response, QString authToken = nullptr);
     void requestError(const QString& errorString);
 
 private slots:
@@ -26,5 +26,6 @@ private slots:
 
 private:
     QNetworkAccessManager* networkManager;
+    static inline QString authToken;
 };
 

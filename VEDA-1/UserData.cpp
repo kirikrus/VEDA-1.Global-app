@@ -19,7 +19,7 @@ UserData::UserData(QString login, QString password, QObject* parent) : QObject(p
 
 void UserData::onUserVerification(const QJsonObject& jsonResponse) {
     qDebug() << "User data received";
-    id = jsonResponse["userid"].toInt();
+    id = jsonResponse["userId"].toInt();
 
     loop.quit();
 
