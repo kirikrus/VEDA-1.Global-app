@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QJsonArray>
 
-UserData::UserData(QString login, QString password, QObject* parent) : QObject(parent) {
+UserData::UserData(QString login, QString password_, QObject* parent) : QObject(parent) {
     http = new HTTPclient(this);
     http_for_exp = new HTTPclient(this);
 
@@ -11,7 +11,18 @@ UserData::UserData(QString login, QString password, QObject* parent) : QObject(p
     connect(http_for_exp, &HTTPclient::requestFinished, this, &UserData::onExpDataReceived);
     connect(http_for_exp, &HTTPclient::requestError, this, &UserData::onError);
 
+    password = password_;
     QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(login == ""?"0":login).arg(password==""?"0":password);
+    http->get(endpoint);
+
+    loop.exec();
+}
+
+void UserData::relogin(){
+    loop.quit();
+    loop_for_exp.quit();
+
+    QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(name == "" ? "0" : name).arg(password == "" ? "0" : password);
     http->get(endpoint);
 
     loop.exec();
@@ -46,8 +57,6 @@ void UserData::download_data(){
 
     initExp();
 }
-
-
 
 void UserData::initExp() {
     QString endpoint = QString("http://localhost:5011/Experiment/GetExperimentsOfUser/%1").arg(id);

@@ -112,6 +112,13 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
     else {
         qDebug() << "Error sending POST request:" << reply->errorString();
         qDebug() << "Response data:" << reply->readAll();
+        
+        switch (reply->error()) {
+        case QNetworkReply::AuthenticationRequiredError:
+            //MAIN_USER_POINTER->relogin();
+            break;
+        }
+
         emit requestError(reply->errorString());
     }
     reply->deleteLater();
