@@ -108,6 +108,7 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
         
         switch (reply->error()) {
         case QNetworkReply::AuthenticationRequiredError:
+            authToken = nullptr;
             //MAIN_USER_POINTER->relogin();
             break;
         }
