@@ -18,6 +18,19 @@ UserData::UserData(QString login, QString password_, QObject* parent) : QObject(
     loop.exec();
 }
 
+UserData::UserData(int id, QObject* parent) : QObject(parent), id(id) {
+    http = new HTTPclient(this);
+    http_for_exp = new HTTPclient(this);
+
+    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
+    connect(http, &HTTPclient::requestError, this, &UserData::onError);
+
+    QString endpoint = QString("http://localhost:5011/User/%1").arg(id);
+    http->get(endpoint);
+
+    loop.exec();
+}
+
 void UserData::relogin(){
     loop.quit();
     loop_for_exp.quit();
