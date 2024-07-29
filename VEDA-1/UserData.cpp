@@ -2,29 +2,60 @@
 #include <QDebug>
 #include <QJsonArray>
 
-UserData::UserData(quint32 id_, QObject* parent) : QObject(parent), id(id_) {
+UserData::UserData(QString login, QString password_, QObject* parent) : QObject(parent) {
     http = new HTTPclient(this);
     http_for_exp = new HTTPclient(this);
 
-    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
+    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserVerification);
     connect(http, &HTTPclient::requestError, this, &UserData::onError);
     connect(http_for_exp, &HTTPclient::requestFinished, this, &UserData::onExpDataReceived);
     connect(http_for_exp, &HTTPclient::requestError, this, &UserData::onError);
 
-    QString endpoint = QString("http://localhost:5011/User/%1").arg(id);
+    password = password_;
+    QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(login == ""?"0":login).arg(password==""?"0":password);
     http->get(endpoint);
 
     loop.exec();
-    
-    initExp();
+}
+
+void UserData::relogin(){
+    loop.quit();
+    loop_for_exp.quit();
+
+    QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(name == "" ? "0" : name).arg(password == "" ? "0" : password);
+    http->get(endpoint);
+
+    loop.exec();
+}
+
+void UserData::onUserVerification(const QJsonObject& jsonResponse) {
+    qDebug() << "User data received";
+    id = jsonResponse["userId"].toInt();
+
+    loop.quit();
+
+    disconnect(http, &HTTPclient::requestFinished, this, &UserData::onUserVerification);
+    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
 }
 
 void UserData::onUserDataReceived(const QJsonObject& jsonResponse) {
     qDebug() << "User data received";
-    QJsonObject userObject = jsonResponse["user"].toObject();
-    name = userObject["fullName"].toString();
+    QJsonObject userObj = jsonResponse["user"].toObject();
+    name = userObj["fullName"].toString();
+    email = userObj["email"].toString();
+    phone = userObj["phone"].toString();
+    admin = userObj["admin"].toBool();
 
     loop.quit();
+}
+
+void UserData::download_data(){
+    QString endpoint = QString("http://localhost:5011/User/%1").arg(id);
+    http->get(endpoint);
+
+    loop.exec();
+
+    initExp();
 }
 
 void UserData::initExp() {
@@ -63,6 +94,8 @@ void UserData::onError(const QString& errorString) {
 }
 
 QString UserData::getUserName() const {return name;}
+
+int UserData::getId() const{return id;}
 
 QVector<experiment> UserData::getExperiments() const {return experiments;}
 

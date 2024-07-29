@@ -8,21 +8,30 @@ class UserData : public QObject {
     Q_OBJECT
 
 public:
-    UserData(quint32 id_, QObject* parent = nullptr);
+    UserData(QString login, QString password, QObject* parent = nullptr);
+    void download_data();
     QString getUserName() const;
+    int getId() const;
     QVector<experiment> getExperiments() const;
     experiment* getExperimentById(int id);
+    void relogin();
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);
+    void onUserVerification(const QJsonObject& jsonResponse);
     void onExpDataReceived(const QJsonObject& jsonResponse);
     void onError(const QString& errorString);
 
 private:
     void initExp();
 
-    quint32 id;
+    int id;
     QString name;
+    QString email;
+    QString phone;
+    QString password;
+
+    bool admin = false;
 
     QVector<experiment> experiments;
 
