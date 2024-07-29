@@ -1,18 +1,25 @@
 #include "Profile.h"
 #include "qchart.h"
-#include "UserData.h"
+#include "modalUserInfo.h"
+#include "MSGconstructor.h"
+
 #include <qchartview.h>
 #include <qlineedit.h>
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
-#include <QMessageBox>
 
-bool USER_ENTERED = false;
-UserData* MAIN_USER_POINTER;
-int CURRENT_EXP;
-
+void show_users(Ui::VEDA1Class* ui);
 void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
+
+void validate(Ui::VEDA1Class* ui) {
+    ui->expPage->setDisabled(true);
+    ui->add_member->hide();
+    if (!MAIN_USER_POINTER->is_admin())
+        ui->adminPage->hide();
+    else
+        ui->adminPage->show();
+}
 
 void show_auth(Ui::VEDA1Class* ui) {
 
@@ -118,7 +125,7 @@ void show_auth(Ui::VEDA1Class* ui) {
     widget->raise();
     widget->show();
 #pragma endregion
-
+    
     QObject::connect(pushButton, &QPushButton::pressed, [=]() {
         QString login = inp_email->text();
         QString password = inp_password->text();
@@ -129,17 +136,14 @@ void show_auth(Ui::VEDA1Class* ui) {
             delete backdrop;
             USER_ENTERED = true;
             MAIN_USER_POINTER->download_data();
+
             show_profile(ui);
+            validate(ui);
         }
         else {
-            QMessageBox msgBox;
-            msgBox.setIcon(QMessageBox::Critical);
-            msgBox.setText(QString::fromLocal8Bit("Упс..."));
-            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(") 
+            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(")
                                                            : QString::fromLocal8Bit("Неверный пароль! \n =(");
-            msgBox.setInformativeText(err);
-            msgBox.setStyleSheet("background-color: #202325; color: White;");
-            msgBox.exec();
+            msg(QMessageBox::Critical, QString::fromLocal8Bit("Упс..."), err, QMessageBox::Ok);
             delete MAIN_USER_POINTER;
         }
         });
@@ -186,16 +190,37 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
         ui->tableExp->setItem(i, 3, new QTableWidgetItem(experiments[i].getDate().toString("dd.MM.yy")));
     }
 
-    ui->tableExp->setColumnWidth(0, 250);
-    ui->tableExp->setColumnWidth(1, 225);
-    ui->tableExp->setColumnWidth(2, 150);
+    ui->tableExp->setColumnWidth(0, 332);
+    ui->tableExp->setColumnWidth(1, 332);
+    ui->tableExp->setColumnWidth(2, 155);
     ui->tableExp->setColumnWidth(3, 75);
 
-   QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
+    QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         CURRENT_EXP = row;
         showChart(ui);
         show_exp_data(ui);
+        show_users(ui);
         });
+}
+
+void show_users(Ui::VEDA1Class* ui) {
+    auto users = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getMembersId();
+    
+    QLayoutItem* item;
+    while ((item = ui->verticalLayout_2->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+    if (MAIN_USER_POINTER->getId() == MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() || MAIN_USER_POINTER->is_admin()) {
+        ui->add_member->show();
+    }
+    else {
+        ui->add_member->hide();
+    }
+
+    for (int id : users) 
+        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui, ui->scrollAreaWidgetContents_2));
 }
 
 void showChart(Ui::VEDA1Class *ui){
@@ -277,9 +302,9 @@ void show_exp_data(Ui::VEDA1Class* ui) {
         QString::fromLocal8Bit("Время"), 
          exp->getChartLink()->getParamUnit()});
 
-    ui->dataGraphTable->setColumnWidth(0, 20);
-    ui->dataGraphTable->setColumnWidth(1, 90);
-    ui->dataGraphTable->setColumnWidth(2, 90);
+    ui->dataGraphTable->setColumnWidth(0, 50);
+    ui->dataGraphTable->setColumnWidth(1, 130);
+    ui->dataGraphTable->setColumnWidth(2, 130);
 
     //установка данных в модели
     int id = 0;
@@ -332,11 +357,16 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
     }
     else if (type_of_method == "DELETE") {
         int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_del->value() );
-
         if (id == -1) return;
 
-        QString endpoint = "http://localhost:5011/Experiment/DeleteData";
-        http.delet(endpoint, id);
+        QString err = QString::fromLocal8Bit("Вы хотите удалить точку № %1?").arg(ui->inp_id_del->value());
+        bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+
+        if (yes) {
+            QString endpoint = "http://localhost:5011/Experiment/DeleteData";
+            http.delet(endpoint, id);
+        }
+        else return;
     }
 
     showChart(ui);

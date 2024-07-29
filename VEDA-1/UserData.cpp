@@ -80,8 +80,16 @@ void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
         quint32 processTypeId = processTypeObject["id"].toInt();
         QString processTypeName = processTypeObject["name"].toString();
 
-        experiments.append(experiment(id, date, material, processTypeId, processTypeName));
+        QJsonArray membersArray = experimentObject["membersid"].toArray();
+        QVector<int> memberId;
+        for (const QJsonValue& value : membersArray)
+            memberId.append(value.toInt());
+
+        int authorId = experimentObject["authorid"].toInt();
+
+        experiments.append(experiment(id, date, material, processTypeId, processTypeName,authorId, memberId));
     }
+
 
     loop_for_exp.quit();
 }
@@ -95,8 +103,14 @@ void UserData::onError(const QString& errorString) {
 
 QString UserData::getUserName() const {return name;}
 
+QString UserData::getEmail() const{return email;}
+
+QString UserData::getPhone() const { return phone; }
+
 int UserData::getId() const{return id;}
 
 QVector<experiment> UserData::getExperiments() const {return experiments;}
 
 experiment* UserData::getExperimentById(int id){return &experiments[id];}
+
+bool UserData::is_admin(){return admin;}
