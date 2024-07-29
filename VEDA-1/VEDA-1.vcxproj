@@ -89,6 +89,9 @@
     <ClCompile Include="connections.cpp" />
     <ClCompile Include="expChart.cpp" />
     <ClCompile Include="experiment.cpp" />
+    <ClCompile Include="GLOBAL.cpp" />
+    <ClCompile Include="modalUserInfo.cpp" />
+    <ClCompile Include="MSGconstructor.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="HTTPclient.cpp" />
     <ClCompile Include="Profile.cpp" />
@@ -100,6 +103,9 @@
     <QtMoc Include="UserData.h" />
     <QtMoc Include="expChart.h" />
     <ClInclude Include="experiment.h" />
+    <QtMoc Include="modalUserInfo.h" />
+    <ClInclude Include="GLOBAL.h" />
+    <ClInclude Include="MSGconstructor.h" />
     <ClInclude Include="Profile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
