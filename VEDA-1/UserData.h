@@ -19,6 +19,7 @@ public:
     QVector<experiment> getExperiments() const;
     experiment* getExperimentById(int id);
     bool is_admin();
+    void relogin();
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);
@@ -33,6 +34,7 @@ private:
     QString name;
     QString email;
     QString phone;
+    QString password;
 
     bool admin = false;
 

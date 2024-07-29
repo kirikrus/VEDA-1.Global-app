@@ -6,6 +6,10 @@
 #include <QJsonObject>
 #include <qjsonarray.h>
 
+#define TOKEN_ADD       if (!authToken.isEmpty()) {\
+                            request.setRawHeader("Authorization", "Bearer " + authToken.toUtf8());\
+                        }
+
 class HTTPclient : public QObject {
     Q_OBJECT
 
@@ -18,7 +22,7 @@ public:
     void delet(const QString& endpoint, const int id);
 
 signals:
-    void requestFinished(const QJsonObject& response);
+    void requestFinished(const QJsonObject& response, QString authToken = nullptr);
     void requestError(const QString& errorString);
 
 private slots:
@@ -26,5 +30,6 @@ private slots:
 
 private:
     QNetworkAccessManager* networkManager;
+    static inline QString authToken;
 };
 

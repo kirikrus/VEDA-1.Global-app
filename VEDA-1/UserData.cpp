@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QJsonArray>
 
-UserData::UserData(QString login, QString password, QObject* parent) : QObject(parent) {
+UserData::UserData(QString login, QString password_, QObject* parent) : QObject(parent) {
     http = new HTTPclient(this);
     http_for_exp = new HTTPclient(this);
 
@@ -11,20 +11,18 @@ UserData::UserData(QString login, QString password, QObject* parent) : QObject(p
     connect(http_for_exp, &HTTPclient::requestFinished, this, &UserData::onExpDataReceived);
     connect(http_for_exp, &HTTPclient::requestError, this, &UserData::onError);
 
+    password = password_;
     QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(login == ""?"0":login).arg(password==""?"0":password);
     http->get(endpoint);
 
     loop.exec();
 }
 
-UserData::UserData(int id, QObject* parent) : QObject(parent), id(id) {
-    http = new HTTPclient(this);
-    http_for_exp = new HTTPclient(this);
+void UserData::relogin(){
+    loop.quit();
+    loop_for_exp.quit();
 
-    connect(http, &HTTPclient::requestFinished, this, &UserData::onUserDataReceived);
-    connect(http, &HTTPclient::requestError, this, &UserData::onError);
-
-    QString endpoint = QString("http://localhost:5011/User/%1").arg(id);
+    QString endpoint = QString("http://localhost:5011/User/Login?Email=%1&Password=%2").arg(name == "" ? "0" : name).arg(password == "" ? "0" : password);
     http->get(endpoint);
 
     loop.exec();
