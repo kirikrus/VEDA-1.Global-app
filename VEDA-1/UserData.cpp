@@ -79,6 +79,7 @@ void UserData::initExp() {
 }
 
 void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
+    experiments.clear();
     qDebug() << "Exp data received";
     QJsonArray experimentsArray = jsonResponse["ExperimentsOfUser"].toArray();
 

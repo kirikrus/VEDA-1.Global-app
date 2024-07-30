@@ -3,8 +3,10 @@
 #include "Profile.h"
 #include "admin.h"
 #include "graphPage.h"
+#include "MSGconstructor.h"
 #include <qlineedit.h>
 #include <qchartview.h>
+#include "GLOBAL.h"
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скрола
@@ -180,14 +182,43 @@ void connections(Ui::VEDA1Class *ui) {
 #pragma endregion
 
 		QObject::connect(memberBt, &QPushButton::pressed, [=]() {
-			delete label_45;
-			delete addMember;
-			delete label_46;
-			delete memberBt;
-			delete exitMemberBt;
-			delete backdrop;
-			delete widget;
+			HTTPclient http;
+			QEventLoop loop;
+			QJsonObject item;
+
+			auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+			item["expid"] = (int)exp->getId();
+			item["email"] = addMember->text();
+
+			QString endpoint = "http://localhost:5011/User/AddMember";
+
+			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+				switch (reply.toInt()) {
+					case -1: 
+						msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Пользователь с данной почтой уже участник!"), QMessageBox::Ok);
+						break;
+					case -2:
+						msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Пользователь с данной почтой не существует!"), QMessageBox::Ok);
+						break;
+					default:
+						delete label_45;
+						delete addMember;
+						delete label_46;
+						delete memberBt;
+						delete exitMemberBt;
+						delete backdrop;
+						delete widget;
+						MAIN_USER_POINTER->initExp();
+						show_users(ui);
+				}
+				loop.quit();
+				});
+
+			http.post(endpoint, item);
+			loop.exec();
 			});
+
 		QObject::connect(exitMemberBt, &QPushButton::pressed, [=]() {
 			delete label_45;
 			delete addMember;

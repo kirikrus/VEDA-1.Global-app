@@ -16,6 +16,7 @@ public:
     int getAuthorId() const;
     QVector<int> getMembersId() const;
     QRgb getProcessTypeColor(int id) const;
+    void addMemberId(int id);
 
 private:
     quint32 id;

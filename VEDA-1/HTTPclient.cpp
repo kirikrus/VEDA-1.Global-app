@@ -1,4 +1,4 @@
-#include "HTTPclient.h"
+#include "GLOBAL.h"
 #include <QEventLoop>
 #include <QDebug>
 
@@ -101,6 +101,7 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
             }
         }
         emit requestFinished(jsonObject, authToken);
+        emit requestReply(responseData);
     }
     else {
         qDebug() << "Error sending POST request:" << reply->errorString();
@@ -109,7 +110,7 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
         switch (reply->error()) {
         case QNetworkReply::AuthenticationRequiredError:
             authToken = nullptr;
-            //MAIN_USER_POINTER->relogin();
+            MAIN_USER_POINTER->relogin();
             break;
         }
 

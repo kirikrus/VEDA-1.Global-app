@@ -24,6 +24,7 @@ public:
 signals:
     void requestFinished(const QJsonObject& response, QString authToken = nullptr);
     void requestError(const QString& errorString);
+    void requestReply(const QByteArray);
 
 private slots:
     void onReplyFinished(QNetworkReply* reply);

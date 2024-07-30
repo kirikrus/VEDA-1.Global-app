@@ -35,4 +35,6 @@ QVector<int> experiment::getMembersId() const { return membersId; }
 
 QRgb experiment::getProcessTypeColor(int id) const{return processTypeColor[id];}
 
+void experiment::addMemberId(int id) { membersId.append(id); }
+
 

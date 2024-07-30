@@ -20,6 +20,7 @@ public:
     experiment* getExperimentById(int id);
     bool is_admin();
     void relogin();
+    void initExp();
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);
@@ -28,8 +29,6 @@ private slots:
     void onError(const QString& errorString);
 
 private:
-    void initExp();
-
     int id;
     QString name;
     QString email;
