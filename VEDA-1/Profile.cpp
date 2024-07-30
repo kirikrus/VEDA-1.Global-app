@@ -170,16 +170,14 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
         ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
 
         QString tag = experiments[i].getProcessTypeName();
+        int tagId = experiments[i].getProcessTypeId();
+        QRgb tagColor = experiments[i].getProcessTypeColor(tagId);
         QLabel* processLabel = new QLabel(tag);//для красивой отрисовки тега процесса
         processLabel->setObjectName(QString::fromUtf8("label_11"));
         processLabel->setGeometry(QRect(175, 80, 86, 16));
-        
-        QString rgb = "background-color: rgb(105, 105, 105);\n";
-        if(tag == "Cutting") rgb = "background-color: rgb(65, 93, 138);\n";
-        else if (tag == "Drilling") rgb = "background-color: rgb(160, 82, 45);\n";
-        else if (tag == "Turning") rgb = "background-color: rgb(34, 139, 34);\n";
 
-        processLabel->setStyleSheet("border-radius: 8px;\n" + rgb +
+        processLabel->setStyleSheet("border-radius: 8px;\n" +
+            QString("background-color: rgb(%1, %2, %3);").arg(QColor(tagColor).red()).arg(QColor(tagColor).green()).arg(QColor(tagColor).blue()) +
             "color: rgb(255, 255, 255);\n"
             "margin-top: 5px;\n"
             "margin-left: 40px;");

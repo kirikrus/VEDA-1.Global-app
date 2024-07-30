@@ -15,6 +15,7 @@ public:
     expChart* getChartLink();
     int getAuthorId() const;
     QVector<int> getMembersId() const;
+    QRgb getProcessTypeColor(int id) const;
 
 private:
     quint32 id;
@@ -22,6 +23,7 @@ private:
     QString material;
     quint32 processTypeId;
     QString processTypeName;
+    QVector<QRgb> processTypeColor;
 
     int authorId;
     QVector<int> membersId;
