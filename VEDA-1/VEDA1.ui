@@ -1627,7 +1627,7 @@ border-radius: 21px;</string>
         <family>MuseoModerno SemiBold</family>
         <pointsize>30</pointsize>
         <bold>true</bold>
-        <kerning>false</kerning>
+        <kerning>true</kerning>
        </font>
       </property>
       <property name="styleSheet">
@@ -2333,7 +2333,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">
@@ -2382,7 +2382,7 @@ background-color: transparent;</string>
           <string>Пользователи</string>
          </property>
         </widget>
-        <widget class="QScrollArea" name="exp_user_2">
+        <widget class="QScrollArea" name="all_user">
          <property name="geometry">
           <rect>
            <x>20</x>

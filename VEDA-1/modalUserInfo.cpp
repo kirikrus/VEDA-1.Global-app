@@ -80,9 +80,10 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
         goBig();
         break;
     case Qt::RightButton:
-        if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId()) 
-            if (!MAIN_USER_POINTER->is_admin())
-                return;
+        if (ui->tabWidget_2->currentIndex() == 0) {}
+        else if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId()) 
+                if (!MAIN_USER_POINTER->is_admin())
+                    return;
         
         QString err = QString::fromLocal8Bit("Вы хотите удалить\n%1?").arg(user->getUserName());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);

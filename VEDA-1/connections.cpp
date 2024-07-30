@@ -1,6 +1,7 @@
 #include "VEDA1.h"
 #include <qobject.h>
 #include "Profile.h"
+#include "admin.h"
 #include <qlineedit.h>
 
 void connections(Ui::VEDA1Class *ui) {
@@ -62,18 +63,19 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->adminPage->setDisabled(false);
 		});
 	QObject::connect(ui->settingPage, &QPushButton::pressed, [=]() {
-		ui->tabWidget_2->setCurrentIndex(0);
+		ui->tabWidget_2->setCurrentIndex(2);
 		ui->hightlighter->setGeometry(ui->settingPage->geometry());
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(true);
 		ui->adminPage->setDisabled(false);
 		});
 	QObject::connect(ui->adminPage, &QPushButton::pressed, [=]() {
-		ui->tabWidget_2->setCurrentIndex(2);
+		ui->tabWidget_2->setCurrentIndex(0);
 		ui->hightlighter->setGeometry(ui->adminPage->geometry());
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(true);
+		show_admin_panel(ui);
 		});
 
 //Добавление участника эксп-та
