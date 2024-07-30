@@ -70,6 +70,12 @@
     <ClCompile Include="admin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="graphPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomChartView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Profile.h">
@@ -87,6 +93,9 @@
     <ClInclude Include="admin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="graphPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="HTTPclient.h">
@@ -99,6 +108,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="modalUserInfo.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CustomChartView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

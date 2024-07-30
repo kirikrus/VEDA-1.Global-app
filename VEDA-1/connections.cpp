@@ -2,7 +2,9 @@
 #include <qobject.h>
 #include "Profile.h"
 #include "admin.h"
+#include "graphPage.h"
 #include <qlineedit.h>
+#include <qchartview.h>
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скрола
@@ -76,6 +78,13 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(true);
 		show_admin_panel(ui);
+		});
+	QObject::connect(ui->fullScreenGraph_bt, &QPushButton::pressed, [=]() {
+		ui->tabWidget_2->setCurrentIndex(3);
+		show_graph_page(ui);
+		});
+	QObject::connect(ui->fullScreenGraph_bt_2, &QPushButton::pressed, [=]() {
+		ui->tabWidget_2->setCurrentIndex(1);
 		});
 
 //Добавление участника эксп-та
@@ -192,5 +201,4 @@ void connections(Ui::VEDA1Class *ui) {
 		widget->show();
 
 		});
-		
 }

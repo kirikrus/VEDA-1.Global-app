@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -2333,7 +2333,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">
@@ -3206,7 +3206,7 @@ border-radius: 21px</string>
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
         </widget>
-        <widget class="QPushButton" name="fullScreenGraph">
+        <widget class="QPushButton" name="fullScreenGraph_bt">
          <property name="geometry">
           <rect>
            <x>415</x>
@@ -4618,6 +4618,184 @@ border: none;</string>
        <zorder>frame_15</zorder>
        <zorder>dataGraphPanel_2</zorder>
        <zorder>frame_16</zorder>
+      </widget>
+      <widget class="QWidget" name="bigGraph">
+       <attribute name="title">
+        <string/>
+       </attribute>
+       <widget class="QGraphicsView" name="chart_big">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>5</y>
+          <width>946</width>
+          <height>581</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>468</width>
+          <height>323</height>
+         </size>
+        </property>
+        <property name="mouseTracking">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="dragMode">
+         <enum>QGraphicsView::NoDrag</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="fullScreenGraph_bt_2">
+        <property name="geometry">
+         <rect>
+          <x>890</x>
+          <y>10</y>
+          <width>81</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Inter V</family>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+color: rgb(163, 236, 90);
+}
+QPushButton:hover{
+color: rgba(163, 236, 90, 150);
+}</string>
+        </property>
+        <property name="text">
+         <string>Выйти  &gt;</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QScrollArea" name="scrollArea_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>595</y>
+          <width>946</width>
+          <height>45</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>946</width>
+          <height>45</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">*{
+	border-radius: 20px;
+	background-color: rgb(32, 35, 37);
+}
+QScrollBar:horizontal {
+	border: none;
+    background: transparent;
+    height: 6px;
+	border-radius: 8px;
+ }
+
+/*  HANDLE BAR VERTICAL */
+QScrollBar::handle:horizontal {	
+	background-color: #A3EC5A;
+	min-height: 30px;
+	border-radius: 3px;
+}
+
+QScrollBar::sub-line:horizontal {
+	border: none;
+	background-color: none;
+	height: 0px;
+}
+
+QScrollBar::add-line:horizontal {
+	border: none;
+	background-color: none;
+	height: 0px;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:horizontal {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:horizontal {
+	background: none;
+}</string>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAsNeeded</enum>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>946</width>
+           <height>45</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">*{
+background-color: rgba(163, 236, 90, 50);
+border-radius: 10px
+}
+*:checked{
+background-color: rgba(163, 236, 90, 255);
+}</string>
+            </property>
+            <property name="text">
+             <string>Эксперимент</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </widget>
      </widget>
      <zorder>frame_12</zorder>

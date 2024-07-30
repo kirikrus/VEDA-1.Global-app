@@ -88,9 +88,11 @@
     <QtMoc Include="VEDA1.h" />
     <ClCompile Include="admin.cpp" />
     <ClCompile Include="connections.cpp" />
+    <ClCompile Include="CustomChartView.cpp" />
     <ClCompile Include="expChart.cpp" />
     <ClCompile Include="experiment.cpp" />
     <ClCompile Include="GLOBAL.cpp" />
+    <ClCompile Include="graphPage.cpp" />
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
     <ClCompile Include="UserData.cpp" />
@@ -104,9 +106,11 @@
     <QtMoc Include="UserData.h" />
     <QtMoc Include="expChart.h" />
     <ClInclude Include="admin.h" />
+    <QtMoc Include="CustomChartView.h" />
     <ClInclude Include="experiment.h" />
     <QtMoc Include="modalUserInfo.h" />
     <ClInclude Include="GLOBAL.h" />
+    <ClInclude Include="graphPage.h" />
     <ClInclude Include="MSGconstructor.h" />
     <ClInclude Include="Profile.h" />
   </ItemGroup>
