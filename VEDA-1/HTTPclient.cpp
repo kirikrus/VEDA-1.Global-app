@@ -72,12 +72,18 @@ void HTTPclient::delet(const QString& endpoint, const int id){
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     // ѕреобразование JSON в строку и добавление кавычек
-    QByteArray jsonData = QString("[%1]").arg(id).toUtf8();
-    qDebug() << "PUT Request json:" << jsonData;
-
+    QByteArray jsonData;
+    if (id != NULL) {
+        jsonData = QString("[%1]").arg(id).toUtf8();
+        qDebug() << "PUT Request json:" << jsonData;
+    }
     TOKEN_ADD
 
-    QNetworkReply* reply = networkManager->sendCustomRequest(request, "DELETE", jsonData);
+    QNetworkReply* reply;
+    if (id != NULL)
+        reply = networkManager->sendCustomRequest(request, "DELETE", jsonData);
+    else
+        reply = networkManager->sendCustomRequest(request, "DELETE");
 
     QEventLoop loop;
     connect(reply, &QNetworkReply::finished, [&]() {loop.quit();});

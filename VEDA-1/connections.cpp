@@ -34,6 +34,8 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 	QObject::connect(ui->dataChange, &QPushButton::clicked, [=]() {
+		if (MAIN_USER_POINTER->getExperiments().size() == 0)
+			return;
 		if (ui->edite->height() == 626) {
 			ui->edite->setGeometry(20, 580, 571, 51);
 			ui->dataChange->setText(("\320\240\320\265\320\264\320\260\320\272\321\202\320\276\321\200 \320\264\320\260\320\275\320\275\321\213\321\205"));
@@ -47,6 +49,8 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 	QObject::connect(ui->expChange, &QPushButton::clicked, [=]() {
+		if (MAIN_USER_POINTER->getExperiments().size() == 0)
+			return;
 			ui->edite->setGeometry(20, 10, 571, 626);
 			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
 			ui->tabWidget_3->setCurrentIndex(1);
@@ -83,7 +87,8 @@ void connections(Ui::VEDA1Class *ui) {
 		});
 	QObject::connect(ui->fullScreenGraph_bt, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(3);
-		show_graph_page(ui);
+		if(MAIN_USER_POINTER->getExperiments().size() != 0)
+			show_graph_page(ui);
 		});
 	QObject::connect(ui->fullScreenGraph_bt_2, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(1);
@@ -235,6 +240,8 @@ void connections(Ui::VEDA1Class *ui) {
 
 //Изменение экспа
 	QObject::connect(ui->expChange, &QPushButton::pressed, [=]() {
+		if (MAIN_USER_POINTER->getExperiments().size() == 0)
+			return;
 		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
 		HTTPclient http;
 		QEventLoop loop;
@@ -263,9 +270,24 @@ void connections(Ui::VEDA1Class *ui) {
 		if (exp->getName() != "")
 			ui->nameExp->setText(exp->getName());
 		});
+	QObject::connect(ui->deleteExp, &QPushButton::pressed, [=]() {
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+		HTTPclient http;
 
-	QObject::connect(ui->deleteExp, &QPushButton::pressed, [=]() {});
+		QString expName;
+		if (exp->getName() == "") expName = QString::fromLocal8Bit("№%1").arg(exp->getId());
+		else expName = exp->getName();
 
+		QString err = QString::fromLocal8Bit("Вы хотите удалить эксперимент: %1?").arg(expName);
+		bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+
+		if (yes) {
+			QString endpoint = QString("http://localhost:5011/Experiment/DeleteExperiment/%1").arg(exp->getId());
+			http.delet(endpoint,NULL);
+			show_profile(ui);
+		}
+		else return;
+		});
 	QObject::connect(ui->expEdit, &QPushButton::pressed, [=]() {
 		HTTPclient http;
 		QEventLoop loop;
@@ -293,7 +315,6 @@ void connections(Ui::VEDA1Class *ui) {
 		http.put(endpoint, item);
 		loop.exec();
 		});
-
 
 //
 }
