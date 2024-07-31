@@ -193,6 +193,7 @@ void show_experiments(Ui::VEDA1Class *ui) {
     ui->tableExp->setColumnWidth(2, 155);
     ui->tableExp->setColumnWidth(3, 75);
 
+    QObject::disconnect(ui->tableExp, &QTableWidget::cellClicked, nullptr, nullptr);
     QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         CURRENT_EXP = row;
         showChart(ui);
@@ -218,7 +219,7 @@ void show_users(Ui::VEDA1Class* ui) {
     }
 
     for (int id : users) 
-        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui, ui->scrollAreaWidgetContents_2));
+        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui, MAIN_USER_POINTER->getExperimentById(CURRENT_EXP), ui->scrollAreaWidgetContents_2));
 }
 
 void showChart(Ui::VEDA1Class *ui){

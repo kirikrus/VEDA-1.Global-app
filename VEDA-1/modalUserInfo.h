@@ -8,7 +8,7 @@ class modalUserInfo : public QWidget {
 	Q_OBJECT
 
 public:
-	modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, QWidget* parent = nullptr);
+	modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, experiment* exp, QWidget* parent = nullptr);
 
 	~modalUserInfo();
 

@@ -25,7 +25,7 @@ void show_all_users(Ui::VEDA1Class* ui){
     }
 
     for (int id : memberId)
-        ui->verticalLayout_3->addWidget(new modalUserInfo(new UserData(id), ui, ui->scrollAreaWidgetContents_3));
+        ui->verticalLayout_3->addWidget(new modalUserInfo(new UserData(id), ui,nullptr, ui->scrollAreaWidgetContents_3));
 }
 
 void show_admin_panel(Ui::VEDA1Class* ui) {
