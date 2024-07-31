@@ -102,6 +102,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             http.deleteWithCondition(endpoint, item);
 
             MAIN_USER_POINTER->initExp();
+            show_experiments(ui);
             show_users(ui);
         }
         break;

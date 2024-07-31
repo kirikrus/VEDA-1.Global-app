@@ -149,8 +149,8 @@ void show_auth(Ui::VEDA1Class* ui) {
         });
 }
 
-void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
-    QVector<experiment> experiments = user->getExperiments();
+void show_experiments(Ui::VEDA1Class *ui) {
+    QVector<experiment> experiments = MAIN_USER_POINTER->getExperiments();
 
     ui->tableExp->setColumnCount(4);
     ui->tableExp->setRowCount(experiments.size());
@@ -326,7 +326,7 @@ void show_profile(Ui::VEDA1Class *ui) {
     }
     ui->tabWidget->setCurrentIndex(1);
 
-    show_experiments(ui, MAIN_USER_POINTER);
+    show_experiments(ui);
 }
 
 void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
