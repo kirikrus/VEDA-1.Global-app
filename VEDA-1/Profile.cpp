@@ -166,7 +166,10 @@ void show_experiments(Ui::VEDA1Class *ui) {
     QTableWidgetItem d(experiments[1].getMaterial());
 
     for (int i = 0; i < experiments.size(); ++i) {
-        ui->tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
+        if (experiments[i].getName() == "") 
+            ui->tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
+        else
+            ui->tableExp->setItem(i, 0, new QTableWidgetItem(experiments[i].getName()));
         ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
 
         QString tag = experiments[i].getProcessTypeName();

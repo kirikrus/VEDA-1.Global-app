@@ -232,4 +232,68 @@ void connections(Ui::VEDA1Class *ui) {
 		widget->show();
 
 		});
+
+//Изменение экспа
+	QObject::connect(ui->expChange, &QPushButton::pressed, [=]() {
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+		HTTPclient http;
+		QEventLoop loop;
+
+		QString endpoint = "http://localhost:5011/Experiment/TOP";
+		QObject::connect(&http, &HTTPclient::requestFinished, [&](const QJsonObject& jsonResponse) {
+			ui->comboExpType->clear();
+
+			QJsonArray arr = jsonResponse["tops"].toArray();
+
+			for (const QJsonValue& value : arr) {
+				QJsonObject obj = value.toObject();
+				quint32 id = obj["id"].toInt();
+				QString jsonDate = obj["name"].toString();
+
+				ui->comboExpType->addItem(jsonDate,id);
+			}
+			loop.quit();
+			});
+		http.get(endpoint);
+		loop.exec();
+
+		ui->comboExpType->setCurrentIndex(exp->getProcessTypeId()-1);
+		ui->materialExp->setText(exp->getMaterial());
+		ui->dateEdit->setDate(exp->getDate());
+		if (exp->getName() != "")
+			ui->nameExp->setText(exp->getName());
+		});
+
+	QObject::connect(ui->deleteExp, &QPushButton::pressed, [=]() {});
+
+	QObject::connect(ui->expEdit, &QPushButton::pressed, [=]() {
+		HTTPclient http;
+		QEventLoop loop;
+		QJsonObject item;
+
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+		item["date"] = ui->dateEdit->date().toString("yyyy-MM-dd");
+		item["material"] = ui->materialExp->text();
+		item["typeofproces_id"] = ui->comboExpType->itemData(ui->comboExpType->currentIndex()).toString();
+		item["name"] = ui->nameExp->text();
+
+		QString endpoint = QString("http://localhost:5011/Experiment/UpdateExperiment/%1").arg(exp->getId());
+
+		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+			if (reply.toInt() <= 0 && reply.size() < 5)
+				msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Перепроверьте данные!"), QMessageBox::Ok);
+			else {
+				MAIN_USER_POINTER->initExp();
+				show_experiments(ui);
+			}
+			loop.quit();
+			});
+
+		http.put(endpoint, item);
+		loop.exec();
+		});
+
+
+//
 }

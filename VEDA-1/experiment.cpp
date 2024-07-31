@@ -1,7 +1,10 @@
 #include "experiment.h"
 
-experiment::experiment(quint32 id, QDate date, QString material, quint32 processTypeId, QString processTypeName, int authorId, QVector<int> membersId)
-    : id(id), date(date), material(material), processTypeId(processTypeId), processTypeName(processTypeName), authorId(authorId), membersId(membersId) {
+experiment::experiment(quint32 id, QDate date, QString material, quint32 processTypeId, QString processTypeName,
+                       int authorId, QVector<int> membersId, QString name)
+    : id(id), date(date), material(material), processTypeId(processTypeId), 
+      processTypeName(processTypeName), authorId(authorId), membersId(membersId), name(name) {
+    
     processTypeColor.append(qRgb(65, 93, 138));
     processTypeColor.append(qRgb(160, 82, 45));
     processTypeColor.append(qRgb(34, 139, 34));
@@ -37,4 +40,4 @@ QRgb experiment::getProcessTypeColor(int id) const{return processTypeColor[id];}
 
 void experiment::addMemberId(int id) { membersId.append(id); }
 
-
+QString experiment::getName() const{return name;}

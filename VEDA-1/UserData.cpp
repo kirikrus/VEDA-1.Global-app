@@ -87,6 +87,7 @@ void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
         QJsonObject experimentObject = value.toObject();
         quint32 id = experimentObject["id"].toInt();
         QString jsonDate = experimentObject["date"].toString();
+        QString expName = experimentObject["name"].toString();
         QDate date = QDate::fromString(jsonDate, "yyyy-MM-dd");
         QString material = experimentObject["material"].toString();
 
@@ -101,7 +102,7 @@ void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
 
         int authorId = experimentObject["authorid"].toInt();
 
-        experiments.append(experiment(id, date, material, processTypeId, processTypeName,authorId, memberId));
+        experiments.append(experiment(id, date, material, processTypeId, processTypeName,authorId, memberId, expName));
     }
 
 
