@@ -13,8 +13,16 @@ void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
 
 void validate(Ui::VEDA1Class* ui) {
-    ui->expPage->setDisabled(true);
-    ui->add_member->hide();
+    if (CURRENT_EXP != -1)
+        if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin()) {
+            ui->add_member->show();
+            ui->expChange->show();
+        }
+        else {
+            ui->expPage->setDisabled(true);
+            ui->add_member->hide();
+            ui->expChange->hide();
+        }
     if (!MAIN_USER_POINTER->is_admin())
         ui->adminPage->hide();
     else
@@ -200,6 +208,7 @@ void show_experiments(Ui::VEDA1Class *ui) {
         showChart(ui);
         show_exp_data(ui);
         show_users(ui);
+        validate(ui);
         });
 }
 

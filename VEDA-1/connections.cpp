@@ -39,7 +39,8 @@ void connections(Ui::VEDA1Class *ui) {
 		if (ui->edite->height() == 626) {
 			ui->edite->setGeometry(20, 580, 571, 51);
 			ui->dataChange->setText(("\320\240\320\265\320\264\320\260\320\272\321\202\320\276\321\200 \320\264\320\260\320\275\320\275\321\213\321\205"));
-			ui->expChange->show();
+			if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin())
+				ui->expChange->show();
 		}
 		else {
 			ui->edite->setGeometry(20, 10, 571, 626);
