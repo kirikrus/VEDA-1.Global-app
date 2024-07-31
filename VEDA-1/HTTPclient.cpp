@@ -85,6 +85,30 @@ void HTTPclient::delet(const QString& endpoint, const int id){
     loop.exec();
 }
 
+void HTTPclient::deleteWithCondition(const QString& endpoint, const QJsonValue& data) {
+    QUrl url(endpoint);
+    qDebug() << "PUT Request URL:" << url.toString();
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonDocument doc;
+    if (data.isArray()) doc = QJsonDocument(data.toArray());
+    else if (data.isObject()) doc = QJsonDocument(data.toObject());
+
+    // ѕреобразование JSON в строку и добавление кавычек
+    QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
+    qDebug() << "PUT Request json:" << jsonData;
+
+    TOKEN_ADD
+
+    QNetworkReply* reply = networkManager->sendCustomRequest(request, "DELETE", jsonData);
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, [&]() {loop.quit();});
+
+    loop.exec();
+}
+
 void HTTPclient::onReplyFinished(QNetworkReply* reply) {
     qDebug() << "onReplyFinished called";
     if (reply->error() == QNetworkReply::NoError) {

@@ -20,6 +20,7 @@ public:
     void post(const QString& endpoint, const QJsonValue& data);
     void put(const QString& endpoint, const QJsonValue& data);
     void delet(const QString& endpoint, const int id);
+    void deleteWithCondition(const QString& endpoint, const QJsonValue& data);
 
 signals:
     void requestFinished(const QJsonObject& response, QString authToken = nullptr);

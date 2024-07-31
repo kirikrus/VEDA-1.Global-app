@@ -88,9 +88,21 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
         QString err = QString::fromLocal8Bit("Вы хотите удалить\n%1?").arg(user->getUserName());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
-            delete user;
-            user = nullptr;
-            delete this;
+            HTTPclient http;
+            QEventLoop loop;
+            QJsonObject item;
+
+            auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+            item["expid"] = (int)exp->getId();
+            item["userid"] = user->getId();
+
+            QString endpoint = "http://localhost:5011/User/ExcludeMember";
+
+            http.deleteWithCondition(endpoint, item);
+
+            MAIN_USER_POINTER->initExp();
+            show_users(ui);
         }
         break;
     }
