@@ -11,9 +11,23 @@
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скрола
-	ui->verticalScrollBar->setMaximum(ui->scrollArea->verticalScrollBar()->maximum());
-	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, ui->verticalScrollBar, &QScrollBar::setValue);
-	QObject::connect(ui->verticalScrollBar, &QScrollBar::valueChanged, ui->scrollArea->verticalScrollBar(), &QScrollBar::setValue);
+	bool *blockScrollSignal = new bool(false);
+	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal) {
+			*blockScrollSignal = true;
+			double ratio = (double)ui->verticalScrollBar->maximum() / ui->scrollArea->verticalScrollBar()->maximum();
+			ui->verticalScrollBar->setValue(value * ratio);
+			*blockScrollSignal = false;
+		}
+		});
+	QObject::connect(ui->verticalScrollBar, &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal) {
+			*blockScrollSignal = true;
+			double ratio = (double)ui->scrollArea->verticalScrollBar()->maximum() / ui->verticalScrollBar->maximum();
+			ui->scrollArea->verticalScrollBar()->setValue(value * ratio);
+			*blockScrollSignal = false;
+		}
+		});
 
 //кнопка переключения на авторизацию
 	QObject::connect(ui->profile_button, &QPushButton::clicked, [=]() {show_profile(ui);});

@@ -87,12 +87,14 @@
     <QtUic Include="VEDA1.ui" />
     <QtMoc Include="VEDA1.h" />
     <ClCompile Include="admin.cpp" />
+    <ClCompile Include="article.cpp" />
     <ClCompile Include="connections.cpp" />
     <ClCompile Include="CustomChartView.cpp" />
     <ClCompile Include="expChart.cpp" />
     <ClCompile Include="experiment.cpp" />
     <ClCompile Include="GLOBAL.cpp" />
     <ClCompile Include="graphPage.cpp" />
+    <ClCompile Include="mainPage.cpp" />
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
     <ClCompile Include="settings.cpp" />
@@ -103,6 +105,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="article.h" />
+    <ClInclude Include="mainPage.h" />
     <ClInclude Include="settings.h" />
     <QtMoc Include="HTTPclient.h" />
     <QtMoc Include="UserData.h" />
