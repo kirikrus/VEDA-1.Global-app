@@ -7,6 +7,7 @@
 #include <qlineedit.h>
 #include <qchartview.h>
 #include "GLOBAL.h"
+#include "settings.h"
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скрола
@@ -81,6 +82,7 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(true);
 		ui->adminPage->setDisabled(false);
+		show_settings(ui);
 		});
 	QObject::connect(ui->adminPage, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(0);

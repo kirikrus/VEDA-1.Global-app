@@ -21,6 +21,7 @@ public:
     bool is_admin();
     void relogin();
     void initExp();
+    QString getPassword();
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);

@@ -95,6 +95,7 @@
     <ClCompile Include="graphPage.cpp" />
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
+    <ClCompile Include="settings.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="HTTPclient.cpp" />
     <ClCompile Include="Profile.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="settings.h" />
     <QtMoc Include="HTTPclient.h" />
     <QtMoc Include="UserData.h" />
     <QtMoc Include="expChart.h" />

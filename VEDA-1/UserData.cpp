@@ -129,3 +129,5 @@ QVector<experiment> UserData::getExperiments() const {return experiments;}
 experiment* UserData::getExperimentById(int id){return &experiments[id];}
 
 bool UserData::is_admin(){return admin;}
+
+QString UserData::getPassword() { return password; }
