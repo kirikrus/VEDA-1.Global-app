@@ -80,7 +80,7 @@ void show_bt(Ui::VEDA1Class* ui,QChart* chart, QVector<QRgb> colors) {
             QString("background-color: rgba(%1, %2, %3, 255);").arg(QColor(colors[counter]).red()).arg(QColor(colors[counter]).green()).arg(QColor(colors[counter]).blue()) +
             "}");
         pushButton->setCheckable(true);
-        if (exp.getId() == CURRENT_EXP+1)
+        if (exp.getId() == exps[CURRENT_EXP].getId())
             pushButton->setChecked(true);
         else
             pushButton->setChecked(false);

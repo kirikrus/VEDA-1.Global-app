@@ -290,6 +290,7 @@ void connections(Ui::VEDA1Class *ui) {
 		if (yes) {
 			QString endpoint = QString("http://localhost:5011/Experiment/DeleteExperiment/%1").arg(exp->getId());
 			http.delet(endpoint,NULL);
+			MAIN_USER_POINTER->initExp();
 			show_profile(ui);
 		}
 		else return;
