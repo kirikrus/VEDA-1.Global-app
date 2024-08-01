@@ -69,7 +69,7 @@ void show_bt(Ui::VEDA1Class* ui,QChart* chart, QVector<QRgb> colors) {
     int counter{ 0 };
     for (experiment exp : exps) {
         QPushButton* pushButton = new QPushButton(ui->scrollAreaWidgetContents_4);
-        pushButton->setText(QString::number(exp.getId()));
+        pushButton->setText(exp.getName() == "" ? QString::number(exp.getId()) : exp.getName());
         pushButton->setMinimumSize(QSize(100, 20));
         pushButton->setMaximumSize(QSize(200, 20));
         pushButton->setStyleSheet("*{\n" +

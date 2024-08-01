@@ -34,15 +34,17 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 	QObject::connect(ui->dataChange, &QPushButton::clicked, [=]() {
-		if (MAIN_USER_POINTER->getExperiments().size() == 0)
-			return;
 		if (ui->edite->height() == 626) {
 			ui->edite->setGeometry(20, 580, 571, 51);
 			ui->dataChange->setText(("\320\240\320\265\320\264\320\260\320\272\321\202\320\276\321\200 \320\264\320\260\320\275\320\275\321\213\321\205"));
+			if (CURRENT_EXP == -1)
+				return;
 			if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin())
 				ui->expChange->show();
 		}
 		else {
+			if (MAIN_USER_POINTER->getExperiments().size() == 0)
+				return;
 			ui->edite->setGeometry(20, 10, 571, 626);
 			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
 			ui->tabWidget_3->setCurrentIndex(0);
@@ -56,6 +58,8 @@ void connections(Ui::VEDA1Class *ui) {
 			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
 			ui->tabWidget_3->setCurrentIndex(1);
 			ui->expChange->hide();
+			ui->expEdit->setText("\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214");
+			ui->dataFrame->show();
 		});
 
 //Работа с запросами в редакторе
@@ -241,9 +245,6 @@ void connections(Ui::VEDA1Class *ui) {
 
 //Изменение экспа
 	QObject::connect(ui->expChange, &QPushButton::pressed, [=]() {
-		if (MAIN_USER_POINTER->getExperiments().size() == 0)
-			return;
-		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
 		HTTPclient http;
 		QEventLoop loop;
 
@@ -264,6 +265,10 @@ void connections(Ui::VEDA1Class *ui) {
 			});
 		http.get(endpoint);
 		loop.exec();
+
+		if (MAIN_USER_POINTER->getExperiments().size() == 0)
+			return;
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
 
 		ui->comboExpType->setCurrentIndex(exp->getProcessTypeId()-1);
 		ui->materialExp->setText(exp->getMaterial());
@@ -317,5 +322,40 @@ void connections(Ui::VEDA1Class *ui) {
 		loop.exec();
 		});
 
-//
+//Создание экспа
+	QObject::connect(ui->add_exp, &QPushButton::pressed, ui->expChange, &QPushButton::pressed);
+	QObject::connect(ui->add_exp, &QPushButton::pressed, [=]() {
+		ui->edite->setGeometry(20, 10, 571, 626);
+		ui->tabWidget_3->setCurrentIndex(1);
+		ui->expChange->hide();
+		ui->deleteExp->hide();
+		ui->expEdit->hide();
+		ui->expCreate->show();
+		ui->dataFrame->hide();
+		});
+	QObject::connect(ui->expCreate, &QPushButton::pressed, [=]() {
+		HTTPclient http;
+		QEventLoop loop;
+		QJsonObject item;
+
+		item["authorId"] = MAIN_USER_POINTER->getId();
+		item["material"] = ui->materialExp->text();
+		item["typeofprocesId"] = ui->comboExpType->itemData(ui->comboExpType->currentIndex()).toString();
+		item["name"] = ui->nameExp->text();
+
+		QString endpoint = QString("http://localhost:5011/Experiment/CreateExperiment");
+
+		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+			if (reply.toInt() <= 0 && reply.size() < 5)
+				msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Перепроверьте данные!"), QMessageBox::Ok);
+			else {
+				MAIN_USER_POINTER->initExp();
+				show_experiments(ui);
+			}
+			loop.quit();
+			});
+
+		http.post(endpoint, item);
+		loop.exec();
+		});
 }

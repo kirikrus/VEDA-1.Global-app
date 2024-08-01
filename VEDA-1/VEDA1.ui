@@ -4175,7 +4175,7 @@ color: White;</string>
           <widget class="QPushButton" name="deleteExp">
            <property name="geometry">
             <rect>
-             <x>315</x>
+             <x>295</x>
              <y>515</y>
              <width>181</width>
              <height>30</height>
@@ -4270,7 +4270,7 @@ color: White;</string>
           <widget class="QPushButton" name="expEdit">
            <property name="geometry">
             <rect>
-             <x>95</x>
+             <x>75</x>
              <y>515</y>
              <width>191</width>
              <height>30</height>
@@ -4298,7 +4298,7 @@ QPushButton:hover{
             <string>Изменить</string>
            </property>
           </widget>
-          <widget class="QFrame" name="frame_19">
+          <widget class="QFrame" name="dataFrame">
            <property name="geometry">
             <rect>
              <x>290</x>
@@ -4361,6 +4361,40 @@ color: White;</string>
              <enum>QAbstractSpinBox::NoButtons</enum>
             </property>
            </widget>
+          </widget>
+          <widget class="QPushButton" name="expCreate">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>185</x>
+             <y>515</y>
+             <width>191</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Inter V</family>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: 	rgba(163, 236, 90, 50);
+	border: 1px solid rgb(54, 59, 62);
+border-radius: 15px;
+color: rgb(212, 212, 212);
+}
+QPushButton:hover{
+	background-color:rgba(163, 236, 90, 150);
+}</string>
+           </property>
+           <property name="text">
+            <string>Создать</string>
+           </property>
           </widget>
          </widget>
         </widget>

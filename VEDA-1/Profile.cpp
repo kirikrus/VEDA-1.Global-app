@@ -27,6 +27,7 @@ void validate(Ui::VEDA1Class* ui) {
         ui->adminPage->hide();
     else
         ui->adminPage->show();
+    ui->expCreate->hide();
 }
 
 void show_auth(Ui::VEDA1Class* ui) {
