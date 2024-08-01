@@ -126,7 +126,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             item["expid"] = (int)exp->getId();
             item["userid"] = user->getId();
 
-            QString endpoint = "http://localhost:5011/Admin/ChangeAuthor";
+            QString endpoint = "http://localhost:5011/Experiment/ChangeAuthor";
 
             http.put(endpoint, item);
 
