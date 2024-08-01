@@ -1,5 +1,5 @@
 #include <ui_VEDA1.h>
-#include "UserData.h"
+#include "GLOBAL.h"
 
 class article : public QWidget {
 	Q_OBJECT

@@ -11,7 +11,7 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QDate d
     sizePolicy.setHeightForWidth(article_->sizePolicy().hasHeightForWidth());
     article_->setSizePolicy(sizePolicy);
     article_->setMinimumSize(QSize(530, 200));
-    article_->setMaximumSize(QSize(530, 1000));
+    article_->setMaximumSize(QSize(530, 9000));
     article_->setStyleSheet(QString::fromUtf8("background-color: #202325;\n"
         "border-radius: 35px"));
     gridLayout = new QGridLayout(article_);
@@ -112,7 +112,7 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QDate d
     label_58->setText(author->getUserName());//автор имя
     label_60->setText(author->getEmail());//автор почта
     label_59->setText(date.toString("dd.MM.yy"));//время
-    textEdit->setMarkdown(text);
+    textEdit->document()->setMarkdown(text);
 
     textEdit->document()->adjustSize();
     QSize documentSize = textEdit->document()->size().toSize();
