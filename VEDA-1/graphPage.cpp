@@ -80,10 +80,14 @@ void show_bt(Ui::VEDA1Class* ui,QChart* chart, QVector<QRgb> colors) {
             QString("background-color: rgba(%1, %2, %3, 255);").arg(QColor(colors[counter]).red()).arg(QColor(colors[counter]).green()).arg(QColor(colors[counter]).blue()) +
             "}");
         pushButton->setCheckable(true);
-        if (exp.getId() == exps[CURRENT_EXP].getId())
-            pushButton->setChecked(true);
-        else
+        if (CURRENT_EXP == -1)
             pushButton->setChecked(false);
+        else
+            if (exp.getId() == exps[CURRENT_EXP].getId())
+                pushButton->setChecked(true);
+            else
+                pushButton->setChecked(false);
+        
         pushButton->setFlat(true);
 
         ui->horizontalLayout->addWidget(pushButton);
@@ -110,10 +114,12 @@ void show_graph_page(Ui::VEDA1Class* ui){
                             qRgb(65, 93, 238),qRgb(160, 82, 145),qRgb(34, 139, 134),qRgb(94, 34, 240),qRgb(140, 137, 134),qRgb(161, 45, 153),qRgb(65, 65, 165),
                             qRgb(65, 193, 138),qRgb(160, 182, 45),qRgb(34, 239, 34),qRgb(94, 134, 140),qRgb(140, 237, 34),qRgb(161, 145, 53),qRgb(65, 165, 65) };
 
-
-    experiment* exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
-
-    QLineSeries* series = exp->getChart();
+    experiment* exp;
+    QLineSeries* series = new QLineSeries();
+    if (CURRENT_EXP != -1) {
+        exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+        series = exp->getChart();
+    }
 
     QChart* chart = new QChart;
     chart->legend()->hide();
@@ -124,7 +130,7 @@ void show_graph_page(Ui::VEDA1Class* ui){
 #pragma region style
     chart->setMinimumSize(ui->chart_big->size());
 
-    QPen pen(colors[CURRENT_EXP]);
+    QPen pen(colors[CURRENT_EXP == -1?0: CURRENT_EXP]);
     pen.setWidth(1);
     series->setPen(pen);
 
