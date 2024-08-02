@@ -1,12 +1,34 @@
 ﻿#include "modalUserInfo.h"
 #include "settings.h"
 #include "Profile.h"
+#include "MSGconstructor.h"
 
 void show_settings(Ui::VEDA1Class* ui) {
 	ui->nameS->setText(MAIN_USER_POINTER->getUserName());
 	ui->emailS->setText(MAIN_USER_POINTER->getEmail());
 	ui->phoneS->setText(MAIN_USER_POINTER->getPhone());
 	ui->passwordS->setText(MAIN_USER_POINTER->getPassword());
+
+	QObject::connect(ui->userSave, &QPushButton::pressed, [=]() {
+		HTTPclient http;
+		QEventLoop loop;
+		QJsonObject item;
+
+		item["fullname"] = ui->nameS->text();
+		item["phone"] = ui->phoneS->text();
+		item["password"] = ui->passwordS->text();
+
+		QString endpoint = SERVER + QString("/User/UserSettings/%1").arg(MAIN_USER_POINTER->getId());
+
+		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+			if (reply.toInt() <= 0 && reply.size() < 5)
+				msg(QMessageBox::Warning, ("Упс..."), ("Перепроверьте данные!"), QMessageBox::Ok);
+			loop.quit();
+			});
+
+		http.put(endpoint, item);
+		loop.exec();
+		});
 
 	QObject::connect(ui->exitUser, &QPushButton::pressed, [=]() {
 		ui->tabWidget->setCurrentIndex(0);
