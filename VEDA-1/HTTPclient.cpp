@@ -1,4 +1,4 @@
-#include "GLOBAL.h"
+п»ї#include "GLOBAL.h"
 #include <QEventLoop>
 #include <QDebug>
 
@@ -27,7 +27,7 @@ void HTTPclient::post(const QString& endpoint, const QJsonValue& data) {
     if (data.isArray()) doc = QJsonDocument(data.toArray());
     else if (data.isObject()) doc = QJsonDocument(data.toObject());
 
-    // Преобразование JSON в строку и добавление кавычек
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "POST Request json:" << jsonData;
 
@@ -51,7 +51,7 @@ void HTTPclient::put(const QString& endpoint, const QJsonValue& data){
     if (data.isArray()) doc = QJsonDocument(data.toArray());
     else if (data.isObject()) doc = QJsonDocument(data.toObject());
 
-    // Преобразование JSON в строку и добавление кавычек
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
@@ -71,7 +71,7 @@ void HTTPclient::delet(const QString& endpoint, const int id){
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    // Преобразование JSON в строку и добавление кавычек
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
     QByteArray jsonData;
     if (id != NULL) {
         jsonData = QString("[%1]").arg(id).toUtf8();
@@ -101,7 +101,7 @@ void HTTPclient::deleteWithCondition(const QString& endpoint, const QJsonValue& 
     if (data.isArray()) doc = QJsonDocument(data.toArray());
     else if (data.isObject()) doc = QJsonDocument(data.toObject());
 
-    // Преобразование JSON в строку и добавление кавычек
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 

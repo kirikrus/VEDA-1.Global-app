@@ -1,4 +1,4 @@
-#include "modalUserInfo.h"
+﻿#include "modalUserInfo.h"
 #include "settings.h"
 
 void show_settings(Ui::VEDA1Class* ui) {

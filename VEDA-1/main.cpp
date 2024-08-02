@@ -1,3 +1,5 @@
+﻿#pragma execution_character_set("utf-8")
+
 #include "VEDA1.h"
 #include <QtWidgets/QApplication>
 #include "GLOBAL.h"

@@ -1,4 +1,4 @@
-#include "article.h"
+ï»¿#include "article.h"
 
 article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QDate date, QWidget* parent)
 				: ui(ui), id(id), text(text), date(date), QWidget(parent) {
@@ -109,9 +109,9 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QDate d
     gridLayout->addWidget(frame_19, 0, 1, 1, 1);
 #pragma endregion
 
-    label_58->setText(author->getUserName());//àâòîð èìÿ
-    label_60->setText(author->getEmail());//àâòîð ïî÷òà
-    label_59->setText(date.toString("dd.MM.yy"));//âðåìÿ
+    label_58->setText(author->getUserName());//Ð°Ð²Ñ‚Ð¾Ñ€ Ð¸Ð¼Ñ
+    label_60->setText(author->getEmail());//Ð°Ð²Ñ‚Ð¾Ñ€ Ð¿Ð¾Ñ‡Ñ‚Ð°
+    label_59->setText(date.toString("dd.MM.yy"));//Ð²Ñ€ÐµÐ¼Ñ
     textEdit->document()->setMarkdown(text);
 
     textEdit->document()->adjustSize();

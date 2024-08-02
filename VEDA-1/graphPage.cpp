@@ -1,4 +1,4 @@
-#include "graphPage.h"
+ï»¿#include "graphPage.h"
 #include "CustomChartView.h"
 #include "GLOBAL.h"
 #include <qchart.h>
@@ -13,7 +13,7 @@ void paintChart(bool show, QChart* chart, QColor color, quint32 id) {
         series->setPen(pen);
         series->setName(QString::number(id));
         chart->addSeries(series);
-        chart->createDefaultAxes(); // Îáíîâëåíèå îñåé äëÿ íîâîé ñåðèè
+        chart->createDefaultAxes(); // ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¾ÑÐµÐ¹ Ð´Ð»Ñ Ð½Ð¾Ð²Ð¾Ð¹ ÑÐµÑ€Ð¸Ð¸
 #pragma region style
 
         chart->setBackgroundBrush(QBrush(QColor("#202325")));

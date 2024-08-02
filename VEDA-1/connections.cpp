@@ -1,4 +1,4 @@
-#include "VEDA1.h"
+п»ї#include "VEDA1.h"
 #include <qobject.h>
 #include "Profile.h"
 #include "admin.h"
@@ -10,7 +10,7 @@
 #include "settings.h"
 
 void connections(Ui::VEDA1Class *ui) {
-//коннект скрола
+//РєРѕРЅРЅРµРєС‚ СЃРєСЂРѕР»Р°
 	bool *blockScrollSignal = new bool(false);
 	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, [=](int value) {
 		if (!*blockScrollSignal) {
@@ -29,23 +29,23 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 
-//кнопка переключения на авторизацию
+//РєРЅРѕРїРєР° РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ РЅР° Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
 	QObject::connect(ui->profile_button, &QPushButton::clicked, [=]() {show_profile(ui);});
 
-//кнопка переключения на главную
+//РєРЅРѕРїРєР° РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ РЅР° РіР»Р°РІРЅСѓСЋ
 	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {ui->tabWidget->setCurrentIndex(0);});
 
-//Развертка блоков на странице профиля
+//Р Р°Р·РІРµСЂС‚РєР° Р±Р»РѕРєРѕРІ РЅР° СЃС‚СЂР°РЅРёС†Рµ РїСЂРѕС„РёР»СЏ
 	QObject::connect(ui->dataViewChange, &QPushButton::clicked, [=]() {
 		if (ui->dataGraphPanel->height() == 626) {
 			ui->dataGraphPanel->setGeometry(610, 435, 351, 196);
 			ui->dataGraphTable->setFixedHeight(141);
-			ui->dataViewChange->setText(QString::fromLocal8Bit("Развернуть  >"));
+			ui->dataViewChange->setText(("Р Р°Р·РІРµСЂРЅСѓС‚СЊ  >"));
 		}
 		else {
 			ui->dataGraphPanel->setGeometry(610, 5, 351, 626);
 			ui->dataGraphTable->setFixedHeight(576);
-			ui->dataViewChange->setText(QString::fromLocal8Bit("Свернуть    >"));
+			ui->dataViewChange->setText(("РЎРІРµСЂРЅСѓС‚СЊ    >"));
 		}
 		});
 	QObject::connect(ui->dataChange, &QPushButton::clicked, [=]() {
@@ -77,12 +77,12 @@ void connections(Ui::VEDA1Class *ui) {
 			ui->dataFrame->show();
 		});
 
-//Работа с запросами в редакторе
+//Р Р°Р±РѕС‚Р° СЃ Р·Р°РїСЂРѕСЃР°РјРё РІ СЂРµРґР°РєС‚РѕСЂРµ
     QObject::connect(ui->addData, &QPushButton::pressed, [=]() {data_Editer(ui,"POST");});
 	QObject::connect(ui->putData, &QPushButton::pressed, [=]() {data_Editer(ui, "PUT");});
 	QObject::connect(ui->deleteData, &QPushButton::pressed, [=]() {data_Editer(ui, "DELETE");});
 
-//переключение страниц профиля
+//РїРµСЂРµРєР»СЋС‡РµРЅРёРµ СЃС‚СЂР°РЅРёС† РїСЂРѕС„РёР»СЏ
 	QObject::connect(ui->expPage, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(1);
 		ui->hightlighter->setGeometry(ui->expPage->geometry());
@@ -115,7 +115,7 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->tabWidget_2->setCurrentIndex(1);
 		});
 
-//Добавление участника эксп-та
+//Р”РѕР±Р°РІР»РµРЅРёРµ СѓС‡Р°СЃС‚РЅРёРєР° СЌРєСЃРї-С‚Р°
 	QObject::connect(ui->add_member, &QPushButton::pressed, [=]() {
 		QFrame* backdrop = new QFrame(ui->centralWidget);
 
@@ -222,10 +222,10 @@ void connections(Ui::VEDA1Class *ui) {
 			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 				switch (reply.toInt()) {
 					case -1: 
-						msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Пользователь с данной почтой уже участник!"), QMessageBox::Ok);
+						msg(QMessageBox::Warning, ("РЈРїСЃ..."), ("РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ РґР°РЅРЅРѕР№ РїРѕС‡С‚РѕР№ СѓР¶Рµ СѓС‡Р°СЃС‚РЅРёРє!"), QMessageBox::Ok);
 						break;
 					case -2:
-						msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Пользователь с данной почтой не существует!"), QMessageBox::Ok);
+						msg(QMessageBox::Warning, ("РЈРїСЃ..."), ("РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ РґР°РЅРЅРѕР№ РїРѕС‡С‚РѕР№ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!"), QMessageBox::Ok);
 						break;
 					default:
 						delete label_45;
@@ -259,7 +259,7 @@ void connections(Ui::VEDA1Class *ui) {
 
 		});
 
-//Изменение экспа
+//РР·РјРµРЅРµРЅРёРµ СЌРєСЃРїР°
 	QObject::connect(ui->expChange, &QPushButton::pressed, [=]() {
 		HTTPclient http;
 		QEventLoop loop;
@@ -297,10 +297,10 @@ void connections(Ui::VEDA1Class *ui) {
 		HTTPclient http;
 
 		QString expName;
-		if (exp->getName() == "") expName = QString::fromLocal8Bit("№%1").arg(exp->getId());
+		if (exp->getName() == "") expName = QString("в„–%1").arg(exp->getId());
 		else expName = exp->getName();
 
-		QString err = QString::fromLocal8Bit("Вы хотите удалить эксперимент: %1?").arg(expName);
+		QString err = QString("Р’С‹ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌРєСЃРїРµСЂРёРјРµРЅС‚: %1?").arg(expName);
 		bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
 		if (yes) {
@@ -327,7 +327,7 @@ void connections(Ui::VEDA1Class *ui) {
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)
-				msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Перепроверьте данные!"), QMessageBox::Ok);
+				msg(QMessageBox::Warning, ("РЈРїСЃ..."), ("РџРµСЂРµРїСЂРѕРІРµСЂСЊС‚Рµ РґР°РЅРЅС‹Рµ!"), QMessageBox::Ok);
 			else {
 				MAIN_USER_POINTER->initExp();
 				show_experiments(ui);
@@ -339,7 +339,7 @@ void connections(Ui::VEDA1Class *ui) {
 		loop.exec();
 		});
 
-//Создание экспа
+//РЎРѕР·РґР°РЅРёРµ СЌРєСЃРїР°
 	QObject::connect(ui->add_exp, &QPushButton::pressed, ui->expChange, &QPushButton::pressed);
 	QObject::connect(ui->add_exp, &QPushButton::pressed, [=]() {
 		ui->edite->setGeometry(20, 10, 571, 626);
@@ -364,7 +364,7 @@ void connections(Ui::VEDA1Class *ui) {
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)
-				msg(QMessageBox::Warning, QString::fromLocal8Bit("Упс..."), QString::fromLocal8Bit("Перепроверьте данные!"), QMessageBox::Ok);
+				msg(QMessageBox::Warning, ("РЈРїСЃ..."), ("РџРµСЂРµРїСЂРѕРІРµСЂСЊС‚Рµ РґР°РЅРЅС‹Рµ!"), QMessageBox::Ok);
 			else {
 				MAIN_USER_POINTER->initExp();
 				show_experiments(ui);

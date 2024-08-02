@@ -1,4 +1,4 @@
-#include "Profile.h"
+п»ї#include "Profile.h"
 #include "qchart.h"
 #include "modalUserInfo.h"
 #include "MSGconstructor.h"
@@ -161,9 +161,9 @@ void show_auth(Ui::VEDA1Class* ui) {
             validate(ui);
         }
         else {
-            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(")
-                                                           : QString::fromLocal8Bit("Неверный пароль! \n =(");
-            msg(QMessageBox::Critical, QString::fromLocal8Bit("Упс..."), err, QMessageBox::Ok);
+            QString err = MAIN_USER_POINTER->getId() == -1 ? ("РўР°РєРѕР№ Email РЅРµ Р·Р°СЂРµРіРµСЃС‚СЂРёСЂРѕРІР°РЅ... \n =(")
+                                                           : ("РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ! \n =(");
+            msg(QMessageBox::Critical, ("РЈРїСЃ..."), err, QMessageBox::Ok);
             delete MAIN_USER_POINTER;
         }
         });
@@ -178,18 +178,18 @@ void show_experiments(Ui::VEDA1Class *ui) {
 
     ui->tableExp->setColumnCount(4);
     ui->tableExp->setRowCount(experiments.size());
-    // установка заголовков таблицы
+    // СѓСЃС‚Р°РЅРѕРІРєР° Р·Р°РіРѕР»РѕРІРєРѕРІ С‚Р°Р±Р»РёС†С‹
     QStringList headers;
-    headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Эксперимент
-            << "\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273"//Материал
-            << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//Процесс
-            << "\320\224\320\260\321\202\320\260";//Дата
+    headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Р­РєСЃРїРµСЂРёРјРµРЅС‚
+            << "\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273"//РњР°С‚РµСЂРёР°Р»
+            << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//РџСЂРѕС†РµСЃСЃ
+            << "\320\224\320\260\321\202\320\260";//Р”Р°С‚Р°
 
     ui->tableExp->setHorizontalHeaderLabels(headers);
 
     for (int i = 0; i < experiments.size(); ++i) {
         if (experiments[i].getName() == "") 
-            ui->tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
+            ui->tableExp->setItem(i, 0, new QTableWidgetItem(("Р­РєСЃРїРµСЂРёРјРµРЅС‚ в„–") + QString::number(experiments[i].getId())));
         else
             ui->tableExp->setItem(i, 0, new QTableWidgetItem(experiments[i].getName()));
         ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
@@ -197,7 +197,7 @@ void show_experiments(Ui::VEDA1Class *ui) {
         QString tag = experiments[i].getProcessTypeName();
         int tagId = experiments[i].getProcessTypeId();
         QRgb tagColor = experiments[i].getProcessTypeColor(tagId);
-        QLabel* processLabel = new QLabel(tag);//для красивой отрисовки тега процесса
+        QLabel* processLabel = new QLabel(tag);//РґР»СЏ РєСЂР°СЃРёРІРѕР№ РѕС‚СЂРёСЃРѕРІРєРё С‚РµРіР° РїСЂРѕС†РµСЃСЃР°
         processLabel->setObjectName(QString::fromUtf8("label_11"));
         processLabel->setGeometry(QRect(175, 80, 86, 16));
 
@@ -269,8 +269,8 @@ void showChart(Ui::VEDA1Class *ui){
     chart->createDefaultAxes();
     
 
-//стилизация
-    chart->setTitle(QString::fromLocal8Bit("Эксперимент №") + QString::number(exp->getId()));
+//СЃС‚РёР»РёР·Р°С†РёСЏ
+    chart->setTitle(("Р­РєСЃРїРµСЂРёРјРµРЅС‚ в„–") + QString::number(exp->getId()));
     chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
 
     chart->setMinimumSize(ui->chart->size());
@@ -318,20 +318,20 @@ void show_exp_data(Ui::VEDA1Class* ui) {
     QLineSeries* series = exp->getChart();
 
 
-    QAbstractItemModel* oldModel = ui->dataGraphTable->model();//чистим память
+    QAbstractItemModel* oldModel = ui->dataGraphTable->model();//С‡РёСЃС‚РёРј РїР°РјСЏС‚СЊ
     if (oldModel) delete oldModel;
 
-    QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
+    QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 СЃС‚РѕР»Р±С†Р°
 
     model->setHorizontalHeaderLabels({ "ID", 
-        QString::fromLocal8Bit("Время"), 
+        ("Р’СЂРµРјСЏ"), 
          exp->getChartLink()->getParamUnit()});
 
     ui->dataGraphTable->setColumnWidth(0, 50);
     ui->dataGraphTable->setColumnWidth(1, 130);
     ui->dataGraphTable->setColumnWidth(2, 130);
 
-    //установка данных в модели
+    //СѓСЃС‚Р°РЅРѕРІРєР° РґР°РЅРЅС‹С… РІ РјРѕРґРµР»Рё
     int id = 0;
     for (const QPointF& point : series->points()) {
         QList<QStandardItem*> rowItems;
@@ -384,7 +384,7 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_del->value() );
         if (id == -1) return;
 
-        QString err = QString::fromLocal8Bit("Вы хотите удалить точку № %1?").arg(ui->inp_id_del->value());
+        QString err = QString("Р’С‹ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ С‚РѕС‡РєСѓ в„– %1?").arg(ui->inp_id_del->value());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
         if (yes) {

@@ -1,4 +1,4 @@
-#include "experiment.h"
+﻿#include "experiment.h"
 
 experiment::experiment(quint32 id, QDate date, QString material, quint32 processTypeId, QString processTypeName,
                        int authorId, QVector<int> membersId, QString name)

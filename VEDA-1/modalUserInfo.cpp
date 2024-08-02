@@ -87,7 +87,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             if (!MAIN_USER_POINTER->is_admin())
                 return;
 
-        QString err = QString::fromLocal8Bit("Вы хотите удалить\n%1?").arg(user->getUserName());
+        QString err = QString("Вы хотите удалить\n%1?").arg(user->getUserName());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
             HTTPclient http;
@@ -114,7 +114,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             if (!MAIN_USER_POINTER->is_admin())
                 return;
 
-        QString errr = QString::fromLocal8Bit("Вы хотите сделать\n%1\nсоздателем?").arg(user->getUserName());
+        QString errr = QString("Вы хотите сделать\n%1\nсоздателем?").arg(user->getUserName());
         bool yess = msg(QMessageBox::Question, "", errr, QMessageBox::Yes | QMessageBox::No);
         if (yess) {
             HTTPclient http;

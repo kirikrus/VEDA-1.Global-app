@@ -1,4 +1,4 @@
-#include <QDebug>
+﻿#include <QDebug>
 #include <QJsonArray>
 #include "GLOBAL.h"
 UserData::UserData(QString login, QString password_, QObject* parent) : QObject(parent) {

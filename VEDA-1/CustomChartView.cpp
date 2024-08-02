@@ -1,4 +1,4 @@
-#include "CustomChartView.h"
+п»ї#include "CustomChartView.h"
 
 #include <QChartView>
 #include <QWheelEvent>
@@ -12,7 +12,7 @@ CustomChartView::CustomChartView(QChart* chart, QWidget* parent)
 }
     
 void CustomChartView::wheelEvent(QWheelEvent* event)  {
-    // Масштабирование при помощи колесика мыши
+    // РњР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРµ РїСЂРё РїРѕРјРѕС‰Рё РєРѕР»РµСЃРёРєР° РјС‹С€Рё
     if (event->angleDelta().y() > 0) {
         chart()->zoomIn();
     }
@@ -23,18 +23,18 @@ void CustomChartView::wheelEvent(QWheelEvent* event)  {
 }
 
 void CustomChartView::mousePressEvent(QMouseEvent* event)  {
-    // Начало панорамирования
+    // РќР°С‡Р°Р»Рѕ РїР°РЅРѕСЂР°РјРёСЂРѕРІР°РЅРёСЏ
     if (event->button() == Qt::LeftButton) {
         isDragging = true;
         lastMousePos = event->pos();
-        setCursor(Qt::ClosedHandCursor); // Изменение курсора
+        setCursor(Qt::ClosedHandCursor); // РР·РјРµРЅРµРЅРёРµ РєСѓСЂСЃРѕСЂР°
     }
     QChartView::mousePressEvent(event);
 }
 
 void CustomChartView::mouseMoveEvent(QMouseEvent* event) {
     if (event->buttons() & Qt::LeftButton) {
-        // Перемещение графика при удерживании левой кнопки мыши
+        // РџРµСЂРµРјРµС‰РµРЅРёРµ РіСЂР°С„РёРєР° РїСЂРё СѓРґРµСЂР¶РёРІР°РЅРёРё Р»РµРІРѕР№ РєРЅРѕРїРєРё РјС‹С€Рё
         QPointF delta = (lastMousePos - event->pos()) * scaleFactor;
         chart()->scroll(delta.x(), -delta.y());
         lastMousePos = event->pos();
@@ -44,10 +44,10 @@ void CustomChartView::mouseMoveEvent(QMouseEvent* event) {
 
 
 void CustomChartView::mouseReleaseEvent(QMouseEvent* event) {
-    // Конец панорамирования
+    // РљРѕРЅРµС† РїР°РЅРѕСЂР°РјРёСЂРѕРІР°РЅРёСЏ
     if (event->button() == Qt::LeftButton) {
         isDragging = false;
-        setCursor(Qt::ArrowCursor); // Возврат к обычному курсору
+        setCursor(Qt::ArrowCursor); // Р’РѕР·РІСЂР°С‚ Рє РѕР±С‹С‡РЅРѕРјСѓ РєСѓСЂСЃРѕСЂСѓ
     }
     QChartView::mouseReleaseEvent(event);
 }
