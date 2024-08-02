@@ -14,10 +14,14 @@ void show_exp_data(Ui::VEDA1Class* ui);
 
 void validate(Ui::VEDA1Class* ui) {
     if (MAIN_USER_POINTER == nullptr) {
-        ui->articleAdd->setVisible(false);
+        ui->articleAdd->setEnabled(false);
     }
     else {
         ui->articleAdd->setEnabled(true);
+        if (!MAIN_USER_POINTER->is_admin())
+            ui->adminPage->hide();
+        else
+            ui->adminPage->show();
     }
     if (CURRENT_EXP != -1)
         if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin()) {
@@ -29,10 +33,6 @@ void validate(Ui::VEDA1Class* ui) {
             ui->add_member->hide();
             ui->expChange->hide();
         }
-    if (!MAIN_USER_POINTER->is_admin())
-        ui->adminPage->hide();
-    else
-        ui->adminPage->show();
     ui->expCreate->hide();
 }
 

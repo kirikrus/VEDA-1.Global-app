@@ -1,4 +1,4 @@
-#include "modalUserInfo.h"
+ï»¿#include "modalUserInfo.h"
 #include "MSGconstructor.h"
 #include "Profile.h"
 
@@ -87,7 +87,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             if (!MAIN_USER_POINTER->is_admin())
                 return;
 
-        QString err = QString("Âû õîòèòå óäàëèòü\n%1?").arg(user->getUserName());
+        QString err = QString("Ð’Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ \n%1?").arg(user->getUserName());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
             HTTPclient http;
@@ -114,7 +114,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             if (!MAIN_USER_POINTER->is_admin())
                 return;
 
-        QString errr = QString("Âû õîòèòå ñäåëàòü\n%1\nñîçäàòåëåì?").arg(user->getUserName());
+        QString errr = QString("Ð’Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ\n%1\nÑÐ¾Ð·Ð´Ð°Ñ‚ÐµÐ»ÐµÐ¼?").arg(user->getUserName());
         bool yess = msg(QMessageBox::Question, "", errr, QMessageBox::Yes | QMessageBox::No);
         if (yess) {
             HTTPclient http;

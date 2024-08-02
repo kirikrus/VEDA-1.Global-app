@@ -1,5 +1,6 @@
 ﻿#include "modalUserInfo.h"
 #include "settings.h"
+#include "Profile.h"
 
 void show_settings(Ui::VEDA1Class* ui) {
 	ui->nameS->setText(MAIN_USER_POINTER->getUserName());
@@ -13,5 +14,6 @@ void show_settings(Ui::VEDA1Class* ui) {
 		MAIN_USER_POINTER = nullptr;
 		CURRENT_EXP = -1;
 		USER_ENTERED = false;
+		validate(ui);
 		});
 }
