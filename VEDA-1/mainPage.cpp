@@ -24,11 +24,13 @@ void mainPage(Ui::VEDA1Class* ui) {
         backdrop->show();
         ui->frame_2->raise();
 
+        QObject::disconnect(ui->articleExit, &QPushButton::pressed, nullptr, nullptr);
         QObject::connect(ui->articleExit, &QPushButton::pressed, [=]() {
             delete backdrop;
             ui->frame_2->hide();
             });
 
+        QObject::disconnect(ui->articlePublish, &QPushButton::pressed, nullptr, nullptr);
         QObject::connect(ui->articlePublish, &QPushButton::pressed, [=]() {
             HTTPclient http;
             QEventLoop loop;
