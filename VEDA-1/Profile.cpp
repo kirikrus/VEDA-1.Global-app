@@ -55,6 +55,7 @@ void show_auth(Ui::VEDA1Class* ui) {
     QLabel* label_11;
     QLabel* label_21;
     QPushButton* pushButton;
+    QPushButton* pushButton2;
 
     widget = new QWidget(ui->centralWidget);
     widget->setObjectName(QString::fromUtf8("widget"));
@@ -71,14 +72,14 @@ void show_auth(Ui::VEDA1Class* ui) {
     inp_email = new QLineEdit(widget);
     inp_email->setObjectName(QString::fromUtf8("inp_email"));
     inp_email->setGeometry(QRect(295, 115, 210, 43));
-    inp_email->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);\n"
+    inp_email->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);color: black;\n"
         "border-radius: 14px"));
     inp_email->setInputMethodHints(Qt::ImhEmailCharactersOnly);
     inp_email->setAlignment(Qt::AlignCenter);
     inp_password = new QLineEdit(widget);
     inp_password->setObjectName(QString::fromUtf8("inp_password"));
     inp_password->setGeometry(QRect(295, 200, 210, 43));
-    inp_password->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);\n"
+    inp_password->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);color: black;\n"
         "border-radius: 14px"));
     inp_password->setInputMethodHints(Qt::ImhNone);
     inp_password->setAlignment(Qt::AlignCenter);
@@ -120,15 +121,18 @@ void show_auth(Ui::VEDA1Class* ui) {
     label_21->setGeometry(QRect(310, 180, 71, 16));
     label_21->setFont(font5);
     label_21->setStyleSheet(QString::fromUtf8("color: white"));
+    pushButton2 = new QPushButton(widget);
+    pushButton2->setGeometry(QRect(405, 370, 100, 43));
     pushButton = new QPushButton(widget);
-    pushButton->setObjectName(QString::fromUtf8("pushButton"));
-    pushButton->setGeometry(QRect(295, 370, 210, 43));
+    pushButton->setGeometry(QRect(295, 370, 100, 43));
     QFont font8;
     font8.setFamilies({ QString::fromUtf8("Inter V") });
-    font8.setPointSize(20);
+    font8.setPointSize(15);
     font8.setBold(false);
     pushButton->setFont(font8);
+    pushButton2->setFont(font8);
     pushButton->setStyleSheet(QString::fromUtf8("QPushButton{\nbackground-color: rgb(163, 236, 90);\nborder-radius: 14px;\n}\nQPushButton:hover{\nbackground-color: rgb(203, 255, 130);\n}"));
+    pushButton2->setStyleSheet(QString::fromUtf8("QPushButton{\nbackground-color: rgb(63, 63, 63);\nborder-radius: 14px;\n}\nQPushButton:hover{\nbackground-color: rgb(80, 80, 80);\n}"));
     inp_email->setPlaceholderText(QCoreApplication::translate("VEDA1Class", "email@stankin.ru", nullptr));
     inp_password->setPlaceholderText(QCoreApplication::translate("VEDA1Class", "***********", nullptr));
     label_8->setText(QCoreApplication::translate("VEDA1Class", "\320\222\321\205\320\276\320\264", nullptr));
@@ -137,6 +141,7 @@ void show_auth(Ui::VEDA1Class* ui) {
     label_11->setText(QCoreApplication::translate("VEDA1Class", "\320\237\320\276\321\207\321\202\320\260", nullptr));
     label_21->setText(QCoreApplication::translate("VEDA1Class", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
     pushButton->setText(QCoreApplication::translate("VEDA1Class", "\320\222\320\276\320\271\321\202\320\270", nullptr));
+    pushButton2->setText(QCoreApplication::translate("VEDA1Class", "\320\236\321\202\320\274\320\265\320\275\320\260", nullptr));
     widget->raise();
     widget->show();
 #pragma endregion
@@ -161,6 +166,10 @@ void show_auth(Ui::VEDA1Class* ui) {
             msg(QMessageBox::Critical, QString::fromLocal8Bit("Óïñ..."), err, QMessageBox::Ok);
             delete MAIN_USER_POINTER;
         }
+        });
+    QObject::connect(pushButton2, &QPushButton::pressed, [=]() {
+            delete widget;
+            delete backdrop;
         });
 }
 
