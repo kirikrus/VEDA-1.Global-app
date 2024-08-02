@@ -6,7 +6,7 @@ void show_all_users(Ui::VEDA1Class* ui){
 
     HTTPclient http;
     QEventLoop loop;
-    QString endpoint = "http://localhost:5011/Admin/AllUsersId";
+    QString endpoint = SERVER + "/Admin/AllUsersId";
     http.get(endpoint);
 
     QObject::connect(&http, &HTTPclient::requestFinished, [&](const QJsonObject& jsonResponse) {

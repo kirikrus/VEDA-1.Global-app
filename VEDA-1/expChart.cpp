@@ -1,6 +1,6 @@
-#include "expChart.h"
 #include <QDebug>
 #include <QJsonArray>
+#include "GLOBAL.h"
 
 struct PointWithId {
     QPointF point;
@@ -17,7 +17,7 @@ expChart::expChart(quint32 expId_, QObject* parent) : QObject(parent), expId(exp
 }
 
 void expChart::initChart() {
-    QString endpoint = QString("http://localhost:5011/Experiment/GetExperimentData/%1").arg(expId);
+    QString endpoint = QString(SERVER + "/Experiment/GetExperimentData/%1").arg(expId);
     http->get(endpoint);
 
     loop.exec();

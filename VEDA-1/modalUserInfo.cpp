@@ -99,7 +99,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             item["expid"] = (int)exp->getId();
             item["userid"] = user->getId();
 
-            QString endpoint = "http://localhost:5011/User/ExcludeMember";
+            QString endpoint = SERVER + "/User/ExcludeMember";
 
             http.deleteWithCondition(endpoint, item);
 
@@ -126,7 +126,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             item["expid"] = (int)exp->getId();
             item["userid"] = user->getId();
 
-            QString endpoint = "http://localhost:5011/Experiment/ChangeAuthor";
+            QString endpoint = SERVER + "/Experiment/ChangeAuthor";
 
             http.put(endpoint, item);
 

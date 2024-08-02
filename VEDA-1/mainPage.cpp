@@ -37,7 +37,7 @@ void mainPage(Ui::VEDA1Class* ui) {
             item["authorid"] = MAIN_USER_POINTER->getId();
             item["text"] = ui->articleInp->document()->toMarkdown();
 
-            QString endpoint = QString("http://localhost:5011/Article/PublishArticle");
+            QString endpoint = QString(SERVER + "/Article/PublishArticle");
             QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
                 if (reply.toInt() <= 0 && reply.size() < 5) {}
                 else {
@@ -68,7 +68,7 @@ void show_all_articles(Ui::VEDA1Class* ui) {
     HTTPclient http;
     QEventLoop loop;
 
-    QString endpoint = QString("http://localhost:5011/Article/AllArticles");
+    QString endpoint = QString(SERVER + "/Article/AllArticles");
 
     QObject::connect(&http, &HTTPclient::requestFinished, [&](const QJsonObject& jsonResponse) {
         qDebug() << "Articles data received";

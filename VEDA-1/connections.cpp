@@ -217,7 +217,7 @@ void connections(Ui::VEDA1Class *ui) {
 			item["expid"] = (int)exp->getId();
 			item["email"] = addMember->text();
 
-			QString endpoint = "http://localhost:5011/User/AddMember";
+			QString endpoint = SERVER + "/User/AddMember";
 
 			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 				switch (reply.toInt()) {
@@ -264,7 +264,7 @@ void connections(Ui::VEDA1Class *ui) {
 		HTTPclient http;
 		QEventLoop loop;
 
-		QString endpoint = "http://localhost:5011/Experiment/TOP";
+		QString endpoint = SERVER + "/Experiment/TOP";
 		QObject::connect(&http, &HTTPclient::requestFinished, [&](const QJsonObject& jsonResponse) {
 			ui->comboExpType->clear();
 
@@ -304,7 +304,7 @@ void connections(Ui::VEDA1Class *ui) {
 		bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
 		if (yes) {
-			QString endpoint = QString("http://localhost:5011/Experiment/DeleteExperiment/%1").arg(exp->getId());
+			QString endpoint = QString(SERVER + "/Experiment/DeleteExperiment/%1").arg(exp->getId());
 			http.delet(endpoint,NULL);
 			MAIN_USER_POINTER->initExp();
 			show_profile(ui);
@@ -323,7 +323,7 @@ void connections(Ui::VEDA1Class *ui) {
 		item["typeofproces_id"] = ui->comboExpType->itemData(ui->comboExpType->currentIndex()).toString();
 		item["name"] = ui->nameExp->text();
 
-		QString endpoint = QString("http://localhost:5011/Experiment/UpdateExperiment/%1").arg(exp->getId());
+		QString endpoint = QString(SERVER + "/Experiment/UpdateExperiment/%1").arg(exp->getId());
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)
@@ -360,7 +360,7 @@ void connections(Ui::VEDA1Class *ui) {
 		item["typeofprocesId"] = ui->comboExpType->itemData(ui->comboExpType->currentIndex()).toString();
 		item["name"] = ui->nameExp->text();
 
-		QString endpoint = QString("http://localhost:5011/Experiment/CreateExperiment");
+		QString endpoint = QString(SERVER + "/Experiment/CreateExperiment");
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)

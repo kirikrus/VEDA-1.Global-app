@@ -368,7 +368,7 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         item["experimentid"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getId();
         data.append(item);
 
-        QString endpoint = "http://localhost:5011/Experiment/PutNewData";
+        QString endpoint = SERVER + "/Experiment/PutNewData";
         http.post(endpoint, data);
     }
     else if (type_of_method == "PUT") {
@@ -377,7 +377,7 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         item["id"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_put->value());
         data.append(item);
 
-        QString endpoint = "http://localhost:5011/Experiment/UpdateData";
+        QString endpoint = SERVER + "/Experiment/UpdateData";
         http.put(endpoint, data);
     }
     else if (type_of_method == "DELETE") {
@@ -388,7 +388,7 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
         if (yes) {
-            QString endpoint = "http://localhost:5011/Experiment/DeleteData";
+            QString endpoint = SERVER + "/Experiment/DeleteData";
             http.delet(endpoint, id);
         }
         else return;
