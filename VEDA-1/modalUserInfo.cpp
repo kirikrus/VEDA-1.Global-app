@@ -65,7 +65,7 @@ modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui,experiment* exp
         "}"));
 
     bool author = exp == nullptr?1:user->getId() == exp->getAuthorId();
-    if(user->is_admin() || author)
+    if((user->is_admin() || author) && ui->tabWidget_2->currentIndex() != 0)
         status.setPixmap(QPixmap(QString::fromUtf8(":/icons/icons/crown.png")));
     status.setScaledContents(true);
 }
