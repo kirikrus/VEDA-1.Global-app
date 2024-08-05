@@ -135,3 +135,9 @@ QString UserData::getPassword() { return password; }
 int UserData::getOneoff(){return oneoff;}
 
 void UserData::setOneoff(int inp) { oneoff = inp; }
+
+void UserData::update(QString name, QString phone, QString password){
+    this->name = name;
+    this->phone = phone;
+    this->password = password;
+}

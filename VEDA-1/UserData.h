@@ -24,6 +24,7 @@ public:
     QString getPassword();
     int getOneoff();
     void setOneoff(int inp);
+    void update(QString name, QString phone, QString password);
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);

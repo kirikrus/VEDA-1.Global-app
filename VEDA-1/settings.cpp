@@ -30,6 +30,7 @@ void show_settings(Ui::VEDA1Class* ui) {
 				ui->adminPage->setDisabled(false);
 				ui->articlePage->setDisabled(false);
 				MAIN_USER_POINTER->setOneoff(0);
+				MAIN_USER_POINTER->update(ui->nameS->text(), ui->phoneS->text(), ui->passwordS->text());
 			}
 			loop.quit();
 			});
