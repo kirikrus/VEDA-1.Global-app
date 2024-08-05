@@ -5,13 +5,13 @@ class article : public QWidget {
 	Q_OBJECT
 
 public:
-	article(Ui::VEDA1Class* ui, int id,int authorId,QString text, QDate date, QWidget* parent = nullptr);
+	article(Ui::VEDA1Class* ui, int id,int authorId,QString text, QString date, QWidget* parent = nullptr);
 
 private:
 	int id;
 	UserData* author;
 	QString text;
-	QDate date;
+	QString date;
 	Ui::VEDA1Class* ui;
 
 	QWidget* article_;

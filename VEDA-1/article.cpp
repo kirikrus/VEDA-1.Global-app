@@ -1,6 +1,6 @@
 ﻿#include "article.h"
 
-article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QDate date, QWidget* parent)
+article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString date, QWidget* parent)
 				: ui(ui), id(id), text(text), date(date), QWidget(parent) {
 
     author = new UserData(authorId);
@@ -111,7 +111,7 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QDate d
 
     label_58->setText(author->getUserName());//автор имя
     label_60->setText(author->getEmail());//автор почта
-    label_59->setText(date.toString("dd.MM.yy"));//время
+    label_59->setText(date);//время
     textEdit->document()->setMarkdown(text);
 
     textEdit->document()->adjustSize();

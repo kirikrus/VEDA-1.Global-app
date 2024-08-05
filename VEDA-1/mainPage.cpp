@@ -81,10 +81,18 @@ void show_all_articles(Ui::VEDA1Class* ui) {
             quint32 id = obj["id"].toInt();
             quint32 authorId = obj["authorId"].toInt();
             QString text = obj["text"].toString();
+            
             QString jsonDate = QString(obj["date"].toString());
+            QString jsonTime = QString(obj["time"].toString());
             QDate date = QDate::fromString(jsonDate, "yyyy-MM-dd");
+            QTime time = QTime::fromString(jsonTime, "hh:mm:ss");
+            QString dateTime = date.toString("dd.MM.yy");
+            if (QDate::currentDate().year() - date.year() == 0 &&
+                QDate::currentDate().month() - date.month() == 0 &&
+                QDate::currentDate().day() - date.day() == 0)
+                dateTime = time.toString("hh:mm");
 
-            article* a = new article(ui, id, authorId, text, date);
+            article* a = new article(ui, id, authorId, text, dateTime);
         }
         loop.quit();
         });
