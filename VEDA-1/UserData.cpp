@@ -43,6 +43,7 @@ void UserData::relogin(){
 void UserData::onUserVerification(const QJsonObject& jsonResponse) {
     qDebug() << "User data received";
     id = jsonResponse["userId"].toInt();
+    oneoff = jsonResponse["oneoff"].toInt();
 
     loop.quit();
 
@@ -130,3 +131,7 @@ experiment* UserData::getExperimentById(int id){return &experiments[id];}
 bool UserData::is_admin(){return admin;}
 
 QString UserData::getPassword() { return password; }
+
+int UserData::getOneoff(){return oneoff;}
+
+void UserData::setOneoff(int inp) { oneoff = inp; }

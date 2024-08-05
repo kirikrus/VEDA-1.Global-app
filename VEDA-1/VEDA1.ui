@@ -2339,7 +2339,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">
@@ -4581,6 +4581,14 @@ color: rgb(212, 212, 212);</string>
          <string>?</string>
         </property>
        </widget>
+       <zorder>frame_6</zorder>
+       <zorder>frame_7</zorder>
+       <zorder>frame_10</zorder>
+       <zorder>frame_8</zorder>
+       <zorder>edite</zorder>
+       <zorder>helpBtPanel1</zorder>
+       <zorder>helpBt1</zorder>
+       <zorder>dataGraphPanel</zorder>
       </widget>
       <widget class="QWidget" name="setting">
        <attribute name="title">

@@ -22,6 +22,8 @@ public:
     void relogin();
     void initExp();
     QString getPassword();
+    int getOneoff();
+    void setOneoff(int inp);
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);
@@ -36,6 +38,7 @@ private:
     QString phone;
     QString password;
 
+    int oneoff = 0;
     bool admin = false;
 
     QVector<experiment> experiments;

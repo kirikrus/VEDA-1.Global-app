@@ -7,6 +7,7 @@
 #include <qlineedit.h>
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
+#include "settings.h"
 
 void show_users(Ui::VEDA1Class* ui);
 void showChart(Ui::VEDA1Class*);
@@ -22,6 +23,17 @@ void validate(Ui::VEDA1Class* ui) {
             ui->adminPage->hide();
         else
             ui->adminPage->show();
+        if (MAIN_USER_POINTER->getOneoff()) {
+            ui->tabWidget_2->setCurrentIndex(2);
+            ui->hightlighter->setGeometry(ui->settingPage->geometry());
+            ui->expPage->setDisabled(true);
+            ui->settingPage->setDisabled(true);
+            ui->adminPage->setDisabled(true);
+            ui->articlePage->setDisabled(true);
+            ui->home_button->setDisabled(true);
+            show_settings(ui);
+            msg(QMessageBox::Information, ("Добро пожаловать ✨"), ("Пожалуйста, обязательно заполните ваши данные!\nИ не забудьте сменить пароль!"), QMessageBox::Ok);
+        }
     }
     if (CURRENT_EXP != -1)
         if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin()) {
