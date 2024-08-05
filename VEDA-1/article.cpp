@@ -1,12 +1,12 @@
 ﻿#include "article.h"
 
-article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString date, QWidget* parent)
-				: ui(ui), id(id), text(text), date(date), QWidget(parent) {
+article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString date, QLayout* parent)
+				: ui(ui), id(id), text(text), date(date) {
 
     author = new UserData(authorId);
 
 #pragma region print
-    article_ = new QWidget(parent);
+    article_ = new QWidget();
     QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     sizePolicy.setHeightForWidth(article_->sizePolicy().hasHeightForWidth());
     article_->setSizePolicy(sizePolicy);
@@ -119,5 +119,5 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString
     textEdit->setMinimumSize(documentSize.width(), documentSize.height());
 
 
-    ui->verticalLayout->addWidget(article_);
+    parent->addWidget(article_);
 }

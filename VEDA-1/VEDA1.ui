@@ -2033,7 +2033,7 @@ QPushButton:hover{
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QPushButton" name="adminPage_2">
+      <widget class="QPushButton" name="articlePage">
        <property name="geometry">
         <rect>
          <x>5</x>
@@ -2302,7 +2302,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">

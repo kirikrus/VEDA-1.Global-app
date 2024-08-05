@@ -5,7 +5,7 @@ class article : public QWidget {
 	Q_OBJECT
 
 public:
-	article(Ui::VEDA1Class* ui, int id,int authorId,QString text, QString date, QWidget* parent = nullptr);
+	article(Ui::VEDA1Class* ui, int id,int authorId,QString text, QString date, QLayout* parent);
 
 private:
 	int id;

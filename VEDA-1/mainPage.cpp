@@ -92,7 +92,7 @@ void show_all_articles(Ui::VEDA1Class* ui) {
                 QDate::currentDate().day() - date.day() == 0)
                 dateTime = time.toString("hh:mm");
 
-            article* a = new article(ui, id, authorId, text, dateTime);
+            article* a = new article(ui, id, authorId, text, dateTime, ui->verticalLayout);
         }
         loop.quit();
         });

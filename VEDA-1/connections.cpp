@@ -8,6 +8,7 @@
 #include <qchartview.h>
 #include "GLOBAL.h"
 #include "settings.h"
+#include "userArticlesPage.h"
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скрола
@@ -89,6 +90,7 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->expPage->setDisabled(true);
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(false);
+		ui->articlePage->setDisabled(false);
 		});
 	QObject::connect(ui->settingPage, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(2);
@@ -96,6 +98,7 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(true);
 		ui->adminPage->setDisabled(false);
+		ui->articlePage->setDisabled(false);
 		show_settings(ui);
 		});
 	QObject::connect(ui->adminPage, &QPushButton::pressed, [=]() {
@@ -104,7 +107,17 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(true);
+		ui->articlePage->setDisabled(false);
 		show_admin_panel(ui);
+		});
+	QObject::connect(ui->articlePage, &QPushButton::pressed, [=]() {
+		ui->tabWidget_2->setCurrentIndex(4);
+		ui->hightlighter->setGeometry(ui->articlePage->geometry());
+		ui->expPage->setDisabled(false);
+		ui->settingPage->setDisabled(false);
+		ui->adminPage->setDisabled(false);
+		ui->articlePage->setDisabled(true);
+		show_user_articles(ui);
 		});
 	QObject::connect(ui->fullScreenGraph_bt, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(3);

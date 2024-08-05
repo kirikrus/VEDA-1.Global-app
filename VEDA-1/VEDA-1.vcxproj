@@ -103,6 +103,7 @@
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
     <ClCompile Include="settings.cpp" />
+    <ClCompile Include="userArticlesPage.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="HTTPclient.cpp" />
     <ClCompile Include="Profile.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="userArticlesPage.h" />
     <QtMoc Include="article.h" />
     <ClInclude Include="mainPage.h" />
     <ClInclude Include="settings.h" />
