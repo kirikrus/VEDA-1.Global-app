@@ -14,7 +14,11 @@ void mainPage(Ui::VEDA1Class* ui) {
     
     show_all_articles(ui);
 
+    QObject::disconnect(ui->articleAdd, &QPushButton::pressed, nullptr, nullptr);
     QObject::connect(ui->articleAdd, &QPushButton::pressed, [=]() {
+        ui->articleChange->setVisible(false);
+        ui->articlePublish->setVisible(true);
+
         ui->frame_2->setParent(ui->centralWidget);
         ui->frame_2->show();
         ui->frame_2->setGeometry(QRect(60,65,886,611));
@@ -40,6 +44,7 @@ void mainPage(Ui::VEDA1Class* ui) {
             item["text"] = ui->articleInp->document()->toMarkdown();
 
             QString endpoint = QString(SERVER + "/Article/PublishArticle");
+            QObject::disconnect(&http, &HTTPclient::requestReply, nullptr, nullptr);
             QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
                 if (reply.toInt() <= 0 && reply.size() < 5) {}
                 else {
@@ -54,6 +59,7 @@ void mainPage(Ui::VEDA1Class* ui) {
             loop.exec();
             });
         });
+    QObject::disconnect(ui->articleInp, &QTextEdit::textChanged, nullptr, nullptr);
     QObject::connect(ui->articleInp, &QTextEdit::textChanged, [=]() {
         QString inp = ui->articleInp->document()->toMarkdown();
         ui->articleOut->document()->setMarkdown(inp);
@@ -72,6 +78,7 @@ void show_all_articles(Ui::VEDA1Class* ui) {
 
     QString endpoint = QString(SERVER + "/Article/AllArticles");
 
+    QObject::disconnect(&http, &HTTPclient::requestFinished, nullptr, nullptr);
     QObject::connect(&http, &HTTPclient::requestFinished, [&](const QJsonObject& jsonResponse) {
         qDebug() << "Articles data received";
         QJsonArray arr = jsonResponse["articles"].toArray();

@@ -1,4 +1,8 @@
 ﻿#include "article.h"
+#include "userArticlesPage.h"
+#include "mainPage.h"
+#include <QMouseEvent>
+#include "MSGconstructor.h"
 
 article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString date, QLayout* parent)
 				: ui(ui), id(id), text(text), date(date) {
@@ -6,38 +10,32 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString
     author = new UserData(authorId);
 
 #pragma region print
-    article_ = new QWidget();
-    QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-    sizePolicy.setHeightForWidth(article_->sizePolicy().hasHeightForWidth());
-    article_->setSizePolicy(sizePolicy);
-    article_->setMinimumSize(QSize(530, 200));
+    article_ = new QWidget(this);
+    
+
+    article_->setMinimumSize(QSize(530, 100));
     article_->setMaximumSize(QSize(530, 9000));
+    article_->setFixedWidth(530);
     article_->setStyleSheet(QString::fromUtf8("background-color: #202325;\n"
         "border-radius: 35px"));
+
     gridLayout = new QGridLayout(article_);
     gridLayout->setSpacing(6);
     gridLayout->setContentsMargins(11, 11, 11, 11);
-    gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
     gridLayout->setSizeConstraint(QLayout::SetMinimumSize);
     gridLayout->setHorizontalSpacing(10);
     gridLayout->setVerticalSpacing(20);
     gridLayout->setContentsMargins(20, 20, 20, 20);
+
     textEdit = new QTextEdit(article_);
-    textEdit->setObjectName(QString::fromUtf8("textEdit"));
-    sizePolicy.setHeightForWidth(textEdit->sizePolicy().hasHeightForWidth());
-    textEdit->setSizePolicy(sizePolicy);
-    textEdit->setSizeIncrement(QSize(0, 0));
-    textEdit->setAcceptDrops(true);
     textEdit->setStyleSheet(QString::fromUtf8("border-radius: 0;\n"
-        "color: rgb(255, 255, 255);\n"
+        "color: rgb(255, 255, 255);"
         ""));
     textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     textEdit->setAutoFormatting(QTextEdit::AutoNone);
-    textEdit->setTabChangesFocus(false);
     textEdit->setLineWrapMode(QTextEdit::WidgetWidth);
     textEdit->setReadOnly(true);
-    textEdit->setOverwriteMode(true);
 
     gridLayout->addWidget(textEdit, 3, 0, 1, 2);
 
@@ -116,8 +114,95 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString
 
     textEdit->document()->adjustSize();
     QSize documentSize = textEdit->document()->size().toSize();
-    textEdit->setMinimumSize(documentSize.width(), documentSize.height());
+    textEdit->setMinimumSize(490, 100);
+    textEdit->setFixedHeight(documentSize.height());
 
+    this->setMinimumSize(530,article_->minimumSizeHint().height());
+       
+    parent->addWidget(this);
+}
 
-    parent->addWidget(article_);
+void article::mousePressEvent(QMouseEvent* event) {
+    if (MAIN_USER_POINTER == nullptr) return;
+    if (MAIN_USER_POINTER->getId() != this->author->getId())
+        if (!MAIN_USER_POINTER->is_admin())
+            return;
+    switch (event->button())
+    {
+    case Qt::RightButton: {
+        QString err = QString("Вы хотите удалить эту статью?");
+        bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+        if (yes) {
+            HTTPclient http;
+            QEventLoop loop;
+
+            QString endpoint = SERVER + QString("/Article/BurnArticle/%1").arg(id);
+
+            QObject::disconnect(&http, &HTTPclient::requestReply, nullptr, nullptr);
+            QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+                if (reply.toInt() <= 0 && reply.size() < 5) {}
+                else {
+                    if (ui->tabWidget_2->currentIndex() == 4) show_user_articles(ui);
+                    else show_all_articles(ui);
+                }
+                loop.quit();
+                });
+
+            http.delet(endpoint,NULL);
+            loop.exec();
+        }
+        break;
+    }
+    case Qt::MiddleButton: {
+        ui->frame_2->setParent(ui->centralWidget);
+        ui->frame_2->show();
+        ui->frame_2->setGeometry(QRect(60, 65, 886, 611));
+        QFrame* backdrop = new QFrame(ui->centralWidget);
+        backdrop->setGeometry(ui->centralWidget->rect());
+        backdrop->setStyleSheet("background-color: rgba(22, 25, 26, 200);");
+        backdrop->show();
+        ui->frame_2->raise();
+
+        QObject::disconnect(ui->articleExit, &QPushButton::pressed, nullptr, nullptr);
+        QObject::connect(ui->articleExit, &QPushButton::pressed, [=]() {
+            delete backdrop;
+            ui->frame_2->hide();
+            });
+
+        QObject::disconnect(ui->articleChange, &QPushButton::pressed, nullptr, nullptr);
+        QObject::connect(ui->articleChange, &QPushButton::pressed, [=]() {
+            delete backdrop;
+            ui->frame_2->hide();
+            });
+
+        ui->articleChange->setVisible(true);
+        ui->articlePublish->setVisible(false);
+        ui->articleInp->setText(text);
+        ui->articleOut->document()->setMarkdown(text);
+        QObject::connect(ui->articleChange, &QPushButton::pressed, [=]() {
+            HTTPclient http;
+            QEventLoop loop;
+            QJsonObject item;
+
+            item["artid"] = id;
+            item["text"] = ui->articleInp->document()->toMarkdown();
+
+            QString endpoint = SERVER + "/Article/RewriteArticle";
+
+            QObject::disconnect(&http, &HTTPclient::requestReply, nullptr, nullptr);
+            QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+                if (reply.toInt() <= 0 && reply.size() < 5) {}
+                else {
+                    if (ui->tabWidget_2->currentIndex() == 4) show_user_articles(ui);
+                    else show_all_articles(ui);
+                }
+                loop.quit();
+                });
+            http.put(endpoint, item);
+            loop.exec();
+            });
+        ui->articlePublish->setVisible(false);
+        break;
+    }
+    }
 }

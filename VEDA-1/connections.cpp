@@ -9,9 +9,10 @@
 #include "GLOBAL.h"
 #include "settings.h"
 #include "userArticlesPage.h"
+#include "mainPage.h"
 
 void connections(Ui::VEDA1Class *ui) {
-//коннект скрола
+//коннект скролов
 	bool *blockScrollSignal = new bool(false);
 	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, [=](int value) {
 		if (!*blockScrollSignal) {
@@ -30,11 +31,32 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 
+	bool *blockScrollSignal2 = new bool(false);
+	QObject::connect(ui->scrollArea_3->verticalScrollBar(), &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal2) {
+			*blockScrollSignal2 = true;
+			double ratio = (double)ui->verticalScrollBar_2->maximum() / ui->scrollArea_3->verticalScrollBar()->maximum();
+			ui->verticalScrollBar_2->setValue(value * ratio);
+			*blockScrollSignal2 = false;
+		}
+		});
+	QObject::connect(ui->verticalScrollBar_2, &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal2) {
+			*blockScrollSignal2 = true;
+			double ratio = (double)ui->scrollArea_3->verticalScrollBar()->maximum() / ui->verticalScrollBar_2->maximum();
+			ui->scrollArea_3->verticalScrollBar()->setValue(value * ratio);
+			*blockScrollSignal2 = false;
+		}
+		});
+
 //кнопка переключения на авторизацию
 	QObject::connect(ui->profile_button, &QPushButton::clicked, [=]() {show_profile(ui);});
 
 //кнопка переключения на главную
-	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {ui->tabWidget->setCurrentIndex(0);});
+	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {
+		ui->tabWidget->setCurrentIndex(0);
+		mainPage(ui);
+		});
 
 //Развертка блоков на странице профиля
 	QObject::connect(ui->dataViewChange, &QPushButton::clicked, [=]() {

@@ -7,6 +7,9 @@ class article : public QWidget {
 public:
 	article(Ui::VEDA1Class* ui, int id,int authorId,QString text, QString date, QLayout* parent);
 
+protected:
+	void mousePressEvent(QMouseEvent* event) override;
+
 private:
 	int id;
 	UserData* author;
