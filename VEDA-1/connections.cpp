@@ -128,6 +128,13 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->tabWidget_2->setCurrentIndex(1);
 		});
 
+//Подсказка 1
+	ui->helpBtPanel1->setGeometry(650, 255, 301, 291);
+	ui->helpBtPanel1->setVisible(false);
+	QObject::connect(ui->helpBt1, &QPushButton::pressed, [=]() {
+		ui->helpBtPanel1->setVisible(!ui->helpBtPanel1->isVisible());
+		});
+
 //Добавление участника эксп-та
 	QObject::connect(ui->add_member, &QPushButton::pressed, [=]() {
 		QFrame* backdrop = new QFrame(ui->centralWidget);
