@@ -4621,7 +4621,7 @@ color: rgb(212, 212, 212);</string>
           <x>20</x>
           <y>5</y>
           <width>571</width>
-          <height>316</height>
+          <height>321</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -4818,7 +4818,7 @@ border-radius: 63px;</string>
          <property name="geometry">
           <rect>
            <x>190</x>
-           <y>250</y>
+           <y>265</y>
            <width>181</width>
            <height>30</height>
           </rect>
@@ -4855,7 +4855,7 @@ QPushButton:hover{
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;
+          <string notr="true">border: 1px solid rgb(163, 236, 90);
 background-color: rgb(22, 25, 26);
 border-radius: 10px;
 color: White;</string>
@@ -4891,6 +4891,45 @@ background-color: transparent;</string>
           <string>Пароль</string>
          </property>
         </widget>
+        <widget class="QLabel" name="password_lvl">
+         <property name="geometry">
+          <rect>
+           <x>135</x>
+           <y>175</y>
+           <width>231</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>9</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(163, 236, 90);
+</string>
+         </property>
+         <property name="text">
+          <string>надёжный</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <zorder>label_48</zorder>
+        <zorder>label_50</zorder>
+        <zorder>label_51</zorder>
+        <zorder>nameS</zorder>
+        <zorder>label_49</zorder>
+        <zorder>emailS</zorder>
+        <zorder>phoneS</zorder>
+        <zorder>label_9</zorder>
+        <zorder>userSave</zorder>
+        <zorder>label_53</zorder>
+        <zorder>password_lvl</zorder>
+        <zorder>passwordS</zorder>
        </widget>
        <widget class="QFrame" name="frame_15">
         <property name="enabled">
