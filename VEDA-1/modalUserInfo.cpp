@@ -213,7 +213,19 @@ void modalUserInfo::goBig() {
 #pragma endregion
 
     name_->setText(user->getUserName());
-    phone->setText(user->getPhone());
+    QString formattedPhone = QString("%1(%2%3%4)-%5%6%7-%8%9-%10%11")
+        .arg(user->getPhone()[0])
+        .arg(user->getPhone()[1])
+        .arg(user->getPhone()[2])
+        .arg(user->getPhone()[3])
+        .arg(user->getPhone()[4])
+        .arg(user->getPhone()[5])
+        .arg(user->getPhone()[6])
+        .arg(user->getPhone()[7])
+        .arg(user->getPhone()[8])
+        .arg(user->getPhone()[9])
+        .arg(user->getPhone()[10]);
+    phone->setText(formattedPhone);
     email->setText(user->getEmail());
     user_ok_bt->setText("\320\227\320\260\320\272\321\200\321\213\321\202\321\214");
 
