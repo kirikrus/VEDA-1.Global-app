@@ -2360,7 +2360,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">
@@ -3356,7 +3356,7 @@ QPushButton:hover{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="data">
           <attribute name="title">
@@ -4786,6 +4786,9 @@ color: White;</string>
 background-color: rgb(22, 25, 26);
 border-radius: 10px;
 color: White;</string>
+         </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhDigitsOnly</set>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

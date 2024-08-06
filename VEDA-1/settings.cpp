@@ -2,6 +2,7 @@
 #include "settings.h"
 #include "Profile.h"
 #include "MSGconstructor.h"
+#include "qregularexpression.h"
 
 void password_lvl(Ui::VEDA1Class* ui, const QString& text) {
 	quint16 lvl = 0;
@@ -49,6 +50,9 @@ void password_lvl(Ui::VEDA1Class* ui, const QString& text) {
 }
 
 void show_settings(Ui::VEDA1Class* ui) {
+	ui->phoneS->setInputMask("\8(999)-999-99-99;");
+	ui->passwordS->setEchoMode(QLineEdit::EchoMode::PasswordEchoOnEdit);
+
 	ui->nameS->setText(MAIN_USER_POINTER->getUserName());
 	ui->emailS->setText(MAIN_USER_POINTER->getEmail());
 	ui->phoneS->setText(MAIN_USER_POINTER->getPhone());
@@ -65,7 +69,7 @@ void show_settings(Ui::VEDA1Class* ui) {
 		QJsonObject item;
 
 		item["fullname"] = ui->nameS->text();
-		item["phone"] = ui->phoneS->text();
+		item["phone"] = ui->phoneS->text().replace(QRegularExpression("[()\\-]"), "");
 		item["password"] = ui->passwordS->text();
 
 		QString endpoint = SERVER + QString("/User/UserSettings/%1").arg(MAIN_USER_POINTER->getId());
