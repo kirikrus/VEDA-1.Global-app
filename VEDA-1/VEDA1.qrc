@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="VEDA1"/>
   <qresource prefix="icons">
+    <file>icons/icon.ico</file>
     <file>icons/big_logo.png</file>
     <file>icons/MMB.png</file>
     <file>icons/RMB.png</file>

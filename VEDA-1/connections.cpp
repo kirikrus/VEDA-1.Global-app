@@ -164,6 +164,7 @@ void connections(Ui::VEDA1Class *ui) {
 //Подсказка 1
 	ui->helpBtPanel1->setGeometry(650, 255, 301, 291);
 	ui->helpBtPanel1->setVisible(false);
+	ui->helpBtPanel1->raise();
 	QObject::connect(ui->helpBt1, &QPushButton::pressed, [=]() {
 		ui->helpBtPanel1->setVisible(!ui->helpBtPanel1->isVisible());
 		});
