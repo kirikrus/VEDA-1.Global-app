@@ -1,40 +1,88 @@
-#include "VEDA1.h"
+ï»¿#include "VEDA1.h"
 #include <qobject.h>
 #include "Profile.h"
+#include "admin.h"
+#include "graphPage.h"
+#include "MSGconstructor.h"
 #include <qlineedit.h>
+#include <qchartview.h>
+#include "GLOBAL.h"
+#include "settings.h"
+#include "userArticlesPage.h"
+#include "mainPage.h"
 
 void connections(Ui::VEDA1Class *ui) {
-//êîííåêò ñêðîëà
-	ui->verticalScrollBar->setMaximum(ui->scrollArea->verticalScrollBar()->maximum());
-	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, ui->verticalScrollBar, &QScrollBar::setValue);
-	QObject::connect(ui->verticalScrollBar, &QScrollBar::valueChanged, ui->scrollArea->verticalScrollBar(), &QScrollBar::setValue);
+//ÐºÐ¾Ð½Ð½ÐµÐºÑ‚ ÑÐºÑ€Ð¾Ð»Ð¾Ð²
+	bool *blockScrollSignal = new bool(false);
+	QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal) {
+			*blockScrollSignal = true;
+			double ratio = (double)ui->verticalScrollBar->maximum() / ui->scrollArea->verticalScrollBar()->maximum();
+			ui->verticalScrollBar->setValue(value * ratio);
+			*blockScrollSignal = false;
+		}
+		});
+	QObject::connect(ui->verticalScrollBar, &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal) {
+			*blockScrollSignal = true;
+			double ratio = (double)ui->scrollArea->verticalScrollBar()->maximum() / ui->verticalScrollBar->maximum();
+			ui->scrollArea->verticalScrollBar()->setValue(value * ratio);
+			*blockScrollSignal = false;
+		}
+		});
 
-//êíîïêà ïåðåêëþ÷åíèÿ íà àâòîðèçàöèþ
+	bool *blockScrollSignal2 = new bool(false);
+	QObject::connect(ui->scrollArea_3->verticalScrollBar(), &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal2) {
+			*blockScrollSignal2 = true;
+			double ratio = (double)ui->verticalScrollBar_2->maximum() / ui->scrollArea_3->verticalScrollBar()->maximum();
+			ui->verticalScrollBar_2->setValue(value * ratio);
+			*blockScrollSignal2 = false;
+		}
+		});
+	QObject::connect(ui->verticalScrollBar_2, &QScrollBar::valueChanged, [=](int value) {
+		if (!*blockScrollSignal2) {
+			*blockScrollSignal2 = true;
+			double ratio = (double)ui->scrollArea_3->verticalScrollBar()->maximum() / ui->verticalScrollBar_2->maximum();
+			ui->scrollArea_3->verticalScrollBar()->setValue(value * ratio);
+			*blockScrollSignal2 = false;
+		}
+		});
+
+//ÐºÐ½Ð¾Ð¿ÐºÐ° Ð¿ÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ð½Ð° Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸ÑŽ
 	QObject::connect(ui->profile_button, &QPushButton::clicked, [=]() {show_profile(ui);});
 
-//êíîïêà ïåðåêëþ÷åíèÿ íà ãëàâíóþ
-	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {ui->tabWidget->setCurrentIndex(0);});
+//ÐºÐ½Ð¾Ð¿ÐºÐ° Ð¿ÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ð½Ð° Ð³Ð»Ð°Ð²Ð½ÑƒÑŽ
+	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {
+		ui->tabWidget->setCurrentIndex(0);
+		mainPage(ui);
+		});
 
-//Ðàçâåðòêà áëîêîâ íà ñòðàíèöå ïðîôèëÿ
+//Ð Ð°Ð·Ð²ÐµÑ€Ñ‚ÐºÐ° Ð±Ð»Ð¾ÐºÐ¾Ð² Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ðµ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ
 	QObject::connect(ui->dataViewChange, &QPushButton::clicked, [=]() {
 		if (ui->dataGraphPanel->height() == 626) {
 			ui->dataGraphPanel->setGeometry(610, 435, 351, 196);
 			ui->dataGraphTable->setFixedHeight(141);
-			ui->dataViewChange->setText(QString::fromLocal8Bit("Ðàçâåðíóòü  >"));
+			ui->dataViewChange->setText(("Ð Ð°Ð·Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ  >"));
 		}
 		else {
 			ui->dataGraphPanel->setGeometry(610, 5, 351, 626);
 			ui->dataGraphTable->setFixedHeight(576);
-			ui->dataViewChange->setText(QString::fromLocal8Bit("Ñâåðíóòü    >"));
+			ui->dataViewChange->setText(("Ð¡Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ    >"));
 		}
 		});
 	QObject::connect(ui->dataChange, &QPushButton::clicked, [=]() {
 		if (ui->edite->height() == 626) {
 			ui->edite->setGeometry(20, 580, 571, 51);
 			ui->dataChange->setText(("\320\240\320\265\320\264\320\260\320\272\321\202\320\276\321\200 \320\264\320\260\320\275\320\275\321\213\321\205"));
-			ui->expChange->show();
+			if (CURRENT_EXP == -1)
+				return;
+			if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin())
+				ui->expChange->show();
 		}
 		else {
+			if (MAIN_USER_POINTER->getExperiments().size() == 0)
+				return;
 			ui->edite->setGeometry(20, 10, 571, 626);
 			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
 			ui->tabWidget_3->setCurrentIndex(0);
@@ -42,41 +90,74 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 	QObject::connect(ui->expChange, &QPushButton::clicked, [=]() {
+		if (MAIN_USER_POINTER->getExperiments().size() == 0)
+			return;
 			ui->edite->setGeometry(20, 10, 571, 626);
 			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
 			ui->tabWidget_3->setCurrentIndex(1);
 			ui->expChange->hide();
+			ui->expEdit->setText("\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214");
+			ui->dataFrame->show();
 		});
 
-//Ðàáîòà ñ çàïðîñàìè â ðåäàêòîðå
+//Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°Ð¼Ð¸ Ð² Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ðµ
     QObject::connect(ui->addData, &QPushButton::pressed, [=]() {data_Editer(ui,"POST");});
 	QObject::connect(ui->putData, &QPushButton::pressed, [=]() {data_Editer(ui, "PUT");});
 	QObject::connect(ui->deleteData, &QPushButton::pressed, [=]() {data_Editer(ui, "DELETE");});
 
-//ïåðåêëþ÷åíèå ñòðàíèö ïðîôèëÿ
+//Ð¿ÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ† Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ
 	QObject::connect(ui->expPage, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(1);
 		ui->hightlighter->setGeometry(ui->expPage->geometry());
 		ui->expPage->setDisabled(true);
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(false);
+		ui->articlePage->setDisabled(false);
 		});
 	QObject::connect(ui->settingPage, &QPushButton::pressed, [=]() {
-		ui->tabWidget_2->setCurrentIndex(0);
+		ui->tabWidget_2->setCurrentIndex(2);
 		ui->hightlighter->setGeometry(ui->settingPage->geometry());
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(true);
 		ui->adminPage->setDisabled(false);
+		ui->articlePage->setDisabled(false);
+		show_settings(ui);
 		});
 	QObject::connect(ui->adminPage, &QPushButton::pressed, [=]() {
-		ui->tabWidget_2->setCurrentIndex(2);
+		ui->tabWidget_2->setCurrentIndex(0);
 		ui->hightlighter->setGeometry(ui->adminPage->geometry());
 		ui->expPage->setDisabled(false);
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(true);
+		ui->articlePage->setDisabled(false);
+		show_admin_panel(ui);
+		});
+	QObject::connect(ui->articlePage, &QPushButton::pressed, [=]() {
+		ui->tabWidget_2->setCurrentIndex(4);
+		ui->hightlighter->setGeometry(ui->articlePage->geometry());
+		ui->expPage->setDisabled(false);
+		ui->settingPage->setDisabled(false);
+		ui->adminPage->setDisabled(false);
+		ui->articlePage->setDisabled(true);
+		show_user_articles(ui);
+		});
+	QObject::connect(ui->fullScreenGraph_bt, &QPushButton::pressed, [=]() {
+		ui->tabWidget_2->setCurrentIndex(3);
+		if(MAIN_USER_POINTER->getExperiments().size() != 0)
+			show_graph_page(ui);
+		});
+	QObject::connect(ui->fullScreenGraph_bt_2, &QPushButton::pressed, [=]() {
+		ui->tabWidget_2->setCurrentIndex(1);
 		});
 
-//Äîáàâëåíèå ó÷àñòíèêà ýêñï-òà
+//ÐŸÐ¾Ð´ÑÐºÐ°Ð·ÐºÐ° 1
+	ui->helpBtPanel1->setGeometry(650, 255, 301, 291);
+	ui->helpBtPanel1->setVisible(false);
+	QObject::connect(ui->helpBt1, &QPushButton::pressed, [=]() {
+		ui->helpBtPanel1->setVisible(!ui->helpBtPanel1->isVisible());
+		});
+
+//Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸ÐºÐ° ÑÐºÑÐ¿-Ñ‚Ð°
 	QObject::connect(ui->add_member, &QPushButton::pressed, [=]() {
 		QFrame* backdrop = new QFrame(ui->centralWidget);
 
@@ -169,14 +250,43 @@ void connections(Ui::VEDA1Class *ui) {
 #pragma endregion
 
 		QObject::connect(memberBt, &QPushButton::pressed, [=]() {
-			delete label_45;
-			delete addMember;
-			delete label_46;
-			delete memberBt;
-			delete exitMemberBt;
-			delete backdrop;
-			delete widget;
+			HTTPclient http;
+			QEventLoop loop;
+			QJsonObject item;
+
+			auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+			item["expid"] = (int)exp->getId();
+			item["email"] = addMember->text();
+
+			QString endpoint = SERVER + "/User/AddMember";
+
+			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+				switch (reply.toInt()) {
+					case -1: 
+						msg(QMessageBox::Warning, ("Ð£Ð¿Ñ..."), ("ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ñ Ð´Ð°Ð½Ð½Ð¾Ð¹ Ð¿Ð¾Ñ‡Ñ‚Ð¾Ð¹ ÑƒÐ¶Ðµ ÑƒÑ‡Ð°ÑÑ‚Ð½Ð¸Ðº!"), QMessageBox::Ok);
+						break;
+					case -2:
+						msg(QMessageBox::Warning, ("Ð£Ð¿Ñ..."), ("ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ñ Ð´Ð°Ð½Ð½Ð¾Ð¹ Ð¿Ð¾Ñ‡Ñ‚Ð¾Ð¹ Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚!"), QMessageBox::Ok);
+						break;
+					default:
+						delete label_45;
+						delete addMember;
+						delete label_46;
+						delete memberBt;
+						delete exitMemberBt;
+						delete backdrop;
+						delete widget;
+						MAIN_USER_POINTER->initExp();
+						show_users(ui);
+				}
+				loop.quit();
+				});
+
+			http.post(endpoint, item);
+			loop.exec();
 			});
+
 		QObject::connect(exitMemberBt, &QPushButton::pressed, [=]() {
 			delete label_45;
 			delete addMember;
@@ -190,5 +300,121 @@ void connections(Ui::VEDA1Class *ui) {
 		widget->show();
 
 		});
-		
+
+//Ð˜Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÑÐºÑÐ¿Ð°
+	QObject::connect(ui->expChange, &QPushButton::pressed, [=]() {
+		HTTPclient http;
+		QEventLoop loop;
+
+		QString endpoint = SERVER + "/Experiment/TOP";
+		QObject::connect(&http, &HTTPclient::requestFinished, [&](const QJsonObject& jsonResponse) {
+			ui->comboExpType->clear();
+
+			QJsonArray arr = jsonResponse["tops"].toArray();
+
+			for (const QJsonValue& value : arr) {
+				QJsonObject obj = value.toObject();
+				quint32 id = obj["id"].toInt();
+				QString jsonDate = obj["name"].toString();
+
+				ui->comboExpType->addItem(jsonDate,id);
+			}
+			loop.quit();
+			});
+		http.get(endpoint);
+		loop.exec();
+
+		if (MAIN_USER_POINTER->getExperiments().size() == 0)
+			return;
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+		ui->comboExpType->setCurrentIndex(exp->getProcessTypeId()-1);
+		ui->materialExp->setText(exp->getMaterial());
+		ui->dateEdit->setDate(exp->getDate());
+		if (exp->getName() != "")
+			ui->nameExp->setText(exp->getName());
+		});
+	QObject::connect(ui->deleteExp, &QPushButton::pressed, [=]() {
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+		HTTPclient http;
+
+		QString expName;
+		if (exp->getName() == "") expName = QString("â„–%1").arg(exp->getId());
+		else expName = exp->getName();
+
+		QString err = QString("Ð’Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÐºÑÐ¿ÐµÑ€Ð¸Ð¼ÐµÐ½Ñ‚: %1?").arg(expName);
+		bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+
+		if (yes) {
+			QString endpoint = QString(SERVER + "/Experiment/DeleteExperiment/%1").arg(exp->getId());
+			http.delet(endpoint,NULL);
+			MAIN_USER_POINTER->initExp();
+			show_profile(ui);
+		}
+		else return;
+		});
+	QObject::connect(ui->expEdit, &QPushButton::pressed, [=]() {
+		HTTPclient http;
+		QEventLoop loop;
+		QJsonObject item;
+
+		auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+		item["date"] = ui->dateEdit->date().toString("yyyy-MM-dd");
+		item["material"] = ui->materialExp->text();
+		item["typeofproces_id"] = ui->comboExpType->itemData(ui->comboExpType->currentIndex()).toString();
+		item["name"] = ui->nameExp->text();
+
+		QString endpoint = QString(SERVER + "/Experiment/UpdateExperiment/%1").arg(exp->getId());
+
+		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+			if (reply.toInt() <= 0 && reply.size() < 5)
+				msg(QMessageBox::Warning, ("Ð£Ð¿Ñ..."), ("ÐŸÐµÑ€ÐµÐ¿Ñ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ!"), QMessageBox::Ok);
+			else {
+				MAIN_USER_POINTER->initExp();
+				show_experiments(ui);
+			}
+			loop.quit();
+			});
+
+		http.put(endpoint, item);
+		loop.exec();
+		});
+
+//Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑÐºÑÐ¿Ð°
+	QObject::connect(ui->add_exp, &QPushButton::pressed, ui->expChange, &QPushButton::pressed);
+	QObject::connect(ui->add_exp, &QPushButton::pressed, [=]() {
+		ui->edite->setGeometry(20, 10, 571, 626);
+		ui->tabWidget_3->setCurrentIndex(1);
+		ui->expChange->hide();
+		ui->deleteExp->hide();
+		ui->expEdit->hide();
+		ui->expCreate->show();
+		ui->dataFrame->hide();
+		});
+	QObject::connect(ui->expCreate, &QPushButton::pressed, [=]() {
+		HTTPclient http;
+		QEventLoop loop;
+		QJsonObject item;
+
+		item["authorId"] = MAIN_USER_POINTER->getId();
+		item["material"] = ui->materialExp->text();
+		item["typeofprocesId"] = ui->comboExpType->itemData(ui->comboExpType->currentIndex()).toString();
+		item["name"] = ui->nameExp->text();
+
+		QString endpoint = QString(SERVER + "/Experiment/CreateExperiment");
+
+		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+			if (reply.toInt() <= 0 && reply.size() < 5)
+				msg(QMessageBox::Warning, ("Ð£Ð¿Ñ..."), ("ÐŸÐµÑ€ÐµÐ¿Ñ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ!"), QMessageBox::Ok);
+			else {
+				MAIN_USER_POINTER->initExp();
+				show_experiments(ui);
+			}
+			loop.quit();
+			});
+
+		http.post(endpoint, item);
+		loop.exec();
+		});
 }

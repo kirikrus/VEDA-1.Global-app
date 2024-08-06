@@ -1,4 +1,4 @@
-#include <QObject>
+﻿#include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
@@ -20,10 +20,12 @@ public:
     void post(const QString& endpoint, const QJsonValue& data);
     void put(const QString& endpoint, const QJsonValue& data);
     void delet(const QString& endpoint, const int id);
+    void deleteWithCondition(const QString& endpoint, const QJsonValue& data);
 
 signals:
     void requestFinished(const QJsonObject& response, QString authToken = nullptr);
     void requestError(const QString& errorString);
+    void requestReply(const QByteArray);
 
 private slots:
     void onReplyFinished(QNetworkReply* reply);

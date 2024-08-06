@@ -1,6 +1,6 @@
-#include "expChart.h"
-#include <QDebug>
+ï»¿#include <QDebug>
 #include <QJsonArray>
+#include "GLOBAL.h"
 
 struct PointWithId {
     QPointF point;
@@ -17,7 +17,7 @@ expChart::expChart(quint32 expId_, QObject* parent) : QObject(parent), expId(exp
 }
 
 void expChart::initChart() {
-    QString endpoint = QString("http://localhost:5011/Experiment/GetExperimentData/%1").arg(expId);
+    QString endpoint = QString(SERVER + "/Experiment/GetExperimentData/%1").arg(expId);
     http->get(endpoint);
 
     loop.exec();
@@ -63,7 +63,7 @@ void expChart::sortLineSeries() {
 
     std::sort(pointsWithIds.begin(), pointsWithIds.end(), [](const PointWithId& a, const PointWithId& b) {return a.point.x() < b.point.x();});
 
-    // Î÷èùàåì ñåðèþ è QVector, çàòåì äîáàâëÿåì îòñîðòèðîâàííûå çíà÷åíèÿ
+    // ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÑÐµÑ€Ð¸ÑŽ Ð¸ QVector, Ð·Ð°Ñ‚ÐµÐ¼ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð¾Ñ‚ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ
     series.clear();
     points_id.clear();
     for (const PointWithId& pointWithId : pointsWithIds) {

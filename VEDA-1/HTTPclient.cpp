@@ -1,4 +1,4 @@
-#include "HTTPclient.h"
+п»ї#include "GLOBAL.h"
 #include <QEventLoop>
 #include <QDebug>
 
@@ -27,7 +27,7 @@ void HTTPclient::post(const QString& endpoint, const QJsonValue& data) {
     if (data.isArray()) doc = QJsonDocument(data.toArray());
     else if (data.isObject()) doc = QJsonDocument(data.toObject());
 
-    // Преобразование JSON в строку и добавление кавычек
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "POST Request json:" << jsonData;
 
@@ -51,7 +51,7 @@ void HTTPclient::put(const QString& endpoint, const QJsonValue& data){
     if (data.isArray()) doc = QJsonDocument(data.toArray());
     else if (data.isObject()) doc = QJsonDocument(data.toObject());
 
-    // Преобразование JSON в строку и добавление кавычек
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
     QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
@@ -71,8 +71,38 @@ void HTTPclient::delet(const QString& endpoint, const int id){
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    // Преобразование JSON в строку и добавление кавычек
-    QByteArray jsonData = QString("[%1]").arg(id).toUtf8();
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
+    QByteArray jsonData;
+    if (id != NULL) {
+        jsonData = QString("[%1]").arg(id).toUtf8();
+        qDebug() << "PUT Request json:" << jsonData;
+    }
+    TOKEN_ADD
+
+    QNetworkReply* reply;
+    if (id != NULL)
+        reply = networkManager->sendCustomRequest(request, "DELETE", jsonData);
+    else
+        reply = networkManager->sendCustomRequest(request, "DELETE");
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, [&]() {loop.quit();});
+
+    loop.exec();
+}
+
+void HTTPclient::deleteWithCondition(const QString& endpoint, const QJsonValue& data) {
+    QUrl url(endpoint);
+    qDebug() << "PUT Request URL:" << url.toString();
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonDocument doc;
+    if (data.isArray()) doc = QJsonDocument(data.toArray());
+    else if (data.isObject()) doc = QJsonDocument(data.toObject());
+
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ JSON РІ СЃС‚СЂРѕРєСѓ Рё РґРѕР±Р°РІР»РµРЅРёРµ РєР°РІС‹С‡РµРє
+    QByteArray jsonData = QString("\'%1\'").arg(doc.toJson(QJsonDocument::Compact)).toUtf8();
     qDebug() << "PUT Request json:" << jsonData;
 
     TOKEN_ADD
@@ -101,6 +131,7 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
             }
         }
         emit requestFinished(jsonObject, authToken);
+        emit requestReply(responseData);
     }
     else {
         qDebug() << "Error sending POST request:" << reply->errorString();
@@ -109,7 +140,7 @@ void HTTPclient::onReplyFinished(QNetworkReply* reply) {
         switch (reply->error()) {
         case QNetworkReply::AuthenticationRequiredError:
             authToken = nullptr;
-            //MAIN_USER_POINTER->relogin();
+            MAIN_USER_POINTER->relogin();
             break;
         }
 

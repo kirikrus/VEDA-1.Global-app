@@ -1,4 +1,4 @@
-#include "MSGconstructor.h"
+﻿#include "MSGconstructor.h"
 
 bool msg(QMessageBox::Icon icon, QString name, QString info, QMessageBox::StandardButtons buttons){
     QMessageBox msgBox;

@@ -1,4 +1,4 @@
-#include "Profile.h"
+п»ї#include "Profile.h"
 #include "qchart.h"
 #include "modalUserInfo.h"
 #include "MSGconstructor.h"
@@ -7,18 +7,45 @@
 #include <qlineedit.h>
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
+#include "settings.h"
 
 void show_users(Ui::VEDA1Class* ui);
 void showChart(Ui::VEDA1Class*);
 void show_exp_data(Ui::VEDA1Class* ui);
 
 void validate(Ui::VEDA1Class* ui) {
-    ui->expPage->setDisabled(true);
-    ui->add_member->hide();
-    if (!MAIN_USER_POINTER->is_admin())
-        ui->adminPage->hide();
-    else
-        ui->adminPage->show();
+    if (MAIN_USER_POINTER == nullptr) {
+        ui->articleAdd->setEnabled(false);
+    }
+    else {
+        ui->articleAdd->setEnabled(true);
+        if (!MAIN_USER_POINTER->is_admin())
+            ui->adminPage->hide();
+        else
+            ui->adminPage->show();
+        if (MAIN_USER_POINTER->getOneoff()) {
+            ui->tabWidget_2->setCurrentIndex(2);
+            ui->hightlighter->setGeometry(ui->settingPage->geometry());
+            ui->expPage->setDisabled(true);
+            ui->settingPage->setDisabled(true);
+            ui->adminPage->setDisabled(true);
+            ui->articlePage->setDisabled(true);
+            ui->home_button->setDisabled(true);
+            show_settings(ui);
+            msg(QMessageBox::Information, ("Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ вњЁ"), ("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ Р·Р°РїРѕР»РЅРёС‚Рµ РІР°С€Рё РґР°РЅРЅС‹Рµ!\nР РЅРµ Р·Р°Р±СѓРґСЊС‚Рµ СЃРјРµРЅРёС‚СЊ РїР°СЂРѕР»СЊ!"), QMessageBox::Ok);
+        }
+    }
+    if (CURRENT_EXP != -1)
+        if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin()) {
+            ui->add_member->show();
+            ui->expChange->show();
+        }
+        else {
+            ui->expPage->setDisabled(true);
+            ui->add_member->hide();
+            ui->expChange->hide();
+        }
+    ui->expCreate->hide();
 }
 
 void show_auth(Ui::VEDA1Class* ui) {
@@ -40,6 +67,7 @@ void show_auth(Ui::VEDA1Class* ui) {
     QLabel* label_11;
     QLabel* label_21;
     QPushButton* pushButton;
+    QPushButton* pushButton2;
 
     widget = new QWidget(ui->centralWidget);
     widget->setObjectName(QString::fromUtf8("widget"));
@@ -56,14 +84,14 @@ void show_auth(Ui::VEDA1Class* ui) {
     inp_email = new QLineEdit(widget);
     inp_email->setObjectName(QString::fromUtf8("inp_email"));
     inp_email->setGeometry(QRect(295, 115, 210, 43));
-    inp_email->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);\n"
+    inp_email->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);color: black;\n"
         "border-radius: 14px"));
     inp_email->setInputMethodHints(Qt::ImhEmailCharactersOnly);
     inp_email->setAlignment(Qt::AlignCenter);
     inp_password = new QLineEdit(widget);
     inp_password->setObjectName(QString::fromUtf8("inp_password"));
     inp_password->setGeometry(QRect(295, 200, 210, 43));
-    inp_password->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);\n"
+    inp_password->setStyleSheet(QString::fromUtf8("background-color: rgb(217, 217, 217);color: black;\n"
         "border-radius: 14px"));
     inp_password->setInputMethodHints(Qt::ImhNone);
     inp_password->setAlignment(Qt::AlignCenter);
@@ -105,15 +133,18 @@ void show_auth(Ui::VEDA1Class* ui) {
     label_21->setGeometry(QRect(310, 180, 71, 16));
     label_21->setFont(font5);
     label_21->setStyleSheet(QString::fromUtf8("color: white"));
+    pushButton2 = new QPushButton(widget);
+    pushButton2->setGeometry(QRect(405, 370, 100, 43));
     pushButton = new QPushButton(widget);
-    pushButton->setObjectName(QString::fromUtf8("pushButton"));
-    pushButton->setGeometry(QRect(295, 370, 210, 43));
+    pushButton->setGeometry(QRect(295, 370, 100, 43));
     QFont font8;
     font8.setFamilies({ QString::fromUtf8("Inter V") });
-    font8.setPointSize(20);
+    font8.setPointSize(15);
     font8.setBold(false);
     pushButton->setFont(font8);
+    pushButton2->setFont(font8);
     pushButton->setStyleSheet(QString::fromUtf8("QPushButton{\nbackground-color: rgb(163, 236, 90);\nborder-radius: 14px;\n}\nQPushButton:hover{\nbackground-color: rgb(203, 255, 130);\n}"));
+    pushButton2->setStyleSheet(QString::fromUtf8("QPushButton{\nbackground-color: rgb(63, 63, 63);\nborder-radius: 14px;\n}\nQPushButton:hover{\nbackground-color: rgb(80, 80, 80);\n}"));
     inp_email->setPlaceholderText(QCoreApplication::translate("VEDA1Class", "email@stankin.ru", nullptr));
     inp_password->setPlaceholderText(QCoreApplication::translate("VEDA1Class", "***********", nullptr));
     label_8->setText(QCoreApplication::translate("VEDA1Class", "\320\222\321\205\320\276\320\264", nullptr));
@@ -122,6 +153,7 @@ void show_auth(Ui::VEDA1Class* ui) {
     label_11->setText(QCoreApplication::translate("VEDA1Class", "\320\237\320\276\321\207\321\202\320\260", nullptr));
     label_21->setText(QCoreApplication::translate("VEDA1Class", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
     pushButton->setText(QCoreApplication::translate("VEDA1Class", "\320\222\320\276\320\271\321\202\320\270", nullptr));
+    pushButton2->setText(QCoreApplication::translate("VEDA1Class", "\320\236\321\202\320\274\320\265\320\275\320\260", nullptr));
     widget->raise();
     widget->show();
 #pragma endregion
@@ -141,45 +173,48 @@ void show_auth(Ui::VEDA1Class* ui) {
             validate(ui);
         }
         else {
-            QString err = MAIN_USER_POINTER->getId() == -1 ? QString::fromLocal8Bit("Такой Email не зарегестрирован... \n =(")
-                                                           : QString::fromLocal8Bit("Неверный пароль! \n =(");
-            msg(QMessageBox::Critical, QString::fromLocal8Bit("Упс..."), err, QMessageBox::Ok);
+            QString err = MAIN_USER_POINTER->getId() == -1 ? ("РўР°РєРѕР№ Email РЅРµ Р·Р°СЂРµРіРµСЃС‚СЂРёСЂРѕРІР°РЅ... \n =(")
+                                                           : ("РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ! \n =(");
+            msg(QMessageBox::Critical, ("РЈРїСЃ..."), err, QMessageBox::Ok);
             delete MAIN_USER_POINTER;
         }
         });
+    QObject::connect(pushButton2, &QPushButton::pressed, [=]() {
+            delete widget;
+            delete backdrop;
+        });
 }
 
-void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
-    QVector<experiment> experiments = user->getExperiments();
+void show_experiments(Ui::VEDA1Class *ui) {
+    QVector<experiment> experiments = MAIN_USER_POINTER->getExperiments();
 
     ui->tableExp->setColumnCount(4);
     ui->tableExp->setRowCount(experiments.size());
-    // установка заголовков таблицы
+    // СѓСЃС‚Р°РЅРѕРІРєР° Р·Р°РіРѕР»РѕРІРєРѕРІ С‚Р°Р±Р»РёС†С‹
     QStringList headers;
-    headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Эксперимент
-            << "\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273"//Материал
-            << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//Процесс
-            << "\320\224\320\260\321\202\320\260";//Дата
+    headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Р­РєСЃРїРµСЂРёРјРµРЅС‚
+            << "\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273"//РњР°С‚РµСЂРёР°Р»
+            << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//РџСЂРѕС†РµСЃСЃ
+            << "\320\224\320\260\321\202\320\260";//Р”Р°С‚Р°
 
     ui->tableExp->setHorizontalHeaderLabels(headers);
 
-    QTableWidgetItem d(experiments[1].getMaterial());
-
     for (int i = 0; i < experiments.size(); ++i) {
-        ui->tableExp->setItem(i, 0, new QTableWidgetItem(QString::fromLocal8Bit("Эксперимент №") + QString::number(experiments[i].getId())));
+        if (experiments[i].getName() == "") 
+            ui->tableExp->setItem(i, 0, new QTableWidgetItem(("Р­РєСЃРїРµСЂРёРјРµРЅС‚ в„–") + QString::number(experiments[i].getId())));
+        else
+            ui->tableExp->setItem(i, 0, new QTableWidgetItem(experiments[i].getName()));
         ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
 
         QString tag = experiments[i].getProcessTypeName();
-        QLabel* processLabel = new QLabel(tag);//для красивой отрисовки тега процесса
+        int tagId = experiments[i].getProcessTypeId();
+        QRgb tagColor = experiments[i].getProcessTypeColor(tagId);
+        QLabel* processLabel = new QLabel(tag);//РґР»СЏ РєСЂР°СЃРёРІРѕР№ РѕС‚СЂРёСЃРѕРІРєРё С‚РµРіР° РїСЂРѕС†РµСЃСЃР°
         processLabel->setObjectName(QString::fromUtf8("label_11"));
         processLabel->setGeometry(QRect(175, 80, 86, 16));
-        
-        QString rgb = "background-color: rgb(105, 105, 105);\n";
-        if(tag == "Cutting") rgb = "background-color: rgb(65, 93, 138);\n";
-        else if (tag == "Drilling") rgb = "background-color: rgb(160, 82, 45);\n";
-        else if (tag == "Turning") rgb = "background-color: rgb(34, 139, 34);\n";
 
-        processLabel->setStyleSheet("border-radius: 8px;\n" + rgb +
+        processLabel->setStyleSheet("border-radius: 8px;\n" +
+            QString("background-color: rgb(%1, %2, %3);").arg(QColor(tagColor).red()).arg(QColor(tagColor).green()).arg(QColor(tagColor).blue()) +
             "color: rgb(255, 255, 255);\n"
             "margin-top: 5px;\n"
             "margin-left: 40px;");
@@ -195,11 +230,13 @@ void show_experiments(Ui::VEDA1Class *ui, UserData *user) {
     ui->tableExp->setColumnWidth(2, 155);
     ui->tableExp->setColumnWidth(3, 75);
 
+    QObject::disconnect(ui->tableExp, &QTableWidget::cellClicked, nullptr, nullptr);
     QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
         CURRENT_EXP = row;
         showChart(ui);
         show_exp_data(ui);
         show_users(ui);
+        validate(ui);
         });
 }
 
@@ -220,7 +257,7 @@ void show_users(Ui::VEDA1Class* ui) {
     }
 
     for (int id : users) 
-        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui, ui->scrollAreaWidgetContents_2));
+        ui->verticalLayout_2->addWidget(new modalUserInfo(new UserData(id), ui, MAIN_USER_POINTER->getExperimentById(CURRENT_EXP), ui->scrollAreaWidgetContents_2));
 }
 
 void showChart(Ui::VEDA1Class *ui){
@@ -244,8 +281,8 @@ void showChart(Ui::VEDA1Class *ui){
     chart->createDefaultAxes();
     
 
-//стилизация
-    chart->setTitle(QString::fromLocal8Bit("Эксперимент №") + QString::number(exp->getId()));
+//СЃС‚РёР»РёР·Р°С†РёСЏ
+    chart->setTitle(("Р­РєСЃРїРµСЂРёРјРµРЅС‚ в„–") + QString::number(exp->getId()));
     chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
 
     chart->setMinimumSize(ui->chart->size());
@@ -293,20 +330,20 @@ void show_exp_data(Ui::VEDA1Class* ui) {
     QLineSeries* series = exp->getChart();
 
 
-    QAbstractItemModel* oldModel = ui->dataGraphTable->model();//чистим память
+    QAbstractItemModel* oldModel = ui->dataGraphTable->model();//С‡РёСЃС‚РёРј РїР°РјСЏС‚СЊ
     if (oldModel) delete oldModel;
 
-    QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
+    QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 СЃС‚РѕР»Р±С†Р°
 
     model->setHorizontalHeaderLabels({ "ID", 
-        QString::fromLocal8Bit("Время"), 
+        ("Р’СЂРµРјСЏ"), 
          exp->getChartLink()->getParamUnit()});
 
     ui->dataGraphTable->setColumnWidth(0, 50);
     ui->dataGraphTable->setColumnWidth(1, 130);
     ui->dataGraphTable->setColumnWidth(2, 130);
 
-    //установка данных в модели
+    //СѓСЃС‚Р°РЅРѕРІРєР° РґР°РЅРЅС‹С… РІ РјРѕРґРµР»Рё
     int id = 0;
     for (const QPointF& point : series->points()) {
         QList<QStandardItem*> rowItems;
@@ -328,7 +365,7 @@ void show_profile(Ui::VEDA1Class *ui) {
     }
     ui->tabWidget->setCurrentIndex(1);
 
-    show_experiments(ui, MAIN_USER_POINTER);
+    show_experiments(ui);
 }
 
 void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
@@ -343,7 +380,7 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         item["experimentid"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getId();
         data.append(item);
 
-        QString endpoint = "http://localhost:5011/Experiment/PutNewData";
+        QString endpoint = SERVER + "/Experiment/PutNewData";
         http.post(endpoint, data);
     }
     else if (type_of_method == "PUT") {
@@ -352,18 +389,18 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         item["id"] = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_put->value());
         data.append(item);
 
-        QString endpoint = "http://localhost:5011/Experiment/UpdateData";
+        QString endpoint = SERVER + "/Experiment/UpdateData";
         http.put(endpoint, data);
     }
     else if (type_of_method == "DELETE") {
         int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_del->value() );
         if (id == -1) return;
 
-        QString err = QString::fromLocal8Bit("Вы хотите удалить точку № %1?").arg(ui->inp_id_del->value());
+        QString err = QString("Р’С‹ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ С‚РѕС‡РєСѓ в„– %1?").arg(ui->inp_id_del->value());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
         if (yes) {
-            QString endpoint = "http://localhost:5011/Experiment/DeleteData";
+            QString endpoint = SERVER + "/Experiment/DeleteData";
             http.delet(endpoint, id);
         }
         else return;

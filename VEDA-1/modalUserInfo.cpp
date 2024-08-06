@@ -1,10 +1,10 @@
-#include "modalUserInfo.h"
+﻿#include "modalUserInfo.h"
 #include "MSGconstructor.h"
 #include "Profile.h"
 
 #include <QMouseEvent>
 
-modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, QWidget* parent) : user(user_),ui(ui), QWidget(parent) {
+modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui,experiment* exp, QWidget* parent) : user(user_),ui(ui), QWidget(parent) {
     
     name.setParent(this);
     ava.setParent(this);
@@ -63,7 +63,9 @@ modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, QWidget* paren
         "*:hover{\n"
         "	background-color: transparent;\n"
         "}"));
-    if(user->is_admin())
+
+    bool author = exp == nullptr?1:user->getId() == exp->getAuthorId();
+    if((user->is_admin() || author) && ui->tabWidget_2->currentIndex() != 0)
         status.setPixmap(QPixmap(QString::fromUtf8(":/icons/icons/crown.png")));
     status.setScaledContents(true);
 }
@@ -79,19 +81,61 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
     case Qt::LeftButton:
         goBig();
         break;
-    case Qt::RightButton:
-        if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId()) 
+    case Qt::RightButton: {
+        if (ui->tabWidget_2->currentIndex() == 0) {}
+        else if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId())
             if (!MAIN_USER_POINTER->is_admin())
                 return;
-        
-        QString err = QString::fromLocal8Bit("�� ������ �������\n%1?").arg(user->getUserName());
+
+        QString err = QString("Вы хотите удалить \n%1?").arg(user->getUserName());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
-            delete user;
-            user = nullptr;
-            delete this;
+            HTTPclient http;
+            QEventLoop loop;
+            QJsonObject item;
+
+            auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+            item["expid"] = (int)exp->getId();
+            item["userid"] = user->getId();
+
+            QString endpoint = SERVER + "/User/ExcludeMember";
+
+            http.deleteWithCondition(endpoint, item);
+
+            MAIN_USER_POINTER->initExp();
+            show_experiments(ui);
+            show_users(ui);
         }
         break;
+    }
+    case Qt::MiddleButton: {
+        if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId())
+            if (!MAIN_USER_POINTER->is_admin())
+                return;
+
+        QString errr = QString("Вы хотите сделать\n%1\nсоздателем?").arg(user->getUserName());
+        bool yess = msg(QMessageBox::Question, "", errr, QMessageBox::Yes | QMessageBox::No);
+        if (yess) {
+            HTTPclient http;
+            QEventLoop loop;
+            QJsonObject item;
+
+            auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
+
+            item["expid"] = (int)exp->getId();
+            item["userid"] = user->getId();
+
+            QString endpoint = SERVER + "/Experiment/ChangeAuthor";
+
+            http.put(endpoint, item);
+
+            MAIN_USER_POINTER->initExp();
+            show_experiments(ui);
+            show_users(ui);
+        }
+        break;
+    }
     }
 }
 

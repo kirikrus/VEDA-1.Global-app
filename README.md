@@ -1,6 +1,13 @@
 # app
 Desktop App for terminals. Qt. Rest Api.
 
+
+Файл конфигурации находится по пути *VEDA1/config.ini*\
+Содержимое фала:
+>`[HOST]`\
+>`server=http://localhost:5011`
+- `server`: Указывает URL сервера, к которому должно подключаться приложение. По умолчанию установлен на `http://localhost:5011`.
+
 ## Зависимости
 + QT Version: 6.2.4_msvc2019_64
 + QT Модули:

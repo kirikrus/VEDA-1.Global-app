@@ -58,6 +58,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -86,12 +91,19 @@
     <QtRcc Include="VEDA1.qrc" />
     <QtUic Include="VEDA1.ui" />
     <QtMoc Include="VEDA1.h" />
+    <ClCompile Include="admin.cpp" />
+    <ClCompile Include="article.cpp" />
     <ClCompile Include="connections.cpp" />
+    <ClCompile Include="CustomChartView.cpp" />
     <ClCompile Include="expChart.cpp" />
     <ClCompile Include="experiment.cpp" />
     <ClCompile Include="GLOBAL.cpp" />
+    <ClCompile Include="graphPage.cpp" />
+    <ClCompile Include="mainPage.cpp" />
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
+    <ClCompile Include="settings.cpp" />
+    <ClCompile Include="userArticlesPage.cpp" />
     <ClCompile Include="UserData.cpp" />
     <ClCompile Include="HTTPclient.cpp" />
     <ClCompile Include="Profile.cpp" />
@@ -99,12 +111,19 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="userArticlesPage.h" />
+    <QtMoc Include="article.h" />
+    <ClInclude Include="mainPage.h" />
+    <ClInclude Include="settings.h" />
     <QtMoc Include="HTTPclient.h" />
     <QtMoc Include="UserData.h" />
     <QtMoc Include="expChart.h" />
+    <ClInclude Include="admin.h" />
+    <QtMoc Include="CustomChartView.h" />
     <ClInclude Include="experiment.h" />
     <QtMoc Include="modalUserInfo.h" />
     <ClInclude Include="GLOBAL.h" />
+    <ClInclude Include="graphPage.h" />
     <ClInclude Include="MSGconstructor.h" />
     <ClInclude Include="Profile.h" />
   </ItemGroup>
