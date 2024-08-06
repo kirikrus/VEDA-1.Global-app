@@ -101,9 +101,9 @@ void show_all_articles(Ui::VEDA1Class* ui) {
 
             article* a = new article(ui, id, authorId, text, dateTime, ui->verticalLayout);
         }
+
         loop.quit();
         });
-
     http.get(endpoint);
     loop.exec();
 }

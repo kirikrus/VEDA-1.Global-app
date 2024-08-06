@@ -232,11 +232,13 @@ void show_experiments(Ui::VEDA1Class *ui) {
 
     QObject::disconnect(ui->tableExp, &QTableWidget::cellClicked, nullptr, nullptr);
     QObject::connect(ui->tableExp, &QTableWidget::cellClicked, [=](int row, int) {
+        LOADING(ui)
         CURRENT_EXP = row;
         showChart(ui);
         show_exp_data(ui);
         show_users(ui);
         validate(ui);
+        CLOSE_LOADING
         });
 }
 

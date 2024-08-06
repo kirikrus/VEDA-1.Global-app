@@ -12,7 +12,5 @@ class VEDA1 : public QMainWindow
 public:
     VEDA1(QWidget *parent = nullptr);
     ~VEDA1();
-
-private:
     Ui::VEDA1Class ui;
 };

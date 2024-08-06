@@ -97,6 +97,12 @@
     <ClCompile Include="CustomChartView.cpp" />
     <ClCompile Include="expChart.cpp" />
     <ClCompile Include="experiment.cpp" />
+    <ClCompile Include="eyeAnimation.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="GLOBAL.cpp" />
     <ClCompile Include="graphPage.cpp" />
     <ClCompile Include="mainPage.cpp" />
@@ -111,6 +117,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="eyeAnimation.h" />
     <ClInclude Include="userArticlesPage.h" />
     <QtMoc Include="article.h" />
     <ClInclude Include="mainPage.h" />

@@ -54,8 +54,10 @@ void connections(Ui::VEDA1Class *ui) {
 
 //кнопка переключения на главную
 	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {
+		LOADING(ui)
 		ui->tabWidget->setCurrentIndex(0);
 		mainPage(ui);
+		CLOSE_LOADING
 		});
 
 //Развертка блоков на странице профиля
@@ -121,7 +123,9 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->settingPage->setDisabled(true);
 		ui->adminPage->setDisabled(false);
 		ui->articlePage->setDisabled(false);
+		LOADING(ui)
 		show_settings(ui);
+		CLOSE_LOADING
 		});
 	QObject::connect(ui->adminPage, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(0);
@@ -130,7 +134,9 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(true);
 		ui->articlePage->setDisabled(false);
+		LOADING(ui)
 		show_admin_panel(ui);
+		CLOSE_LOADING
 		});
 	QObject::connect(ui->articlePage, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(4);
@@ -139,12 +145,17 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->settingPage->setDisabled(false);
 		ui->adminPage->setDisabled(false);
 		ui->articlePage->setDisabled(true);
+		LOADING(ui)
 		show_user_articles(ui);
+		CLOSE_LOADING
 		});
 	QObject::connect(ui->fullScreenGraph_bt, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(3);
-		if(MAIN_USER_POINTER->getExperiments().size() != 0)
+		if (MAIN_USER_POINTER->getExperiments().size() != 0) {
+			LOADING(ui)
 			show_graph_page(ui);
+			CLOSE_LOADING
+		}
 		});
 	QObject::connect(ui->fullScreenGraph_bt_2, &QPushButton::pressed, [=]() {
 		ui->tabWidget_2->setCurrentIndex(1);
@@ -250,6 +261,7 @@ void connections(Ui::VEDA1Class *ui) {
 #pragma endregion
 
 		QObject::connect(memberBt, &QPushButton::pressed, [=]() {
+			LOADING(ui)
 			HTTPclient http;
 			QEventLoop loop;
 			QJsonObject item;
@@ -281,6 +293,7 @@ void connections(Ui::VEDA1Class *ui) {
 						show_users(ui);
 				}
 				loop.quit();
+				CLOSE_LOADING
 				});
 
 			http.post(endpoint, item);
@@ -393,6 +406,7 @@ void connections(Ui::VEDA1Class *ui) {
 		ui->dataFrame->hide();
 		});
 	QObject::connect(ui->expCreate, &QPushButton::pressed, [=]() {
+		LOADING(ui)
 		HTTPclient http;
 		QEventLoop loop;
 		QJsonObject item;
@@ -412,6 +426,7 @@ void connections(Ui::VEDA1Class *ui) {
 				show_experiments(ui);
 			}
 			loop.quit();
+			CLOSE_LOADING
 			});
 
 		http.post(endpoint, item);
