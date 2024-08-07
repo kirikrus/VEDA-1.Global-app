@@ -87,6 +87,9 @@
         <height>711</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: none;</string>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -858,7 +861,8 @@ border-radius: 8px</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: qlineargradient(spread:pad, x1:0.545, y1:1, x2:0.517, y2:0, stop:0.255682 rgba(22, 25, 26, 255), stop:0.511364 rgba(22, 25, 26, 232), stop:0.6875 rgba(22, 25, 26, 169), stop:1 rgba(22, 25, 26, 0));</string>
+        <string notr="true">background-color: qlineargradient(spread:pad, x1:0.545, y1:1, x2:0.517, y2:0, stop:0.255682 rgba(22, 25, 26, 255), stop:0.511364 rgba(22, 25, 26, 232), stop:0.6875 rgba(22, 25, 26, 169), stop:1 rgba(22, 25, 26, 0));
+border: none;</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -3030,7 +3034,8 @@ QPushButton:hover{
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.48, fx:0.5, fy:0.5, stop:0 rgba(163, 236, 90, 50), stop:1 transparent);</string>
+         <string notr="true">background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.48, fx:0.5, fy:0.5, stop:0 rgba(163, 236, 90, 50), stop:1 transparent);
+border: none;</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -5130,7 +5135,8 @@ background-color: transparent;</string>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.48, fx:0.5, fy:0.5, stop:0 rgba(163, 236, 90, 50), stop:1 transparent);</string>
+         <string notr="true">background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.48, fx:0.5, fy:0.5, stop:0 rgba(163, 236, 90, 50), stop:1 transparent);
+border: none;</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
