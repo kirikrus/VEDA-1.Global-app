@@ -41,7 +41,7 @@ void mainPage(Ui::VEDA1Class* ui) {
             QJsonObject item;
 
             item["authorid"] = MAIN_USER_POINTER->getId();
-            item["text"] = ui->articleInp->document()->toMarkdown();
+            item["text"] = escapeJsonString(ui->articleInp->document()->toMarkdown());
 
             QString endpoint = QString(SERVER + "/Article/PublishArticle");
             QObject::disconnect(&http, &HTTPclient::requestReply, nullptr, nullptr);
@@ -67,6 +67,8 @@ void mainPage(Ui::VEDA1Class* ui) {
 }
 
 void show_all_articles(Ui::VEDA1Class* ui) {
+    LOADING(ui)
+
     QLayoutItem* item;
     while ((item = ui->verticalLayout->takeAt(0)) != nullptr) {
         delete item->widget();
@@ -101,7 +103,7 @@ void show_all_articles(Ui::VEDA1Class* ui) {
 
             article* a = new article(ui, id, authorId, text, dateTime, ui->verticalLayout);
         }
-
+        CLOSE_LOADING
         loop.quit();
         });
     http.get(endpoint);

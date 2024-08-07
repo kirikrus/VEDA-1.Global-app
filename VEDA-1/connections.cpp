@@ -54,10 +54,8 @@ void connections(Ui::VEDA1Class *ui) {
 
 //кнопка переключения на главную
 	QObject::connect(ui->home_button, &QPushButton::clicked, [=]() {
-		LOADING(ui)
 		ui->tabWidget->setCurrentIndex(0);
 		mainPage(ui);
-		CLOSE_LOADING
 		});
 
 //Развертка блоков на странице профиля

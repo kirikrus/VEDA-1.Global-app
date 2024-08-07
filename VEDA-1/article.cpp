@@ -4,6 +4,14 @@
 #include <QMouseEvent>
 #include "MSGconstructor.h"
 
+QString escapeJsonString(const QString& input) {
+    QString output = input;
+    output.replace("\\", "\\\\");
+    output.replace("\"", "\\\"");
+    output.replace("\n", "\\n");
+    return output;
+}
+
 article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString date, QLayout* parent)
 				: ui(ui), id(id), text(text), date(date) {
 
@@ -185,7 +193,7 @@ void article::mousePressEvent(QMouseEvent* event) {
             QJsonObject item;
 
             item["artid"] = id;
-            item["text"] = ui->articleInp->document()->toMarkdown();
+            item["text"] = escapeJsonString(ui->articleInp->document()->toMarkdown());
 
             QString endpoint = SERVER + "/Article/RewriteArticle";
 
