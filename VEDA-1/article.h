@@ -1,6 +1,8 @@
 #include <ui_VEDA1.h>
 #include "GLOBAL.h"
 
+QString escapeJsonString(const QString& input);
+
 class article : public QWidget {
 	Q_OBJECT
 

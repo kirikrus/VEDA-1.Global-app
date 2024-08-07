@@ -88,6 +88,9 @@
     <ClCompile Include="userArticlesPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="eyeAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Profile.h">
@@ -135,6 +138,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="article.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="eyeAnimation.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

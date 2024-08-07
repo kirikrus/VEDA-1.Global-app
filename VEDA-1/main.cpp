@@ -4,6 +4,7 @@
 #include <QtWidgets/QApplication>
 #include "GLOBAL.h"
 #include <QSettings>
+#include "mainPage.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +14,13 @@ int main(int argc, char *argv[])
     SERVER = settings.value("HOST/server").toString();
 
     VEDA1 w;
+
+    LOADING(&w.ui)
+    
     w.show();
+    connections(&w.ui);
+    mainPage(&w.ui);
+
+    CLOSE_LOADING
     return a.exec();
 }

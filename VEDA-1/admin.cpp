@@ -29,5 +29,12 @@ void show_all_users(Ui::VEDA1Class* ui){
 }
 
 void show_admin_panel(Ui::VEDA1Class* ui) {
+    ui->helpBtPanel2->setVisible(false);
+    ui->helpBtPanel2->setGeometry(630,40,311,291);
+    QObject::disconnect(ui->helpBt2, &QPushButton::pressed, nullptr, nullptr);
+    QObject::connect(ui->helpBt2, &QPushButton::pressed, [=]() {
+        ui->helpBtPanel2->setVisible(!ui->helpBtPanel2->isVisible());
+        });
+    
     show_all_users(ui);
 }

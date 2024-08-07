@@ -10,11 +10,28 @@
     <height>747</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1046</width>
+    <height>747</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1046</width>
+    <height>747</height>
+   </size>
+  </property>
   <property name="sizeIncrement">
    <size>
     <width>0</width>
     <height>0</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Inter V</family>
+   </font>
   </property>
   <property name="mouseTracking">
    <bool>true</bool>
@@ -23,7 +40,11 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>VEDA1</string>
+   <string>ВЕДА-1</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="VEDA1.qrc">
+    <normaloff>:/icons/icons/icon.ico</normaloff>:/icons/icons/icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #16191A;</string>
@@ -365,10 +386,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         <number>100</number>
        </property>
        <property name="singleStep">
-        <number>1</number>
+        <number>20</number>
        </property>
        <property name="pageStep">
-        <number>1</number>
+        <number>20</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -402,10 +423,10 @@ border-radius: 27px</string>
        <widget class="QLabel" name="label_25">
         <property name="geometry">
          <rect>
-          <x>4</x>
-          <y>10</y>
-          <width>45</width>
-          <height>40</height>
+          <x>0</x>
+          <y>0</y>
+          <width>54</width>
+          <height>54</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -416,7 +437,7 @@ background-color: none;</string>
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="VEDA1.qrc">:/icons/icons/logo.png</pixmap>
+         <pixmap resource="VEDA1.qrc">:/icons/icons/icon.ico</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -1621,10 +1642,10 @@ border-radius: 27px</string>
       <widget class="QLabel" name="label_27">
        <property name="geometry">
         <rect>
-         <x>4</x>
-         <y>10</y>
-         <width>45</width>
-         <height>40</height>
+         <x>0</x>
+         <y>0</y>
+         <width>54</width>
+         <height>54</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -1635,7 +1656,7 @@ background-color: none;</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="VEDA1.qrc">:/icons/icons/logo.png</pixmap>
+        <pixmap resource="VEDA1.qrc">:/icons/icons/icon.ico</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -2473,7 +2494,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
           </layout>
          </widget>
         </widget>
-        <widget class="QPushButton" name="add_member_2">
+        <widget class="QPushButton" name="add_member_server">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -2549,7 +2570,7 @@ background-color: transparent;</string>
           <string>Админ</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="dataChange_3">
+        <widget class="QPushButton" name="admin_save">
          <property name="geometry">
           <rect>
            <x>195</x>
@@ -2578,6 +2599,184 @@ QPushButton:hover{
          </property>
          <property name="text">
           <string>Сохранить</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="helpBt2">
+        <property name="geometry">
+         <rect>
+          <x>925</x>
+          <y>15</y>
+          <width>24</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Inter V</family>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>WhatsThisCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">*{
+border-radius: 12px;
+border: 1px solid rgb(212, 212, 212);
+color: rgb(212, 212, 212);
+}
+*:hover{
+	background-color: rgba(212, 212, 212, 50);
+}</string>
+        </property>
+        <property name="text">
+         <string>?</string>
+        </property>
+       </widget>
+       <widget class="QFrame" name="helpBtPanel2">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>40</y>
+          <width>311</width>
+          <height>0</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius: 30px;
+background-color: rgb(58, 58, 58);</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label_23">
+         <property name="geometry">
+          <rect>
+           <x>25</x>
+           <y>25</y>
+           <width>40</width>
+           <height>55</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="VEDA1.qrc">:/icons/icons/LMB.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_31">
+         <property name="geometry">
+          <rect>
+           <x>25</x>
+           <y>115</y>
+           <width>40</width>
+           <height>55</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="VEDA1.qrc">:/icons/icons/RMB.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_32">
+         <property name="geometry">
+          <rect>
+           <x>25</x>
+           <y>205</y>
+           <width>40</width>
+           <height>55</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="VEDA1.qrc">:/icons/icons/MMB.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_33">
+         <property name="geometry">
+          <rect>
+           <x>85</x>
+           <y>25</y>
+           <width>161</width>
+           <height>46</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>- ЛКМ просмотр профиля</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_34">
+         <property name="geometry">
+          <rect>
+           <x>85</x>
+           <y>115</y>
+           <width>161</width>
+           <height>46</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;- ПКМ удаление пользователя из системы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_68">
+         <property name="geometry">
+          <rect>
+           <x>85</x>
+           <y>200</y>
+           <width>161</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;- СКМ сброс пароля пользователя (одноразовый прийдет на почту)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </widget>
@@ -4573,9 +4772,14 @@ background-color: rgb(58, 58, 58);</string>
          <cursorShape>WhatsThisCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-radius: 12px;
+         <string notr="true">*{
+border-radius: 12px;
 border: 1px solid rgb(212, 212, 212);
-color: rgb(212, 212, 212);</string>
+color: rgb(212, 212, 212);
+}
+*:hover{
+	background-color: rgba(212, 212, 212, 50);
+}</string>
         </property>
         <property name="text">
          <string>?</string>
@@ -4600,7 +4804,7 @@ color: rgb(212, 212, 212);</string>
           <x>20</x>
           <y>5</y>
           <width>571</width>
-          <height>316</height>
+          <height>321</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -4766,6 +4970,9 @@ background-color: rgb(22, 25, 26);
 border-radius: 10px;
 color: White;</string>
          </property>
+         <property name="inputMethodHints">
+          <set>Qt::ImhDigitsOnly</set>
+         </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
@@ -4797,7 +5004,7 @@ border-radius: 63px;</string>
          <property name="geometry">
           <rect>
            <x>190</x>
-           <y>250</y>
+           <y>265</y>
            <width>181</width>
            <height>30</height>
           </rect>
@@ -4834,7 +5041,7 @@ QPushButton:hover{
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;
+          <string notr="true">border: 1px solid rgb(163, 236, 90);
 background-color: rgb(22, 25, 26);
 border-radius: 10px;
 color: White;</string>
@@ -4870,6 +5077,45 @@ background-color: transparent;</string>
           <string>Пароль</string>
          </property>
         </widget>
+        <widget class="QLabel" name="password_lvl">
+         <property name="geometry">
+          <rect>
+           <x>135</x>
+           <y>175</y>
+           <width>231</width>
+           <height>26</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter V</family>
+           <pointsize>9</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(163, 236, 90);
+</string>
+         </property>
+         <property name="text">
+          <string>надёжный</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <zorder>label_48</zorder>
+        <zorder>label_50</zorder>
+        <zorder>label_51</zorder>
+        <zorder>nameS</zorder>
+        <zorder>label_49</zorder>
+        <zorder>emailS</zorder>
+        <zorder>phoneS</zorder>
+        <zorder>label_9</zorder>
+        <zorder>userSave</zorder>
+        <zorder>label_53</zorder>
+        <zorder>password_lvl</zorder>
+        <zorder>passwordS</zorder>
        </widget>
        <widget class="QFrame" name="frame_15">
         <property name="enabled">
