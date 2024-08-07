@@ -315,6 +315,145 @@ void connections(Ui::VEDA1Class *ui) {
 
 		});
 
+//Добавление пользователя в систему
+	QObject::connect(ui->add_member_server, &QPushButton::pressed, [=]() {
+		QFrame* backdrop = new QFrame(ui->centralWidget);
+
+		backdrop->setGeometry(ui->centralWidget->rect());
+		backdrop->setStyleSheet("background-color: rgba(22, 25, 26, 200);");
+		backdrop->show();
+
+		QWidget* widget;
+		QLabel* label_45;
+		QLineEdit* addMember;
+		QLabel* label_46;
+		QPushButton* memberBt;
+		QPushButton* exitMemberBt;
+
+#pragma region print
+		QFont font7;
+		font7.setFamilies({ QString::fromUtf8("Inter V") });
+		font7.setPointSize(12);
+		font7.setBold(true);
+		QFont font9;
+		font9.setFamilies({ QString::fromUtf8("Inter V") });
+		font9.setPointSize(10);
+
+		widget = new QWidget(ui->centralWidget);
+		widget->setObjectName(QString::fromUtf8("widget"));
+		widget->setGeometry(QRect(370, 250, 341, 201));
+		widget->setStyleSheet(QString::fromUtf8("background-color: rgb(32, 35, 37);\n"
+			"border-radius: 21px;\n"
+			"border: 1px solid rgb(163, 236, 90);\n"
+			"color: white;"));
+		label_45 = new QLabel(widget);
+		label_45->setObjectName(QString::fromUtf8("label_45"));
+		label_45->setGeometry(QRect(20, 15, 271, 26));
+		label_45->setFont(font7);
+		label_45->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+			"border: none;"));
+		addMember = new QLineEdit(widget);
+		addMember->setObjectName(QString::fromUtf8("addMember"));
+		addMember->setGeometry(QRect(45, 75, 246, 41));
+		addMember->setStyleSheet(QString::fromUtf8("border: none;\n"
+			"border-radius: 20px;\n"
+			"background-color: rgb(58, 58, 58);"));
+		addMember->setAlignment(Qt::AlignCenter);
+		label_46 = new QLabel(widget);
+		label_46->setObjectName(QString::fromUtf8("label_46"));
+		label_46->setGeometry(QRect(55, 55, 56, 26));
+		QFont font12;
+		font12.setFamilies({ QString::fromUtf8("Inter V") });
+		font12.setPointSize(10);
+		font12.setBold(false);
+		font12.setKerning(true);
+		label_46->setFont(font12);
+		label_46->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+			"border: none;\n"
+			"color: rgb(212, 212, 212);\n"
+			"background-color: rgba(255, 255, 255, 0);"));
+		memberBt = new QPushButton(widget);
+		memberBt->setObjectName(QString::fromUtf8("memberBt"));
+		memberBt->setGeometry(QRect(185, 145, 106, 30));
+		memberBt->setFont(font9);
+		memberBt->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+			"	background-color: transparent;\n"
+			"	border: 1px solid rgb(54, 59, 62);\n"
+			"border-radius: 15px;\n"
+			"color: rgb(212, 212, 212);\n"
+			"}\n"
+			"QPushButton:hover{\n"
+			"	background-color: rgb(58, 58, 58);\n"
+			"}"));
+		exitMemberBt = new QPushButton(widget);
+		exitMemberBt->setObjectName(QString::fromUtf8("exitMemberBt"));
+		exitMemberBt->setGeometry(QRect(45, 145, 106, 30));
+		exitMemberBt->setFont(font9);
+		exitMemberBt->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+			"	background-color: transparent;\n"
+			"	border: 1px solid rgb(54, 59, 62);\n"
+			"border-radius: 15px;\n"
+			"color: rgb(212, 212, 212);\n"
+			"}\n"
+			"QPushButton:hover{\n"
+			"	background-color: rgb(58, 58, 58);\n"
+			"}"));
+
+		label_45->setText(QCoreApplication::translate("VEDA1Class", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\203\321\207\320\260\321\201\321\202\320\275\320\270\320\272\320\260", nullptr));
+		addMember->setPlaceholderText(QCoreApplication::translate("VEDA1Class", "email@stankin.ru", nullptr));
+		label_46->setText(QCoreApplication::translate("VEDA1Class", "\320\237\320\276\321\207\321\202\320\260", nullptr));
+		memberBt->setText(QCoreApplication::translate("VEDA1Class", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
+		exitMemberBt->setText(QCoreApplication::translate("VEDA1Class", "\320\236\321\202\320\274\320\265\320\275\320\270\321\202\321\214", nullptr));
+
+#pragma endregion
+
+		QObject::connect(memberBt, &QPushButton::pressed, [=]() {
+			LOADING(ui)
+			HTTPclient http;
+			QEventLoop loop;
+			QJsonObject item;
+
+			item["email"] = addMember->text();
+
+			QString endpoint = SERVER + QString("/Admin/Registration?Email=%1").arg(addMember->text());
+
+			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+				switch (reply.toInt()) {
+				case -1:
+					msg(QMessageBox::Warning, ("Упс..."), ("Пользователь с данной почтой уже участник!"), QMessageBox::Ok);
+					break;
+				default:
+					delete label_45;
+					delete addMember;
+					delete label_46;
+					delete memberBt;
+					delete exitMemberBt;
+					delete backdrop;
+					delete widget;
+					show_admin_panel(ui);
+				}
+				loop.quit();
+				CLOSE_LOADING
+				});
+
+			http.post(endpoint, item);
+			loop.exec();
+			});
+
+		QObject::connect(exitMemberBt, &QPushButton::pressed, [=]() {
+			delete label_45;
+			delete addMember;
+			delete label_46;
+			delete memberBt;
+			delete exitMemberBt;
+			delete backdrop;
+			delete widget;
+			});
+
+		widget->show();
+
+		});
+
 //Изменение экспа
 	QObject::connect(ui->expChange, &QPushButton::pressed, [=]() {
 		HTTPclient http;

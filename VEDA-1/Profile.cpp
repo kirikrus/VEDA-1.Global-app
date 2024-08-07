@@ -37,6 +37,7 @@ void validate(Ui::VEDA1Class* ui) {
     }
     if (CURRENT_EXP != -1)
         if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin()) {
+            ui->expPage->setDisabled(true);
             ui->add_member->show();
             ui->expChange->show();
         }
@@ -45,6 +46,26 @@ void validate(Ui::VEDA1Class* ui) {
             ui->add_member->hide();
             ui->expChange->hide();
         }
+    else {
+        if (ui->chart->scene()) {
+            QGraphicsScene* oldScene = ui->chart->scene();
+            QList<QGraphicsItem*> items = oldScene->items();
+            for (QGraphicsItem* item : items)
+                oldScene->removeItem(item);
+            oldScene->clear();
+            ui->chart->setScene(nullptr);
+            delete oldScene;
+        }
+        ui->dataGraphTable->model()->deleteLater();
+        QLayoutItem* item;
+        while ((item = ui->verticalLayout_2->takeAt(0)) != nullptr) {
+            delete item->widget();
+            delete item;
+        }
+        ui->expPage->setDisabled(true);
+        ui->add_member->hide();
+        ui->expChange->hide();
+    }
     ui->expCreate->hide();
 }
 
@@ -158,6 +179,8 @@ void show_auth(Ui::VEDA1Class* ui) {
     widget->show();
 #pragma endregion
     
+    inp_password->setEchoMode(QLineEdit::EchoMode::PasswordEchoOnEdit);
+
     QObject::connect(pushButton, &QPushButton::pressed, [=]() {
         QString login = inp_email->text();
         QString password = inp_password->text();
@@ -366,6 +389,12 @@ void show_profile(Ui::VEDA1Class *ui) {
         return;
     }
     ui->tabWidget->setCurrentIndex(1);
+    ui->tabWidget_2->setCurrentIndex(1);
+    ui->hightlighter->setGeometry(ui->expPage->geometry());
+    ui->expPage->setDisabled(true);
+    ui->settingPage->setDisabled(false);
+    ui->adminPage->setDisabled(false);
+    ui->articlePage->setDisabled(false);
 
     show_experiments(ui);
 }

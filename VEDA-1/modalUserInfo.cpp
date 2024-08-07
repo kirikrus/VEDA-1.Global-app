@@ -82,7 +82,22 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
         goBig();
         break;
     case Qt::RightButton: {
-        if (ui->tabWidget_2->currentIndex() == 0) {}
+        if (ui->tabWidget_2->currentIndex() == 0) {
+            //QString err = QString("Вы хотите удалить \n%1\nиз системы?").arg(user->getUserName());
+            //bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
+            //if (yes) {
+            //    HTTPclient http;
+            //    QEventLoop loop;
+            //    QJsonObject item;
+
+            //    item["userid"] = user->getId();
+
+            //    QString endpoint = SERVER + "/User/ExcludeMember";
+
+            //    http.deleteWithCondition(endpoint, item);
+            //}
+            //return;
+        }
         else if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId())
             if (!MAIN_USER_POINTER->is_admin())
                 return;
@@ -91,7 +106,6 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
             HTTPclient http;
-            QEventLoop loop;
             QJsonObject item;
 
             auto exp = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP);
@@ -110,6 +124,21 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
         break;
     }
     case Qt::MiddleButton: {
+        if (ui->tabWidget_2->currentIndex() == 0) {
+            QString errr = QString("Вы хотите сбросить пароль\n%1?").arg(user->getUserName());
+            bool yess = msg(QMessageBox::Question, "", errr, QMessageBox::Yes | QMessageBox::No);
+            if (yess) {
+                HTTPclient http;
+                QJsonObject item;
+
+                item[""] = "";
+
+                QString endpoint = SERVER + QString("/Admin/ResetUserPass/%1").arg(user->getId());
+
+                http.put(endpoint, item);
+            }
+            return;
+        }
         if (MAIN_USER_POINTER->getId() != MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId())
             if (!MAIN_USER_POINTER->is_admin())
                 return;
@@ -213,19 +242,23 @@ void modalUserInfo::goBig() {
 #pragma endregion
 
     name_->setText(user->getUserName());
-    QString formattedPhone = QString("%1(%2%3%4)-%5%6%7-%8%9-%10%11")
-        .arg(user->getPhone()[0])
-        .arg(user->getPhone()[1])
-        .arg(user->getPhone()[2])
-        .arg(user->getPhone()[3])
-        .arg(user->getPhone()[4])
-        .arg(user->getPhone()[5])
-        .arg(user->getPhone()[6])
-        .arg(user->getPhone()[7])
-        .arg(user->getPhone()[8])
-        .arg(user->getPhone()[9])
-        .arg(user->getPhone()[10]);
-    phone->setText(formattedPhone);
+    if (user->getPhone() != "") {
+        QString formattedPhone = QString("%1(%2%3%4)-%5%6%7-%8%9-%10%11")
+            .arg(user->getPhone()[0])
+            .arg(user->getPhone()[1])
+            .arg(user->getPhone()[2])
+            .arg(user->getPhone()[3])
+            .arg(user->getPhone()[4])
+            .arg(user->getPhone()[5])
+            .arg(user->getPhone()[6])
+            .arg(user->getPhone()[7])
+            .arg(user->getPhone()[8])
+            .arg(user->getPhone()[9])
+            .arg(user->getPhone()[10]);
+        phone->setText(formattedPhone);
+    }
+    else
+        phone->setText("");
     email->setText(user->getEmail());
     user_ok_bt->setText("\320\227\320\260\320\272\321\200\321\213\321\202\321\214");
 
