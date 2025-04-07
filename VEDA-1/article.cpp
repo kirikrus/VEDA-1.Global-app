@@ -57,8 +57,8 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString
     ArticlephotoUser->setFrameShadow(QFrame::Raised);
     label_24 = new QLabel(ArticlephotoUser);
     label_24->setObjectName(QString::fromUtf8("label_24"));
-    label_24->setGeometry(QRect(11, 11, 50, 50));
-    label_24->setPixmap(QPixmap(QString::fromUtf8(":/icons/icons/user.png")));
+    //label_24->setGeometry(QRect(11, 11, 50, 50));
+    label_24->setPixmap(author->getAvatar(71));
     label_24->setScaledContents(true);
 
     gridLayout->addWidget(ArticlephotoUser, 0, 0, 2, 1);

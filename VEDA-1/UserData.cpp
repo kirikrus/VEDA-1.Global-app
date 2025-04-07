@@ -1,5 +1,6 @@
 ﻿#include <QDebug>
 #include <QJsonArray>
+#include <qpainterpath.h>
 #include "GLOBAL.h"
 UserData::UserData(QString login, QString password_, QObject* parent) : QObject(parent) {
     http = new HTTPclient(this);
@@ -59,6 +60,18 @@ void UserData::onUserDataReceived(const QJsonObject& jsonResponse) {
     phone = userObj["phone"].toString();
     admin = userObj["admin"].toBool();
 
+    if (MAIN_USER_POINTER != NULL) {
+        QNetworkAccessManager manager;
+        QEventLoop loop;
+        QNetworkReply* reply = manager.get(QNetworkRequest(QUrl(SERVER + userObj["img"].toString())));
+        QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+        loop.exec(); 
+        if (reply->error() == QNetworkReply::NoError) {
+            QByteArray data = reply->readAll();
+            avatar.loadFromData(data);
+        }
+        reply->deleteLater();
+    }
     loop.quit();
 }
 
@@ -140,4 +153,16 @@ void UserData::update(QString name, QString phone, QString password){
     this->name = name;
     this->phone = phone;
     this->password = password;
+}
+
+QPixmap UserData::getAvatar(int size){
+    QPixmap roundedPixmap(size, size);
+    roundedPixmap.fill(Qt::transparent); // прозрачный фон
+    QPainter painter(&roundedPixmap);
+    painter.setRenderHint(QPainter::Antialiasing);
+    QPainterPath path;
+    path.addEllipse(0, 0, size, size);
+    painter.setClipPath(path);
+    painter.drawPixmap(0, 0, size, size, avatar.scaled(size, size, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
+    return roundedPixmap;
 }

@@ -57,7 +57,8 @@ void show_settings(Ui::VEDA1Class* ui) {
 	ui->emailS->setText(MAIN_USER_POINTER->getEmail());
 	ui->phoneS->setText(MAIN_USER_POINTER->getPhone());
 	ui->passwordS->setText(MAIN_USER_POINTER->getPassword());
-
+	ui->user_ico_bt->setIcon(QIcon(MAIN_USER_POINTER->getAvatar(126)));
+	
 	password_lvl(ui, MAIN_USER_POINTER->getPassword());
 
 	QObject::connect(ui->passwordS, &QLineEdit::textChanged, [=](const QString& text) {password_lvl(ui, text);});

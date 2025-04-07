@@ -22,9 +22,10 @@ public:
     void relogin();
     void initExp();
     QString getPassword();
-    int getOneoff();
+    int getOneoff();//гость
     void setOneoff(int inp);
     void update(QString name, QString phone, QString password);
+    QPixmap getAvatar(int size);
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);
@@ -38,6 +39,7 @@ private:
     QString email;
     QString phone;
     QString password;
+    QPixmap avatar;
 
     int oneoff = 0;
     bool admin = false;

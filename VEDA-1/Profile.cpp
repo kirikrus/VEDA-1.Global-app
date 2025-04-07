@@ -388,6 +388,8 @@ void show_profile(Ui::VEDA1Class *ui) {
         show_auth(ui);
         return;
     }
+    ui->user_ico->setPixmap(MAIN_USER_POINTER->getAvatar(40));
+    ui->user_ico2->setPixmap(MAIN_USER_POINTER->getAvatar(40));
     ui->tabWidget->setCurrentIndex(1);
     ui->tabWidget_2->setCurrentIndex(1);
     ui->hightlighter->setGeometry(ui->expPage->geometry());
