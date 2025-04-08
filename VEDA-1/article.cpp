@@ -138,7 +138,7 @@ void article::mousePressEvent(QMouseEvent* event) {
     switch (event->button())
     {
     case Qt::RightButton: {
-        QString err = QString("Вы хотите удалить эту статью?");
+        QString err = QString(QObject::tr("Вы хотите удалить эту статью?"));
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
             HTTPclient http;

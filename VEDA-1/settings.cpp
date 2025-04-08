@@ -17,27 +17,27 @@ void password_lvl(Ui::VEDA1Class* ui, const QString& text) {
 	switch (lvl) {
 	case 0:
 		rgb = QColor(qRgb(179, 61, 61));
-		ui->password_lvl->setText("Пустой");
+		ui->password_lvl->setText(QObject::tr("Пустой"));
 		break;
 	case 1:
 		rgb = QColor(qRgb(179, 112, 61));
-		ui->password_lvl->setText("Очень слабый");
+		ui->password_lvl->setText(QObject::tr("Очень слабый"));
 		break;
 	case 2:
 		rgb = QColor(qRgb(179, 161, 61));
-		ui->password_lvl->setText("Слабый");
+		ui->password_lvl->setText(QObject::tr("Слабый"));
 		break;
 	case 3:
 		rgb = QColor(qRgb(155, 179, 61));
-		ui->password_lvl->setText("Средний");
+		ui->password_lvl->setText(QObject::tr("Средний"));
 		break;
 	case 4:
 		rgb = QColor(qRgb(120, 179, 61));
-		ui->password_lvl->setText("Надежный");
+		ui->password_lvl->setText(QObject::tr("Надежный"));
 		break;
 	case 5:
 		rgb = QColor(qRgb(163, 236, 90));
-		ui->password_lvl->setText("Очень надежный");
+		ui->password_lvl->setText(QObject::tr("Очень надежный"));
 		break;
 	}
 
@@ -77,7 +77,7 @@ void show_settings(Ui::VEDA1Class* ui) {
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)
-				msg(QMessageBox::Warning, ("Упс..."), ("Перепроверьте данные!"), QMessageBox::Ok);
+				msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Перепроверьте данные!")), QMessageBox::Ok);
 			else {
 				ui->expPage->setDisabled(false);
 				ui->settingPage->setDisabled(true);

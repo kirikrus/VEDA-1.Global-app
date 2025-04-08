@@ -102,7 +102,7 @@ void modalUserInfo::mousePressEvent(QMouseEvent* event) {
             if (!MAIN_USER_POINTER->is_admin())
                 return;
 
-        QString err = QString("Вы хотите удалить \n%1?").arg(user->getUserName());
+        QString err = QString(QObject::tr("Вы хотите удалить \n%1?")).arg(user->getUserName());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
         if (yes) {
             HTTPclient http;
@@ -260,7 +260,7 @@ void modalUserInfo::goBig() {
     else
         phone->setText("");
     email->setText(user->getEmail());
-    user_ok_bt->setText("\320\227\320\260\320\272\321\200\321\213\321\202\321\214");
+    user_ok_bt->setText(QObject::tr("\320\227\320\260\320\272\321\200\321\213\321\202\321\214"));
 
     widget->raise();
     widget->show();

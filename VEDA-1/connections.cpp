@@ -63,18 +63,18 @@ void connections(Ui::VEDA1Class *ui) {
 		if (ui->dataGraphPanel->height() == 626) {
 			ui->dataGraphPanel->setGeometry(610, 435, 351, 196);
 			ui->dataGraphTable->setFixedHeight(141);
-			ui->dataViewChange->setText(("Развернуть  >"));
+			ui->dataViewChange->setText(QObject::tr("Развернуть  >"));
 		}
 		else {
 			ui->dataGraphPanel->setGeometry(610, 5, 351, 626);
 			ui->dataGraphTable->setFixedHeight(576);
-			ui->dataViewChange->setText(("Свернуть    >"));
+			ui->dataViewChange->setText(QObject::tr("Свернуть    >"));
 		}
 		});
 	QObject::connect(ui->dataChange, &QPushButton::clicked, [=]() {
 		if (ui->edite->height() == 626) {
 			ui->edite->setGeometry(20, 580, 571, 51);
-			ui->dataChange->setText(("\320\240\320\265\320\264\320\260\320\272\321\202\320\276\321\200 \320\264\320\260\320\275\320\275\321\213\321\205"));
+			ui->dataChange->setText(QObject::tr("Редактор данных"));
 			if (CURRENT_EXP == -1)
 				return;
 			if (MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getAuthorId() == MAIN_USER_POINTER->getId() || MAIN_USER_POINTER->is_admin())
@@ -84,7 +84,7 @@ void connections(Ui::VEDA1Class *ui) {
 			if (MAIN_USER_POINTER->getExperiments().size() == 0)
 				return;
 			ui->edite->setGeometry(20, 10, 571, 626);
-			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
+			ui->dataChange->setText( QObject::tr("Закрыть редактор"));
 			ui->tabWidget_3->setCurrentIndex(0);
 			ui->expChange->hide();
 		}
@@ -93,10 +93,10 @@ void connections(Ui::VEDA1Class *ui) {
 		if (MAIN_USER_POINTER->getExperiments().size() == 0)
 			return;
 			ui->edite->setGeometry(20, 10, 571, 626);
-			ui->dataChange->setText(("\320\227\320\260\320\272\321\200\321\213\321\202\321\214 \321\200\320\265\320\264\320\260\320\272\321\202\320\276\321\200"));
+			ui->dataChange->setText(QObject::tr(("Закрыть редактор")));
 			ui->tabWidget_3->setCurrentIndex(1);
 			ui->expChange->hide();
-			ui->expEdit->setText("\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214");
+			ui->expEdit->setText(QObject::tr("Изменить"));
 			ui->dataFrame->show();
 		});
 
@@ -275,10 +275,10 @@ void connections(Ui::VEDA1Class *ui) {
 			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 				switch (reply.toInt()) {
 					case -1: 
-						msg(QMessageBox::Warning, ("Упс..."), ("Пользователь с данной почтой уже участник!"), QMessageBox::Ok);
+						msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Пользователь с данной почтой уже участник!")), QMessageBox::Ok);
 						break;
 					case -2:
-						msg(QMessageBox::Warning, ("Упс..."), ("Пользователь с данной почтой не существует!"), QMessageBox::Ok);
+						msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Пользователь с данной почтой не существует!")), QMessageBox::Ok);
 						break;
 					default:
 						delete label_45;
@@ -418,7 +418,7 @@ void connections(Ui::VEDA1Class *ui) {
 			QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 				switch (reply.toInt()) {
 				case -1:
-					msg(QMessageBox::Warning, ("Упс..."), ("Пользователь с данной почтой уже участник!"), QMessageBox::Ok);
+					msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Пользователь с данной почтой уже участник!")), QMessageBox::Ok);
 					break;
 				default:
 					delete label_45;
@@ -493,7 +493,7 @@ void connections(Ui::VEDA1Class *ui) {
 		if (exp->getName() == "") expName = QString("№%1").arg(exp->getId());
 		else expName = exp->getName();
 
-		QString err = QString("Вы хотите удалить эксперимент: %1?").arg(expName);
+		QString err = QString(QObject::tr("Вы хотите удалить эксперимент: %1?")).arg(expName);
 		bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
 		if (yes) {
@@ -520,7 +520,7 @@ void connections(Ui::VEDA1Class *ui) {
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)
-				msg(QMessageBox::Warning, ("Упс..."), ("Перепроверьте данные!"), QMessageBox::Ok);
+				msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Перепроверьте данные!")), QMessageBox::Ok);
 			else {
 				MAIN_USER_POINTER->initExp();
 				show_experiments(ui);
@@ -558,7 +558,7 @@ void connections(Ui::VEDA1Class *ui) {
 
 		QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
 			if (reply.toInt() <= 0 && reply.size() < 5)
-				msg(QMessageBox::Warning, ("Упс..."), ("Перепроверьте данные!"), QMessageBox::Ok);
+				msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Перепроверьте данные!")), QMessageBox::Ok);
 			else {
 				MAIN_USER_POINTER->initExp();
 				show_experiments(ui);

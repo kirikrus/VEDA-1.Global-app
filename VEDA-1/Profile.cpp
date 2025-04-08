@@ -32,7 +32,7 @@ void validate(Ui::VEDA1Class* ui) {
             ui->articlePage->setDisabled(true);
             ui->home_button->setDisabled(true);
             show_settings(ui);
-            msg(QMessageBox::Information, ("Добро пожаловать ✨"), ("Пожалуйста, обязательно заполните ваши данные!\nИ не забудьте сменить пароль!"), QMessageBox::Ok);
+            msg(QMessageBox::Information, (QObject::tr("Добро пожаловать ✨")), (QObject::tr("Пожалуйста, обязательно заполните ваши данные!\nИ не забудьте сменить пароль!")), QMessageBox::Ok);
         }
     }
     if (CURRENT_EXP != -1)
@@ -118,7 +118,8 @@ void show_auth(Ui::VEDA1Class* ui) {
     inp_password->setAlignment(Qt::AlignCenter);
     label_8 = new QLabel(widget);
     label_8->setObjectName(QString::fromUtf8("label_8"));
-    label_8->setGeometry(QRect(345, 20, 136, 51));
+    label_8->setGeometry(QRect(300, 20, 200, 51));
+    label_8->setAlignment(Qt::AlignCenter);
     QFont font6;
     font6.setFamilies({ QString::fromUtf8("Inter V") });
     font6.setPointSize(30);
@@ -196,9 +197,9 @@ void show_auth(Ui::VEDA1Class* ui) {
             validate(ui);
         }
         else {
-            QString err = MAIN_USER_POINTER->getId() == -1 ? ("Такой Email не зарегестрирован... \n =(")
-                                                           : ("Неверный пароль! \n =(");
-            msg(QMessageBox::Critical, ("Упс..."), err, QMessageBox::Ok);
+            QString err = MAIN_USER_POINTER->getId() == -1 ? (QObject::tr("Такой Email не зарегестрирован... \n =("))
+                                                           : (QObject::tr("Неверный пароль! \n =("));
+            msg(QMessageBox::Critical, (QObject::tr("Упс...")), err, QMessageBox::Ok);
             delete MAIN_USER_POINTER;
         }
         });
@@ -215,16 +216,16 @@ void show_experiments(Ui::VEDA1Class *ui) {
     ui->tableExp->setRowCount(experiments.size());
     // установка заголовков таблицы
     QStringList headers;
-    headers << "\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202"//Эксперимент
-            << "\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273"//Материал
-            << "\320\237\321\200\320\276\321\206\320\265\321\201\321\201"//Процесс
-            << "\320\224\320\260\321\202\320\260";//Дата
+    headers << QObject::tr("\320\255\320\272\321\201\320\277\320\265\321\200\320\270\320\274\320\265\320\275\321\202")//Эксперимент
+            << QObject::tr("\320\234\320\260\321\202\320\265\321\200\320\270\320\260\320\273")//Материал
+            << QObject::tr("\320\237\321\200\320\276\321\206\320\265\321\201\321\201")//Процесс
+            << QObject::tr("\320\224\320\260\321\202\320\260");//Дата
 
     ui->tableExp->setHorizontalHeaderLabels(headers);
 
     for (int i = 0; i < experiments.size(); ++i) {
         if (experiments[i].getName() == "") 
-            ui->tableExp->setItem(i, 0, new QTableWidgetItem(("Эксперимент №") + QString::number(experiments[i].getId())));
+            ui->tableExp->setItem(i, 0, new QTableWidgetItem(QObject::tr("Эксперимент №") + QString::number(experiments[i].getId())));
         else
             ui->tableExp->setItem(i, 0, new QTableWidgetItem(experiments[i].getName()));
         ui->tableExp->setItem(i, 1, new QTableWidgetItem(experiments[i].getMaterial()));
@@ -307,7 +308,7 @@ void showChart(Ui::VEDA1Class *ui){
     
 
 //стилизация
-    chart->setTitle(("Эксперимент №") + QString::number(exp->getId()));
+    chart->setTitle(QObject::tr("Эксперимент №") + QString::number(exp->getId()));
     chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
 
     chart->setMinimumSize(ui->chart->size());
@@ -361,7 +362,7 @@ void show_exp_data(Ui::VEDA1Class* ui) {
     QStandardItemModel* model = new QStandardItemModel(0, 3, ui->dataGraphTable); //3 столбца
 
     model->setHorizontalHeaderLabels({ "ID", 
-        ("Время"), 
+        (QObject::tr("Время") ),
          exp->getChartLink()->getParamUnit()});
 
     ui->dataGraphTable->setColumnWidth(0, 50);
@@ -429,7 +430,7 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         int id = (int)MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getChartLink()->getPointId(ui->inp_id_del->value() );
         if (id == -1) return;
 
-        QString err = QString("Вы хотите удалить точку № %1?").arg(ui->inp_id_del->value());
+        QString err = QString(QObject::tr("Вы хотите удалить точку № %1?")).arg(ui->inp_id_del->value());
         bool yes = msg(QMessageBox::Question, "", err, QMessageBox::Yes | QMessageBox::No);
 
         if (yes) {

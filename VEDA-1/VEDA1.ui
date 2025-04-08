@@ -667,6 +667,9 @@ border-radius: 27px;</string>
          <property name="text">
           <string>Главная</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </widget>
        <widget class="QPushButton" name="profile_button">
@@ -929,420 +932,6 @@ border: none;</string>
          <property name="bottomMargin">
           <number>150</number>
          </property>
-         <item>
-          <widget class="QWidget" name="article" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>530</width>
-             <height>200</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>530</width>
-             <height>1000</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: #202325;
-border-radius: 35px</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetMinimumSize</enum>
-            </property>
-            <property name="leftMargin">
-             <number>20</number>
-            </property>
-            <property name="topMargin">
-             <number>20</number>
-            </property>
-            <property name="rightMargin">
-             <number>20</number>
-            </property>
-            <property name="bottomMargin">
-             <number>20</number>
-            </property>
-            <property name="horizontalSpacing">
-             <number>10</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>20</number>
-            </property>
-            <item row="3" column="0" colspan="2">
-             <widget class="QTextEdit" name="textEdit">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="sizeIncrement">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="acceptDrops">
-               <bool>true</bool>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">border-radius: 0;
-color: rgb(255, 255, 255);
-</string>
-              </property>
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="autoFormatting">
-               <set>QTextEdit::AutoNone</set>
-              </property>
-              <property name="tabChangesFocus">
-               <bool>false</bool>
-              </property>
-              <property name="lineWrapMode">
-               <enum>QTextEdit::WidgetWidth</enum>
-              </property>
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-              <property name="markdown">
-               <string>### Основы Git \n апва
-
-</string>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;h3 style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;Основы Git \n апва&lt;/span&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="overwriteMode">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QFrame" name="frame_19">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_2" columnstretch="0">
-               <property name="sizeConstraint">
-                <enum>QLayout::SetDefaultConstraint</enum>
-               </property>
-               <property name="horizontalSpacing">
-                <number>10</number>
-               </property>
-               <property name="verticalSpacing">
-                <number>0</number>
-               </property>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_60">
-                 <property name="font">
-                  <font>
-                   <family>Inter V</family>
-                   <pointsize>10</pointsize>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(212, 212, 212);</string>
-                 </property>
-                 <property name="text">
-                  <string>Alekseev@stankin.ru</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_58">
-                 <property name="font">
-                  <font>
-                   <family>Inter V</family>
-                   <pointsize>16</pointsize>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: #fff
-</string>
-                 </property>
-                 <property name="text">
-                  <string>Алексеев Костя Павлович</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="0" column="0" rowspan="2">
-             <widget class="QFrame" name="ArticlephotoUser">
-              <property name="minimumSize">
-               <size>
-                <width>71</width>
-                <height>71</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>71</width>
-                <height>71</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: #fff;
-border-radius: 35px</string>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <widget class="QLabel" name="label_24">
-               <property name="geometry">
-                <rect>
-                 <x>11</x>
-                 <y>11</y>
-                 <width>50</width>
-                 <height>50</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="VEDA1.qrc">:/icons/icons/user.png</pixmap>
-               </property>
-               <property name="scaledContents">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QWidget" name="article_2" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>530</width>
-             <height>200</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>530</width>
-             <height>1000</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: #202325;
-border-radius: 35px</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetMinimumSize</enum>
-            </property>
-            <property name="leftMargin">
-             <number>20</number>
-            </property>
-            <property name="topMargin">
-             <number>20</number>
-            </property>
-            <property name="rightMargin">
-             <number>20</number>
-            </property>
-            <property name="bottomMargin">
-             <number>20</number>
-            </property>
-            <property name="horizontalSpacing">
-             <number>10</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>20</number>
-            </property>
-            <item row="0" column="0" rowspan="2">
-             <widget class="QFrame" name="ArticlephotoUser_2">
-              <property name="minimumSize">
-               <size>
-                <width>71</width>
-                <height>71</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>71</width>
-                <height>71</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: #fff;
-border-radius: 35px</string>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <widget class="QLabel" name="label_28">
-               <property name="geometry">
-                <rect>
-                 <x>11</x>
-                 <y>11</y>
-                 <width>50</width>
-                 <height>50</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="VEDA1.qrc">:/icons/icons/user.png</pixmap>
-               </property>
-               <property name="scaledContents">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QFrame" name="frame_20">
-              <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_4" columnstretch="0">
-               <property name="sizeConstraint">
-                <enum>QLayout::SetDefaultConstraint</enum>
-               </property>
-               <property name="horizontalSpacing">
-                <number>10</number>
-               </property>
-               <property name="verticalSpacing">
-                <number>0</number>
-               </property>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_61">
-                 <property name="font">
-                  <font>
-                   <family>Inter V</family>
-                   <pointsize>10</pointsize>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(212, 212, 212);</string>
-                 </property>
-                 <property name="text">
-                  <string>Alekseev@stankin.ru</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_59">
-                 <property name="font">
-                  <font>
-                   <family>Inter V</family>
-                   <pointsize>16</pointsize>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: #fff
-</string>
-                 </property>
-                 <property name="text">
-                  <string>Алексеев Костя Павлович</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QTextEdit" name="textEdit_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="sizeIncrement">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="acceptDrops">
-               <bool>true</bool>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">border-radius: 0;
-color: rgb(255, 255, 255);
-</string>
-              </property>
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
-              </property>
-              <property name="autoFormatting">
-               <set>QTextEdit::AutoNone</set>
-              </property>
-              <property name="tabChangesFocus">
-               <bool>false</bool>
-              </property>
-              <property name="lineWrapMode">
-               <enum>QTextEdit::WidgetWidth</enum>
-              </property>
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-              <property name="markdown">
-               <string>### Основы Git \n апва
-
-</string>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;h3 style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;Основы Git \n апва&lt;/span&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="overwriteMode">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
         </layout>
        </widget>
       </widget>
@@ -1577,6 +1166,75 @@ QPushButton:hover{
         </property>
        </widget>
       </widget>
+      <widget class="QPushButton" name="bt_ru">
+       <property name="geometry">
+        <rect>
+         <x>825</x>
+         <y>10</y>
+         <width>61</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="VEDA1.qrc">
+         <normaloff>:/icons/icons/ru.png</normaloff>:/icons/icons/ru.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="bt_en">
+       <property name="geometry">
+        <rect>
+         <x>880</x>
+         <y>10</y>
+         <width>61</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="VEDA1.qrc">
+         <normaloff>:/icons/icons/usa.png</normaloff>:/icons/icons/usa.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="bt_ch">
+       <property name="geometry">
+        <rect>
+         <x>935</x>
+         <y>10</y>
+         <width>61</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="VEDA1.qrc">
+         <normaloff>:/icons/icons/ch.png</normaloff>:/icons/icons/ch.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
       <zorder>scrollArea</zorder>
       <zorder>quickUsers</zorder>
       <zorder>verticalScrollBar</zorder>
@@ -1587,6 +1245,9 @@ QPushButton:hover{
       <zorder>frame</zorder>
       <zorder>mainFooter</zorder>
       <zorder>frame_2</zorder>
+      <zorder>bt_ru</zorder>
+      <zorder>bt_en</zorder>
+      <zorder>bt_ch</zorder>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -5545,61 +5206,49 @@ border-radius: 35px</string>
              <property name="verticalSpacing">
               <number>20</number>
              </property>
-             <item row="3" column="0" colspan="2">
-              <widget class="QTextEdit" name="textEdit_3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="sizeIncrement">
+             <item row="0" column="0" rowspan="2">
+              <widget class="QFrame" name="ArticlephotoUser_3">
+               <property name="minimumSize">
                 <size>
-                 <width>0</width>
-                 <height>0</height>
+                 <width>71</width>
+                 <height>71</height>
                 </size>
                </property>
-               <property name="acceptDrops">
-                <bool>true</bool>
+               <property name="maximumSize">
+                <size>
+                 <width>71</width>
+                 <height>71</height>
+                </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">border-radius: 0;
-color: rgb(255, 255, 255);
-</string>
+                <string notr="true">background-color: #fff;
+border-radius: 35px</string>
                </property>
-               <property name="verticalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
                </property>
-               <property name="horizontalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
                </property>
-               <property name="autoFormatting">
-                <set>QTextEdit::AutoNone</set>
-               </property>
-               <property name="tabChangesFocus">
-                <bool>false</bool>
-               </property>
-               <property name="lineWrapMode">
-                <enum>QTextEdit::WidgetWidth</enum>
-               </property>
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="markdown">
-                <string>### Основы Git \n апва
-
-</string>
-               </property>
-               <property name="html">
-                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;h3 style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;Основы Git \n апва&lt;/span&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="overwriteMode">
-                <bool>true</bool>
-               </property>
+               <widget class="QLabel" name="label_29">
+                <property name="geometry">
+                 <rect>
+                  <x>11</x>
+                  <y>11</y>
+                  <width>50</width>
+                  <height>50</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="VEDA1.qrc">:/icons/icons/user.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
               </widget>
              </item>
              <item row="0" column="1">
@@ -5656,51 +5305,6 @@ p, li { white-space: pre-wrap; }
                  </widget>
                 </item>
                </layout>
-              </widget>
-             </item>
-             <item row="0" column="0" rowspan="2">
-              <widget class="QFrame" name="ArticlephotoUser_3">
-               <property name="minimumSize">
-                <size>
-                 <width>71</width>
-                 <height>71</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>71</width>
-                 <height>71</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: #fff;
-border-radius: 35px</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <widget class="QLabel" name="label_29">
-                <property name="geometry">
-                 <rect>
-                  <x>11</x>
-                  <y>11</y>
-                  <width>50</width>
-                  <height>50</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="VEDA1.qrc">:/icons/icons/user.png</pixmap>
-                </property>
-                <property name="scaledContents">
-                 <bool>true</bool>
-                </property>
-               </widget>
               </widget>
              </item>
             </layout>
@@ -5853,63 +5457,6 @@ border-radius: 35px</string>
                </layout>
               </widget>
              </item>
-             <item row="3" column="0" colspan="2">
-              <widget class="QTextEdit" name="textEdit_4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="sizeIncrement">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="acceptDrops">
-                <bool>true</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">border-radius: 0;
-color: rgb(255, 255, 255);
-</string>
-               </property>
-               <property name="verticalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
-               </property>
-               <property name="horizontalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
-               </property>
-               <property name="autoFormatting">
-                <set>QTextEdit::AutoNone</set>
-               </property>
-               <property name="tabChangesFocus">
-                <bool>false</bool>
-               </property>
-               <property name="lineWrapMode">
-                <enum>QTextEdit::WidgetWidth</enum>
-               </property>
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="markdown">
-                <string>### Основы Git \n апва
-
-</string>
-               </property>
-               <property name="html">
-                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;h3 style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;Основы Git \n апва&lt;/span&gt;&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="overwriteMode">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -5991,7 +5538,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="VEDA1.qrc"/>
   <include location="VEDA1.qrc"/>
  </resources>
  <connections/>
