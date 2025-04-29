@@ -3,6 +3,8 @@
 #include "Profile.h"
 #include "MSGconstructor.h"
 #include "qregularexpression.h"
+#include <QFileDialog>
+#include <QBuffer>
 
 void password_lvl(Ui::VEDA1Class* ui, const QString& text) {
 	quint16 lvl = 0;
@@ -63,6 +65,13 @@ void show_settings(Ui::VEDA1Class* ui) {
 
 	QObject::connect(ui->passwordS, &QLineEdit::textChanged, [=](const QString& text) {password_lvl(ui, text);});
 
+	QObject::disconnect(ui->user_ico_bt, &QPushButton::pressed, nullptr, nullptr);
+	QObject::connect(ui->user_ico_bt, &QPushButton::pressed, [=]() {
+		QString file = QFileDialog::getOpenFileName(nullptr, "Open Image", "", "Image Files (*.png *.jpg *.bmp *.jpeg)");
+		if (!file.isEmpty())
+			ui->user_ico_bt->setIcon(QIcon(file));
+		});
+
 	QObject::disconnect(ui->userSave, &QPushButton::pressed, nullptr, nullptr);
 	QObject::connect(ui->userSave, &QPushButton::pressed, [=]() {
 		HTTPclient http;
@@ -72,6 +81,15 @@ void show_settings(Ui::VEDA1Class* ui) {
 		item["fullname"] = ui->nameS->text();
 		item["phone"] = ui->phoneS->text().replace(QRegularExpression("[()\\-]"), "");
 		item["password"] = ui->passwordS->text();
+
+		QPixmap pixmap = ui->user_ico_bt->icon().pixmap(ui->user_ico_bt->icon().actualSize(QSize(256, 256)));
+		QImage ava = pixmap.toImage();
+		QByteArray byteArray;
+		QBuffer buffer(&byteArray);
+		ava.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
+		QString avaBase64 = QString::fromLatin1(byteArray.toBase64().data());
+
+		item["img"] = avaBase64;
 
 		QString endpoint = SERVER + QString("/User/UserSettings/%1").arg(MAIN_USER_POINTER->getId());
 
@@ -85,7 +103,8 @@ void show_settings(Ui::VEDA1Class* ui) {
 				ui->articlePage->setDisabled(false);
 				ui->home_button->setDisabled(false);
 				MAIN_USER_POINTER->setOneoff(0);
-				MAIN_USER_POINTER->update(ui->nameS->text(), ui->phoneS->text(), ui->passwordS->text());
+				QPixmap avatar = ui->user_ico_bt->icon().pixmap(ui->user_ico_bt->icon().actualSize(QSize(1024, 1024)));
+				MAIN_USER_POINTER->update(ui->nameS->text(), ui->phoneS->text(), ui->passwordS->text(), avatar);
 			}
 			loop.quit();
 			});

@@ -24,8 +24,9 @@ public:
     QString getPassword();
     int getOneoff();//гость
     void setOneoff(int inp);
-    void update(QString name, QString phone, QString password);
+    void update(QString name, QString phone, QString password, QPixmap avatar);
     QPixmap getAvatar(int size);
+    void setAvatar(QString file);
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);

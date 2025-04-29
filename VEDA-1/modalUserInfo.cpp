@@ -53,7 +53,7 @@ modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui,experiment* exp
         "*:hover{\n"
         "	background-color: transparent;\n"
         "}"));
-    ava.setPixmap(QPixmap(QString::fromUtf8(":/icons/icons/test_avatar.png")));
+    ava.setPixmap(user_->getAvatar(71));
     ava.setScaledContents(true);
     status.setObjectName(QString::fromUtf8("label_46"));
     status.setGeometry(QRect(265, 7, 25, 25));
@@ -191,7 +191,7 @@ void modalUserInfo::goBig() {
     photo->setGeometry(QRect(20, 20, 100, 100));
     photo->setStyleSheet(QString::fromUtf8("background-color: rgb(32, 35, 37);\n"
         "border: none"));
-    photo->setPixmap(QPixmap(QString::fromUtf8(":/icons/icons/test_avatar.png")));
+    photo->setPixmap(user->getAvatar(71));
     photo->setScaledContents(true);
     name_ = new QLabel(widget);
     name_->setGeometry(QRect(140, 25, 276, 86));

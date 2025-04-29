@@ -149,10 +149,11 @@ int UserData::getOneoff(){return oneoff;}
 
 void UserData::setOneoff(int inp) { oneoff = inp; }
 
-void UserData::update(QString name, QString phone, QString password){
+void UserData::update(QString name, QString phone, QString password, QPixmap avatar) {
     this->name = name;
     this->phone = phone;
     this->password = password;
+    this->avatar = avatar;
 }
 
 QPixmap UserData::getAvatar(int size){
@@ -166,3 +167,5 @@ QPixmap UserData::getAvatar(int size){
     painter.drawPixmap(0, 0, size, size, avatar.scaled(size, size, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     return roundedPixmap;
 }
+
+void UserData::setAvatar(QString file) { avatar.fromImage(QImage(file)); }
