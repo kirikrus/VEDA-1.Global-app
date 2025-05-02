@@ -108,6 +108,7 @@
     <ClCompile Include="mainPage.cpp" />
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
+    <ClCompile Include="searchPanel.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="userArticlesPage.cpp" />
     <ClCompile Include="UserData.cpp" />
@@ -118,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="eyeAnimation.h" />
+    <QtMoc Include="searchPanel.h" />
     <ClInclude Include="userArticlesPage.h" />
     <QtMoc Include="article.h" />
     <ClInclude Include="mainPage.h" />

@@ -91,6 +91,9 @@
     <ClCompile Include="eyeAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="searchPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Profile.h">
@@ -141,6 +144,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="eyeAnimation.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="searchPanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
