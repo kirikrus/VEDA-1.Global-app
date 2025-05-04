@@ -1721,7 +1721,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">
@@ -2896,7 +2896,7 @@ QPushButton:hover{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="data">
           <attribute name="title">
@@ -4555,31 +4555,6 @@ background-color: transparent;</string>
           <string>Спец. настройки</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_52">
-         <property name="geometry">
-          <rect>
-           <x>40</x>
-           <y>50</y>
-           <width>116</width>
-           <height>26</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Inter V</family>
-           <pointsize>12</pointsize>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(212, 212, 212);
-background-color: transparent;
-border: none;</string>
-         </property>
-         <property name="text">
-          <string>Уведомления</string>
-         </property>
-        </widget>
         <widget class="QPushButton" name="exitUser">
          <property name="geometry">
           <rect>
@@ -4690,6 +4665,12 @@ color: rgba(163, 236, 90, 150);
           <height>45</height>
          </rect>
         </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>946</width>
@@ -4748,11 +4729,129 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:horizontal {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>946</width>
-           <height>45</height>
+           <width>997</width>
+           <height>39</height>
           </rect>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>500</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">*{
+background-color: rgba(163, 236, 90, 50);
+border-radius: 10px
+}
+*:checked{
+background-color: rgba(163, 236, 90, 255);
+}</string>
+            </property>
+            <property name="text">
+             <string>пппппппппппппппппппппп</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>500</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">*{
+background-color: rgba(163, 236, 90, 50);
+border-radius: 10px;
+padding: 0 10px 0 10px;
+}
+*:checked{
+background-color: rgba(163, 236, 90, 255);
+}</string>
+            </property>
+            <property name="text">
+             <string>выаываывааывыавыаываывываываываываываываываываыва</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>500</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">*{
+background-color: rgba(163, 236, 90, 50);
+border-radius: 10px
+}
+*:checked{
+background-color: rgba(163, 236, 90, 255);
+}</string>
+            </property>
+            <property name="text">
+             <string>выаываывааывыавыаываывываываываываываываываываыва</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QPushButton" name="pushButton">
             <property name="minimumSize">
@@ -4763,7 +4862,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:horizontal {
             </property>
             <property name="maximumSize">
              <size>
-              <width>200</width>
+              <width>500</width>
               <height>20</height>
              </size>
             </property>

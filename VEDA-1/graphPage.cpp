@@ -4,6 +4,7 @@
 #include <qchart.h>
 #include <qvalueaxis.h>
 #include <qchartview.h>
+#include <qsizepolicy.h>
 
 void paintChart(bool show, QChart* chart, QColor color, quint32 id) {
     if (show) {
@@ -70,12 +71,19 @@ void show_bt(Ui::VEDA1Class* ui,QChart* chart, QVector<QRgb> colors) {
     for (experiment exp : exps) {
         QPushButton* pushButton = new QPushButton(ui->scrollAreaWidgetContents_4);
         pushButton->setText(exp.getName() == "" ? QString::number(exp.getId()) : exp.getName());
-        pushButton->setMinimumSize(QSize(100, 20));
-        pushButton->setMaximumSize(QSize(200, 20));
+
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        pushButton->setSizePolicy(sizePolicy);
+
+        pushButton->adjustSize();
+
+        pushButton->setMinimumSize(QSize(50, 20));
+        pushButton->setMaximumSize(QSize(500, 100));
+
         pushButton->setStyleSheet("*{\n" +
             QString("background-color: rgba(%1, %2, %3, 50);").arg(QColor(colors[counter]).red()).arg(QColor(colors[counter]).green()).arg(QColor(colors[counter]).blue()) +
-            "border-radius: 10px\n"
-            "}\n"
+            "border-radius: 10px\n;"
+            "padding: 0 10px 0 10px;}\n"
             "*:checked{\n" +
             QString("background-color: rgba(%1, %2, %3, 255);").arg(QColor(colors[counter]).red()).arg(QColor(colors[counter]).green()).arg(QColor(colors[counter]).blue()) +
             "}");
