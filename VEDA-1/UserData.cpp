@@ -139,7 +139,8 @@ int UserData::getId() const{return id;}
 
 QVector<experiment> UserData::getExperiments() const {return experiments;}
 
-experiment* UserData::getExperimentById(int id){return &experiments[id];}
+experiment* UserData::getExperimentById(int id)//по id в списке экспов, а не id самих экспов
+{return &experiments[id];}
 
 bool UserData::is_admin(){return admin;}
 

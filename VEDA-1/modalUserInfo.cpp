@@ -70,6 +70,8 @@ modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui,experiment* exp
     status.setScaledContents(true);
 }
 
+modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui) : user(user_), ui(ui) {}
+
 modalUserInfo::~modalUserInfo(){
     delete user;
     user = nullptr;

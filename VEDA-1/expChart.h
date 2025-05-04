@@ -1,3 +1,5 @@
+#pragma once
+
 #include <qlineseries.h>
 #include <QString>
 #include <QObject>

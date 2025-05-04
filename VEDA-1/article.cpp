@@ -17,10 +17,12 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString
 
     author = new UserData(authorId);
 
+    setObjectName("article_" + QString::number(id));
+
 #pragma region print
     article_ = new QWidget(this);
     
-
+    
     article_->setMinimumSize(QSize(530, 100));
     article_->setMaximumSize(QSize(530, 9000));
     article_->setFixedWidth(530);
@@ -129,6 +131,10 @@ article::article(Ui::VEDA1Class* ui, int id, int authorId, QString text, QString
        
     parent->addWidget(this);
 }
+
+int article::getId() { return id; }
+
+QString article::getText(){return text;}
 
 void article::mousePressEvent(QMouseEvent* event) {
     if (MAIN_USER_POINTER == nullptr) return;

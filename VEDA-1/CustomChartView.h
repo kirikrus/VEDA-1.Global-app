@@ -1,3 +1,5 @@
+#pragma once
+
 #include <QChartView>
 #include <QWheelEvent>
 #include <QMouseEvent>

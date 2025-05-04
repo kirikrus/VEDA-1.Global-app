@@ -1,3 +1,5 @@
+#pragma once
+
 #include "UserData.h"
 #include "eyeAnimation.h"
 

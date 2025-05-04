@@ -9,10 +9,6 @@
 #include <qvalueaxis.h>
 #include "settings.h"
 
-void show_users(Ui::VEDA1Class* ui);
-void showChart(Ui::VEDA1Class*);
-void show_exp_data(Ui::VEDA1Class* ui);
-
 void validate(Ui::VEDA1Class* ui) {
     if (MAIN_USER_POINTER == nullptr) {
         ui->articleAdd->setEnabled(false);
@@ -308,7 +304,11 @@ void showChart(Ui::VEDA1Class *ui){
     
 
 //стилизация
-    chart->setTitle(QObject::tr("Эксперимент №") + QString::number(exp->getId()));
+    if (exp->getName() == "")
+        chart->setTitle(QObject::tr("Эксперимент №") + QString::number(exp->getId()));
+    else
+        chart->setTitle(exp->getName());
+    
     chart->setTitleBrush(QBrush(QColor("#d4d4d4")));
 
     chart->setMinimumSize(ui->chart->size());

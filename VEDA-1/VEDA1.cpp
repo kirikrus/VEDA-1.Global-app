@@ -1,4 +1,5 @@
 ﻿#include "VEDA1.h"
+#include <qevent.h>
 
 VEDA1::VEDA1(QWidget *parent)
     : QMainWindow(parent)

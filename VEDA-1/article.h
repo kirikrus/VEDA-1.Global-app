@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ui_VEDA1.h>
 #include "GLOBAL.h"
 
@@ -8,6 +10,8 @@ class article : public QWidget {
 
 public:
 	article(Ui::VEDA1Class* ui, int id,int authorId,QString text, QString date, QLayout* parent);
+	int getId();
+	QString getText();
 
 protected:
 	void mousePressEvent(QMouseEvent* event) override;

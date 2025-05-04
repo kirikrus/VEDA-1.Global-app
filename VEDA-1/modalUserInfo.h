@@ -1,3 +1,5 @@
+#pragma once
+
 #include "GLOBAL.h"
 #include <QWidget>
 #include <qlabel.h>
@@ -9,8 +11,10 @@ class modalUserInfo : public QWidget {
 
 public:
 	modalUserInfo(UserData* user_, Ui::VEDA1Class* ui, experiment* exp, QWidget* parent = nullptr);
-
+	modalUserInfo(UserData* user_, Ui::VEDA1Class* ui);
 	~modalUserInfo();
+
+	void goBig();
 
 protected:
 	void mousePressEvent(QMouseEvent* event) override;
@@ -23,7 +27,5 @@ private:
 	QLabel ava;
 	QLabel status;
 	QWidget panel;
-
-	void goBig();
 };
 

@@ -10,6 +10,7 @@
 #include "settings.h"
 #include "userArticlesPage.h"
 #include "mainPage.h"
+#include "searchPanel.h"
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скролов
@@ -569,5 +570,22 @@ void connections(Ui::VEDA1Class *ui) {
 
 		http.post(endpoint, item);
 		loop.exec();
+		});
+
+//Коннект кнопки поиска
+	ui->search_out->hide();
+	ui->search_out->setGeometry(360, 345, 346, 291);
+	ui->search_out->verticalScrollBar()->setStyleSheet("QScrollArea{\nbackground-color: rgba(69, 71, 72,250);\nborder-radius: 26px;\n}\n\nQScrollBar:vertical {\n	border: none;\nbackground-color: transparent;\n    width: 7px;\n	border-radius: 1px;\nmargin: 8px 0px 8px 0px;\n }\n\n/*  HANDLE BAR VERTICAL */\nQScrollBar::handle:vertical {	\nbackground-color: rgba(89, 91, 92,255);\n	min-height: 30px;\n	border-radius: 3px;\n}\n\nQScrollBar::sub-line:vertical {\n	border: none;\n	background-color: none;\n	height: 0px;\n}\n\nQScrollBar::add-line:vertical {\n	border: none;\n	background-color: none;\n	height: 0px;\n}\n\nQScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n	background: none;\n}\nQScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n	background: none;\n}");
+	QObject::connect(ui->search_bt, &QPushButton::pressed, [=]() {
+		if (ui->search_inp->text() != "") {
+			searchPanelShow(ui, QRect(360, 345, 346, 291), ui->search_layout, ui->search_inp->text());
+			ui->search_out->show();
+		}
+		});
+	QObject::connect(ui->search_bt_2, &QPushButton::pressed, [=]() {
+		if (ui->search_inp_2->text() != "") {
+			searchPanelShow(ui, QRect(684, 81, 346, 291), ui->search_layout, ui->search_inp_2->text());
+			ui->search_out->show();
+		}
 		});
 }

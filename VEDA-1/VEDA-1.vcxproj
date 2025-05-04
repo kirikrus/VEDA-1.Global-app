@@ -31,7 +31,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.6.0_msvc2019_64</QtInstall>
+    <QtInstall>6.2.4_msvc2019_64</QtInstall>
     <QtModules>core;gui;network;widgets;charts</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -105,9 +105,11 @@
     </ClCompile>
     <ClCompile Include="GLOBAL.cpp" />
     <ClCompile Include="graphPage.cpp" />
+    <ClCompile Include="hide_click_outside.cpp" />
     <ClCompile Include="mainPage.cpp" />
     <ClCompile Include="modalUserInfo.cpp" />
     <ClCompile Include="MSGconstructor.cpp" />
+    <ClCompile Include="search.cpp" />
     <ClCompile Include="searchPanel.cpp" />
     <ClCompile Include="settings.cpp" />
     <ClCompile Include="userArticlesPage.cpp" />
@@ -120,6 +122,7 @@
   <ItemGroup>
     <QtMoc Include="eyeAnimation.h" />
     <QtMoc Include="searchPanel.h" />
+    <ClInclude Include="hide_click_outside.h" />
     <ClInclude Include="userArticlesPage.h" />
     <QtMoc Include="article.h" />
     <ClInclude Include="mainPage.h" />
