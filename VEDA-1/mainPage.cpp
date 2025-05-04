@@ -113,6 +113,7 @@ void show_all_articles(Ui::VEDA1Class* ui) {
 }
 
 void show_favs(Ui::VEDA1Class* ui) {
+    if (ui->tabWidget->currentIndex() != 0) return;
 
     QVector<QPushButton*> favButtons = {
         ui->fav_1,

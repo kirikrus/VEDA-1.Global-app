@@ -252,9 +252,9 @@ void modalUserInfo::goBig() {
             if (MAIN_USER_POINTER->getFavs().size() == 5)
                 msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Можно добавить неболее 5 избранных пользователей.\n=(")), QMessageBox::Ok);
             else
-                MAIN_USER_POINTER->addFav(CARD_ON_SCREEN_USER_ID);
+                MAIN_USER_POINTER->addFav(CARD_ON_SCREEN_USER_ID == -1? user->getId() : CARD_ON_SCREEN_USER_ID);
         else
-            MAIN_USER_POINTER->removeFav(CARD_ON_SCREEN_USER_ID);
+            MAIN_USER_POINTER->removeFav(CARD_ON_SCREEN_USER_ID == -1 ? user->getId() : CARD_ON_SCREEN_USER_ID);
         });
 
     QPushButton* user_ok_bt = new QPushButton(widget);
@@ -306,6 +306,6 @@ void modalUserInfo::goBig() {
         delete widget;
         delete backdrop;
         MAIN_USER_POINTER->initFavs();
-        show_favs(GLOBAL_UI_POINTER);
+        show_favs(GLOBAL_UI_POINTER == nullptr ? ui : GLOBAL_UI_POINTER);
         });
 }
