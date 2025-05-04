@@ -112,6 +112,8 @@ void searchPanel::mousePressEvent(QMouseEvent* event) {
             ui->search_out->hide();
             modalUserInfo card(user, ui);
             card.goBig();
+            CARD_ON_SCREEN_USER_ID = user->getId();
+            GLOBAL_UI_POINTER = ui;
             break;
         }
         CLOSE_LOADING

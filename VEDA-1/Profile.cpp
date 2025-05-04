@@ -9,7 +9,7 @@
 #include <qvalueaxis.h>
 #include "settings.h"
 
-#define reset_ico(a, b) a->setIcon(icon1); ui->main_ico_1->setIconSize(QSize(b, b));
+#define reset_ico(a, b) a->setIcon(icon1); ui->main_ico_1->setIconSize(QSize(b, b)); a->show();;
 
 void validate(Ui::VEDA1Class* ui) {
     if (MAIN_USER_POINTER == nullptr) {
@@ -210,6 +210,7 @@ void show_auth(Ui::VEDA1Class* ui) {
             delete backdrop;
             USER_ENTERED = true;
             MAIN_USER_POINTER->download_data();
+            MAIN_USER_POINTER->initFavs();
 
             show_profile(ui);
             validate(ui);
@@ -464,3 +465,4 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
     showChart(ui);
     show_exp_data(ui);
 }
+

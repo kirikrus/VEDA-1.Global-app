@@ -1,6 +1,9 @@
 <RCC>
   <qresource prefix="VEDA1"/>
   <qresource prefix="icons">
+    <file>icons/star_on.png</file>
+    <file>icons/star_off.png</file>
+    <file>icons/Избранные пользователи.png</file>
     <file>icons/ch.png</file>
     <file>icons/usa.png</file>
     <file>icons/ru.png</file>

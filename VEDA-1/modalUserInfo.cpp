@@ -3,6 +3,7 @@
 #include "Profile.h"
 
 #include <QMouseEvent>
+#include "mainPage.h"
 
 modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui,experiment* exp, QWidget* parent) : user(user_),ui(ui), QWidget(parent) {
     
@@ -70,7 +71,9 @@ modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui,experiment* exp
     status.setScaledContents(true);
 }
 
-modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui) : user(user_), ui(ui) {}
+modalUserInfo::modalUserInfo(UserData* user_, Ui::VEDA1Class* ui) : user(user_), ui(ui) {
+    user_id = user_->getId();
+}
 
 modalUserInfo::~modalUserInfo(){
     delete user;
@@ -189,12 +192,14 @@ void modalUserInfo::goBig() {
     widget->setStyleSheet(QString::fromUtf8("background-color: rgb(32, 35, 37);\n"
         "border-radius: 21px;\n"
         "border: 1px solid rgb(163, 236, 90);"));
+
     photo = new QLabel(widget);
     photo->setGeometry(QRect(20, 20, 100, 100));
     photo->setStyleSheet(QString::fromUtf8("background-color: rgb(32, 35, 37);\n"
         "border: none"));
     photo->setPixmap(user->getAvatar(71));
     photo->setScaledContents(true);
+
     name_ = new QLabel(widget);
     name_->setGeometry(QRect(140, 25, 276, 86));
     QFont font12;
@@ -206,6 +211,7 @@ void modalUserInfo::goBig() {
         "background-color: rgb(32, 35, 37);\n"
         "border: none"));
     name_->setWordWrap(true);
+
     email = new QLabel(widget);
     email->setGeometry(QRect(85, 140, 281, 26));
     QFont font7;
@@ -218,6 +224,7 @@ void modalUserInfo::goBig() {
         "border: none"));
     email->setAlignment(Qt::AlignCenter);
     email->setWordWrap(true);
+
     phone = new QLabel(widget);
     phone->setGeometry(QRect(85, 170, 281, 26));
     phone->setFont(font7);
@@ -226,6 +233,30 @@ void modalUserInfo::goBig() {
         "border: none"));
     phone->setAlignment(Qt::AlignCenter);
     phone->setWordWrap(true);
+
+    QIcon icon;
+    icon.addFile(":/icons/icons/star_off.png", QSize(), QIcon::Normal, QIcon::Off);
+    icon.addFile(":/icons/icons/star_on.png", QSize(), QIcon::Normal, QIcon::On);
+
+    QPushButton* star = new QPushButton(widget);
+    star->setCheckable(true);
+    star->setGeometry(QRect(446 - 50, 20, 30, 30));
+    star->setStyleSheet("border: none;");
+    star->setIcon(icon);
+    star->setIconSize(QSize(20, 20));
+
+    star->setChecked(MAIN_USER_POINTER->getFavs().contains(user->getId()));
+
+    QObject::connect(star, &QPushButton::toggled, [=](bool checked) {
+        if (checked)
+            if (MAIN_USER_POINTER->getFavs().size() == 5)
+                msg(QMessageBox::Warning, (QObject::tr("Упс...")), (QObject::tr("Можно добавить неболее 5 избранных пользователей.\n=(")), QMessageBox::Ok);
+            else
+                MAIN_USER_POINTER->addFav(CARD_ON_SCREEN_USER_ID);
+        else
+            MAIN_USER_POINTER->removeFav(CARD_ON_SCREEN_USER_ID);
+        });
+
     QPushButton* user_ok_bt = new QPushButton(widget);
     user_ok_bt->setGeometry(QRect(120, 225, 211, 30));
     user_ok_bt->setFont(font7);
@@ -274,5 +305,7 @@ void modalUserInfo::goBig() {
         delete photo;
         delete widget;
         delete backdrop;
+        MAIN_USER_POINTER->initFavs();
+        show_favs(GLOBAL_UI_POINTER);
         });
 }

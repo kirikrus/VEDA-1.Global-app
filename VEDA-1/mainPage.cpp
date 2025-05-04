@@ -1,5 +1,6 @@
 ﻿#include "article.h"
 #include "mainPage.h"
+#include "modalUserInfo.h"
 
 
 void show_all_articles(Ui::VEDA1Class* ui);
@@ -10,6 +11,7 @@ void mainPage(Ui::VEDA1Class* ui) {
     }
     else {
         ui->articleAdd->setEnabled(true);
+        show_favs(ui);
     }
     
     show_all_articles(ui);
@@ -69,12 +71,12 @@ void mainPage(Ui::VEDA1Class* ui) {
 void show_all_articles(Ui::VEDA1Class* ui) {
     LOADING(ui)
 
-    QLayoutItem* item;
+        QLayoutItem* item;
     while ((item = ui->verticalLayout->takeAt(0)) != nullptr) {
         delete item->widget();
         delete item;
     }
-    
+
     HTTPclient http;
     QEventLoop loop;
 
@@ -90,7 +92,7 @@ void show_all_articles(Ui::VEDA1Class* ui) {
             quint32 id = obj["id"].toInt();
             quint32 authorId = obj["authorId"].toInt();
             QString text = obj["text"].toString();
-            
+
             QString jsonDate = QString(obj["date"].toString());
             QString jsonTime = QString(obj["time"].toString());
             QDate date = QDate::fromString(jsonDate, "yyyy-MM-dd");
@@ -104,8 +106,43 @@ void show_all_articles(Ui::VEDA1Class* ui) {
             article* a = new article(ui, id, authorId, text, dateTime, ui->verticalLayout);
         }
         CLOSE_LOADING
-        loop.quit();
+            loop.quit();
         });
     http.get(endpoint);
     loop.exec();
 }
+
+void show_favs(Ui::VEDA1Class* ui) {
+
+    QVector<QPushButton*> favButtons = {
+        ui->fav_1,
+        ui->fav_2,
+        ui->fav_3,
+        ui->fav_4,
+        ui->fav_5
+    };
+
+    const QVector<int>& favs = MAIN_USER_POINTER->getFavs();
+
+    int count = favs.size();
+
+    for (int i = 0; i < count; ++i) {
+        UserData user = UserData(favs[i]);
+        favButtons[i]->setIcon(user.getAvatar(44));
+        favButtons[i]->setIconSize(QSize(44, 44));
+        favButtons[i]->show();
+
+        favButtons[i]->disconnect();
+        QObject::connect(favButtons[i], &QPushButton::pressed, [=]() {
+            modalUserInfo card(new UserData(favs[i]), ui);
+            CARD_ON_SCREEN_USER_ID = favs[i];
+            GLOBAL_UI_POINTER = ui;
+            card.goBig();
+            });
+    }
+
+    for (int i = count; i < favButtons.size(); ++i) {
+        favButtons[i]->hide();
+    }
+}
+

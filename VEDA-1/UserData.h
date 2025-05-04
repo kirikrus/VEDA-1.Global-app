@@ -19,21 +19,26 @@ public:
     QString getPhone() const;
     int getId() const;
     QVector<experiment> getExperiments() const;
+    QVector<int> getFavs() const;
     experiment* getExperimentById(int id);
     bool is_admin();
     void relogin();
     void initExp();
+    void initFavs();
     QString getPassword();
     int getOneoff();//гость
     void setOneoff(int inp);
     void update(QString name, QString phone, QString password, QPixmap avatar);
     QPixmap getAvatar(int size);
     void setAvatar(QString file);
+    void addFav(int fav);
+    void removeFav(int fav);
 
 private slots:
     void onUserDataReceived(const QJsonObject& jsonResponse);
     void onUserVerification(const QJsonObject& jsonResponse);
     void onExpDataReceived(const QJsonObject& jsonResponse);
+    void onFavsDataReceived(const QJsonObject& jsonResponse);
     void onError(const QString& errorString);
 
 private:
@@ -48,9 +53,12 @@ private:
     bool admin = false;
 
     QVector<experiment> experiments;
+    QVector<int> favs;
 
     HTTPclient* http;
     HTTPclient* http_for_exp;
+    HTTPclient* http_for_favs;
     QEventLoop loop;
     QEventLoop loop_for_exp;
+    QEventLoop loop_for_favs;
 };

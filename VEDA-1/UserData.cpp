@@ -2,12 +2,18 @@
 #include <QJsonArray>
 #include <qpainterpath.h>
 #include "GLOBAL.h"
+#include "UserData.h"
 UserData::UserData(QString login, QString password_, QObject* parent) : QObject(parent) {
     http = new HTTPclient(this);
     http_for_exp = new HTTPclient(this);
+    http_for_favs = new HTTPclient(this);
 
     connect(http, &HTTPclient::requestFinished, this, &UserData::onUserVerification);
     connect(http, &HTTPclient::requestError, this, &UserData::onError);
+
+    connect(http_for_favs, &HTTPclient::requestError, this, &UserData::onError);
+    connect(http_for_favs, &HTTPclient::requestFinished, this, &UserData::onFavsDataReceived);
+    
     connect(http_for_exp, &HTTPclient::requestFinished, this, &UserData::onExpDataReceived);
     connect(http_for_exp, &HTTPclient::requestError, this, &UserData::onError);
 
@@ -91,6 +97,13 @@ void UserData::initExp() {
     loop_for_exp.exec();
 }
 
+void UserData::initFavs() {
+    QString endpoint = QString(SERVER + "/User/FavouriteIds/%1").arg(id);
+    http_for_favs->get(endpoint);
+
+    loop_for_favs.exec();
+}
+
 void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
     experiments.clear();
     qDebug() << "Exp data received";
@@ -122,6 +135,17 @@ void UserData::onExpDataReceived(const QJsonObject& jsonResponse) {
     loop_for_exp.quit();
 }
 
+void UserData::onFavsDataReceived(const QJsonObject& jsonResponse){
+    favs.clear();
+    qDebug() << "Favs data received";
+    QJsonArray arr = jsonResponse["userFavourites"].toArray();
+
+    for (const QJsonValue& value : arr)
+        favs.append(value.toInt());
+
+    loop_for_favs.quit();
+}
+
 void UserData::onError(const QString& errorString) {
     qDebug() << "Error received:" << errorString;
 
@@ -138,6 +162,8 @@ QString UserData::getPhone() const { return phone; }
 int UserData::getId() const{return id;}
 
 QVector<experiment> UserData::getExperiments() const {return experiments;}
+
+QVector<int> UserData::getFavs() const{return favs;}
 
 experiment* UserData::getExperimentById(int id)//по id в списке экспов, а не id самих экспов
 {return &experiments[id];}
@@ -170,3 +196,33 @@ QPixmap UserData::getAvatar(int size){
 }
 
 void UserData::setAvatar(QString file) { avatar.fromImage(QImage(file)); }
+
+void UserData::addFav(int fav){
+    HTTPclient http;
+    QEventLoop loop;
+
+    QString endpoint = SERVER + QString("/User/Favourite/%1").arg(fav);
+
+    QObject::disconnect(&http, &HTTPclient::requestReply, nullptr, nullptr);
+    QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+        loop.quit();
+        });
+
+    http.post(endpoint, NULL);
+    loop.exec();
+}
+
+void UserData::removeFav(int fav){
+    HTTPclient http;
+    QEventLoop loop;
+
+    QString endpoint = SERVER + QString("/User/Favourite/%1").arg(fav);
+
+    QObject::disconnect(&http, &HTTPclient::requestReply, nullptr, nullptr);
+    QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+        loop.quit();
+        });
+
+    http.delet(endpoint, NULL);
+    loop.exec();
+}

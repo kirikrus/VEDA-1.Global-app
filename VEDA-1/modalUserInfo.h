@@ -23,6 +23,7 @@ private:
 	Ui::VEDA1Class* ui;
 
 	UserData* user;
+	int user_id;
 	QLabel name;
 	QLabel ava;
 	QLabel status;
