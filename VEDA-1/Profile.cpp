@@ -9,12 +9,34 @@
 #include <qvalueaxis.h>
 #include "settings.h"
 
+#define reset_ico(a, b) a->setIcon(icon1); ui->main_ico_1->setIconSize(QSize(b, b));
+
 void validate(Ui::VEDA1Class* ui) {
     if (MAIN_USER_POINTER == nullptr) {
         ui->articleAdd->setEnabled(false);
+
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/icons/icons/user.png"), QSize(), QIcon::Normal, QIcon::Off);
+        reset_ico(ui->main_ico_1, 25);
+        reset_ico(ui->main_ico_2, 25);
+        reset_ico(ui->fav_1, 25);
+        reset_ico(ui->fav_2, 25);
+        reset_ico(ui->fav_3, 25);
+        reset_ico(ui->fav_4, 25);
+        reset_ico(ui->fav_5, 25);
+        ui->main_name_1->setText(QWidget::tr("Добро пожаловать!"));
+        ui->main_name_2->setText(QWidget::tr("Добро пожаловать!"));
     }
     else {
         ui->articleAdd->setEnabled(true);
+
+        ui->main_ico_1->setIcon(MAIN_USER_POINTER->getAvatar(44));
+        ui->main_ico_1->setIconSize(QSize(44,44));
+        ui->main_name_1->setText(MAIN_USER_POINTER->getUserName());
+        ui->main_ico_2->setIcon(MAIN_USER_POINTER->getAvatar(44));
+        ui->main_ico_2->setIconSize(QSize(44, 44));
+        ui->main_name_2->setText(MAIN_USER_POINTER->getUserName());
+
         if (!MAIN_USER_POINTER->is_admin())
             ui->adminPage->hide();
         else
@@ -28,7 +50,7 @@ void validate(Ui::VEDA1Class* ui) {
             ui->articlePage->setDisabled(true);
             ui->home_button->setDisabled(true);
             show_settings(ui);
-            msg(QMessageBox::Information, (QObject::tr("Добро пожаловать ✨")), (QObject::tr("Пожалуйста, обязательно заполните ваши данные!\nИ не забудьте сменить пароль!")), QMessageBox::Ok);
+            msg(QMessageBox::Information, (QWidget::tr("Добро пожаловать ✨")), (QWidget::tr("Пожалуйста, обязательно заполните ваши данные!\nИ не забудьте сменить пароль!")), QMessageBox::Ok);
         }
     }
     if (CURRENT_EXP != -1)
@@ -389,8 +411,7 @@ void show_profile(Ui::VEDA1Class *ui) {
         show_auth(ui);
         return;
     }
-    ui->user_ico->setPixmap(MAIN_USER_POINTER->getAvatar(40));
-    ui->user_ico2->setPixmap(MAIN_USER_POINTER->getAvatar(40));
+
     ui->tabWidget->setCurrentIndex(1);
     ui->tabWidget_2->setCurrentIndex(1);
     ui->hightlighter->setGeometry(ui->expPage->geometry());
