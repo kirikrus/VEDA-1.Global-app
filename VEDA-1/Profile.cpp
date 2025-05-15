@@ -8,6 +8,9 @@
 #include <qstandarditemmodel.h>
 #include <qvalueaxis.h>
 #include "settings.h"
+#include <QAxObject>
+#include <QFileDialog>
+#include <QElapsedTimer>
 
 #define reset_ico(a, b) a->setIcon(icon1); ui->main_ico_1->setIconSize(QSize(b, b)); a->show();;
 
@@ -425,6 +428,7 @@ void show_profile(Ui::VEDA1Class *ui) {
 }
 
 void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
+
     HTTPclient http;
     QJsonArray data;
     QJsonObject item;
@@ -461,8 +465,69 @@ void data_Editer(Ui::VEDA1Class* ui, QString type_of_method) {
         }
         else return;
     }
+    else if (type_of_method == "Exele") {
+        LOADING(ui)
+
+        QString file = QFileDialog::getOpenFileName(nullptr, "Open .xlsx", "", "Files (*.xlsx)");
+
+        if (!file.isEmpty()) {
+            QElapsedTimer timer;
+            timer.start();
+
+            HTTPclient http;
+            QEventLoop loop;
+
+            QJsonArray jsonArray;
+
+            QAxObject excel("Excel.Application");
+            excel.setProperty("Visible", false);
+            QAxObject* workbooks = excel.querySubObject("Workbooks");
+            QAxObject* workbook = workbooks->querySubObject("Open(const QString&)", file);
+            QAxObject* sheet = workbook->querySubObject("Worksheets(int)", 1);
+            QAxObject* usedRange = sheet->querySubObject("UsedRange");
+            QAxObject* rows = usedRange->querySubObject("Rows");
+            int rowCount = rows->property("Count").toInt();
+
+            for (int row = 2; row <= rowCount; ++row) {
+                QAxObject* cell1 = sheet->querySubObject("Cells(int,int)", row, 2);
+                QAxObject* cell2 = sheet->querySubObject("Cells(int,int)", row, 1);
+
+                double value = cell1->property("Value").toDouble();
+                double timepoint = cell2->property("Value").toDouble();
+                int parameterid = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getProcessTypeId();
+                int experimentid = MAIN_USER_POINTER->getExperimentById(CURRENT_EXP)->getId();
+
+                QJsonObject obj;
+                obj["value"] = value;
+                obj["timepoint"] = timepoint;
+                obj["parameterid"] = parameterid;
+                obj["experimentid"] = experimentid;
+
+                jsonArray.append(obj);
+            }
+
+            workbook->dynamicCall("Close()");
+            excel.dynamicCall("Quit()");
+
+            qint64 elapsedMs = timer.elapsed();
+            qDebug() << "Время обработки экселя:" << elapsedMs << "мс";
+
+            QString endpoint = SERVER + QString("/Experiment/PutNewData");
+
+            QObject::connect(&http, &HTTPclient::requestReply, [&](const QByteArray& reply) {
+                showChart(ui);
+                show_exp_data(ui);
+                
+                CLOSE_LOADING
+
+                loop.quit();
+                });
+
+            http.post(endpoint, jsonArray);
+            loop.exec();
+        }
+    }
 
     showChart(ui);
     show_exp_data(ui);
 }
-

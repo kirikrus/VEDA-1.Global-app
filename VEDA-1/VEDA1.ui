@@ -1721,7 +1721,7 @@ border: none;
 }</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="admin">
        <attribute name="title">
@@ -2808,9 +2808,9 @@ color: rgba(163, 236, 90, 150);
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>580</y>
+          <y>585</y>
           <width>571</width>
-          <height>51</height>
+          <height>46</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -2896,7 +2896,7 @@ QPushButton:hover{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="data">
           <attribute name="title">
@@ -3555,6 +3555,35 @@ background-color: rgba(163, 236, 90, 150);
              <string>Удалить</string>
             </property>
            </widget>
+          </widget>
+          <widget class="QPushButton" name="putExel">
+           <property name="geometry">
+            <rect>
+             <x>115</x>
+             <y>520</y>
+             <width>326</width>
+             <height>26</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Inter V</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+background-color: rgb(163, 236, 90);
+color: black;
+border-radius: 13px;
+}
+QPushButton:hover{
+background-color: rgba(163, 236, 90, 150);
+}</string>
+           </property>
+           <property name="text">
+            <string>Загрузить файл .xlsx</string>
+           </property>
           </widget>
          </widget>
          <widget class="QWidget" name="exp">

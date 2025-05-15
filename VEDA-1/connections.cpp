@@ -11,6 +11,7 @@
 #include "userArticlesPage.h"
 #include "mainPage.h"
 #include "searchPanel.h"
+#include <qfiledialog.h>
 
 void connections(Ui::VEDA1Class *ui) {
 //коннект скролов
@@ -105,6 +106,7 @@ void connections(Ui::VEDA1Class *ui) {
     QObject::connect(ui->addData, &QPushButton::pressed, [=]() {data_Editer(ui,"POST");});
 	QObject::connect(ui->putData, &QPushButton::pressed, [=]() {data_Editer(ui, "PUT");});
 	QObject::connect(ui->deleteData, &QPushButton::pressed, [=]() {data_Editer(ui, "DELETE");});
+	QObject::connect(ui->putExel, &QPushButton::pressed, [=]() {data_Editer(ui, "Exele");});
 
 //переключение страниц профиля
 	QObject::connect(ui->expPage, &QPushButton::pressed, [=]() {
@@ -589,3 +591,4 @@ void connections(Ui::VEDA1Class *ui) {
 		}
 		});
 }
+
