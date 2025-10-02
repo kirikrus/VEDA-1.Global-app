@@ -1,3 +1,5 @@
+© 2025 Kirill Rusinov. All rights reserved
+
 # app
 Desktop App for terminals. Qt. Rest Api.
 
